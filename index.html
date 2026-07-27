@@ -411,6 +411,9 @@
   .foot-bottom .socials { display: flex; gap: 14px; }
   .foot-bottom .socials a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(251,248,241,0.18); display: grid; place-items: center; color: rgba(251,248,241,0.65); transition: all .25s ease; }
   .foot-bottom .socials a:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .foot-bottom .socials a.app-tile { border: none; border-radius: 9px; padding: 0; overflow: hidden; }
+  .foot-bottom .socials a.app-tile img { width: 100%; height: 100%; display: block; }
+  .foot-bottom .socials a.app-tile:hover { background: none; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.32); }
   .foot-bottom .socials svg { width: 17px; height: 17px; }
 
   /* ---------- Reveal animation ---------- */
@@ -962,7 +965,7 @@
       <div class="socials">
         <a href="https://www.facebook.com/people/Waymark-Coaching/pfbid021QXKoodjEAeNrKLJNpkGyR3QrcxtxfACZQTnWszE6SfRkcDvt7MRj5p45c8STybyl/?ref=1" target="_blank" rel="noopener" aria-label="Waymark on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H9v3h2v6h3v-6h2.5l.5-3H14V9z"/></svg></a>
         <a href="https://www.instagram.com/waymarkinc/" target="_blank" rel="noopener" aria-label="Waymark on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
-        <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark on the YouVersion Bible App"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="3.5" width="13" height="17" rx="1.6"/><line x1="9" y1="3.5" x2="9" y2="20.5"/><line x1="13.9" y1="9" x2="13.9" y2="15"/><line x1="11.4" y1="12" x2="16.4" y2="12"/></svg></a>
+        <a class="app-tile" href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark on the YouVersion Bible App"><img src="assets/youversion-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
       </div>
     </div>
   </div>
