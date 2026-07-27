@@ -282,10 +282,15 @@
   .services .sec-head p { color: rgba(251,248,241,0.74); }
   .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
   .svc {
+    display: block; text-decoration: none; color: inherit;
     background: rgba(251,248,241,0.05); border: 1px solid rgba(251,248,241,0.12); border-radius: 18px;
     padding: 36px 30px; transition: background .3s ease, transform .3s ease, border-color .3s ease;
   }
+  a.svc { cursor: pointer; }
   .svc:hover { background: rgba(251,248,241,0.09); transform: translateY(-5px); border-color: rgba(227,203,149,0.4); }
+  a.svc:hover h3 { color: var(--gold-light); }
+  a.svc h3 { transition: color .3s ease; }
+  a.svc:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
   .svc .ic { width: 50px; height: 50px; border-radius: 50%; background: rgba(227,203,149,0.16); display: grid; place-items: center; color: var(--gold-light); margin-bottom: 22px; }
   .svc .ic svg { width: 24px; height: 24px; }
   .svc h3 { color: var(--cream); font-size: 24px; margin-bottom: 10px; }
@@ -657,36 +662,36 @@
     </div>
 
     <div class="svc-grid">
-      <div class="svc reveal">
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3 data-i18n="svc1-h">Couples Coaching</h3>
         <p data-i18n="svc1-p">Structured sessions for couples in crisis, rebuilding after betrayal, or simply wanting to grow closer. We meet you where you are.</p>
-      </div>
-      <div class="svc reveal">
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 data-i18n="svc2-h">Marriage Restoration</h3>
         <p data-i18n="svc2-p">An intensive, guided path for marriages on the brink — proven steps that move couples from separation back toward a lasting covenant.</p>
-      </div>
-      <div class="svc reveal">
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 0 0-7-7z"/><path d="M9 21h6M10 18v3M14 18v3"/></svg></div>
         <h3 data-i18n="svc3-h">Spiritual Direction</h3>
         <p data-i18n="svc3-p">Faith-centered guidance for the questions beneath the questions — purpose, forgiveness, identity, and the road back to peace.</p>
-      </div>
-      <div class="svc reveal">
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></div>
         <h3 data-i18n="svc4-h">Coaching for Ministers &amp; Leaders</h3>
         <p data-i18n="svc4-p">Support for pastors, ministers, and leaders who pour into others — guarding your own marriage, family, and calling while you serve.</p>
-      </div>
-      <div class="svc reveal">
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
         <h3 data-i18n="svc5-h">Phone Consultations</h3>
         <p data-i18n="svc5-p">Direct, private conversations when you need wise guidance quickly. Call <strong>(405) 822-8300</strong> to begin.</p>
-      </div>
-      <div class="svc reveal">
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
         <h3 data-i18n="svc6-h">Premarital Guidance</h3>
         <p data-i18n="svc6-p">Begin in the right order. Preparation that helps couples build intimacy on a foundation strong enough to last a lifetime.</p>
-      </div>
+      </a>
     </div>
   </div>
 </section>
