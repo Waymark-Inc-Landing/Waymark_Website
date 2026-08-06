@@ -149,6 +149,26 @@
     .brand-symbol { display: block; }
   }
 
+  /* Floating social rail — visible on arrival, fades out once the visitor scrolls.
+     Right edge only: on the left it collides with the hero headline. */
+  .rail {
+    position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 48;
+    display: none; flex-direction: column; gap: 10px; padding: 13px 10px; border-radius: 44px;
+    background: rgba(16,42,67,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(16,30,52,0.26);
+    opacity: 1; visibility: visible;
+    transition: opacity .45s ease, transform .45s ease, visibility .45s;
+  }
+  .rail.hidden { opacity: 0; visibility: hidden; transform: translateY(-50%) translateX(24px); pointer-events: none; }
+  .rail a { display: block; line-height: 0; border-radius: 9px; overflow: hidden; transition: transform .2s ease; }
+  .rail a:hover { transform: scale(1.1); }
+  .rail a:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  /* Below 1100px the hero headline widens into the rail's space, so it stays hidden
+     and the footer icons serve instead. */
+  @media (min-width: 1100px) { .rail { display: flex; } }
+  @media (prefers-reduced-motion: reduce) { .rail { transition: none; } }
+
   .nav-links { display: flex; align-items: center; gap: 12px; }
   .nav-links a.navlink {
     font-size: 13.5px; font-weight: 400; letter-spacing: 0.04em; color: var(--ink-soft);
@@ -534,6 +554,12 @@
 <body>
 
 <!-- ================= NAV ================= -->
+<div class="rail" id="socialRail">
+  <a href="https://www.facebook.com/people/Waymark-Coaching/pfbid021QXKoodjEAeNrKLJNpkGyR3QrcxtxfACZQTnWszE6SfRkcDvt7MRj5p45c8STybyl/?ref=1" target="_blank" rel="noopener" aria-label="Waymark on Facebook"><img src="assets/waymark-facebook-icon.png" alt="" width="34" height="34" /></a>
+  <a href="https://www.instagram.com/waymarkinc/" target="_blank" rel="noopener" aria-label="Waymark on Instagram"><img src="assets/waymark-instagram-icon.png" alt="" width="34" height="34" /></a>
+  <a href="https://wa.me/14058228300" target="_blank" rel="noopener" aria-label="Message Waymark on WhatsApp"><img src="assets/waymark-whatsapp-icon.png" alt="" width="34" height="34" /></a>
+  <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark on the YouVersion Bible App"><img src="assets/waymark-youversion-icon.png" alt="" width="34" height="34" /></a>
+</div>
 <header id="header">
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="Waymark Inc. — Marking the way back">

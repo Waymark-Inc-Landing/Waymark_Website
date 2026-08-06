@@ -173,6 +173,13 @@
   try { saved = localStorage.getItem('wm-lang') || 'en'; } catch (e) {}
   applyLang(saved);
 
+  // ---------- Floating social rail ----------
+  var rail = document.getElementById('socialRail');
+  if (rail) {
+    var railScroll = function () { rail.classList.toggle('hidden', window.scrollY > 120); };
+    railScroll(); window.addEventListener('scroll', railScroll, { passive: true });
+  }
+
   // ---------- Header scroll state ----------
   var header = document.getElementById('header');
   var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 24); };
