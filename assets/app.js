@@ -173,11 +173,24 @@
   try { saved = localStorage.getItem('wm-lang') || 'en'; } catch (e) {}
   applyLang(saved);
 
-  // ---------- Floating social rail ----------
-  var rail = document.getElementById('socialRail');
-  if (rail) {
-    var railScroll = function () { rail.classList.toggle('hidden', window.scrollY > 120); };
-    railScroll(); window.addEventListener('scroll', railScroll, { passive: true });
+  // ---------- Header social row: opacity tracks scroll ----------
+  var headSocial = document.getElementById('headSocial');
+  if (headSocial) {
+    var FADE_END = 250; // fully transparent by 250px of scroll
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var fadeSocial = function () {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      var o = 1 - (y / FADE_END);
+      if (o < 0) o = 0; else if (o > 1) o = 1;
+      headSocial.style.opacity = o;
+      // stop it swallowing clicks once it is effectively invisible
+      headSocial.style.visibility = o < 0.05 ? 'hidden' : 'visible';
+    };
+    fadeSocial();
+    window.addEventListener('scroll', function () {
+      if (reduce) { fadeSocial(); return; }
+      window.requestAnimationFrame(fadeSocial);
+    }, { passive: true });
   }
 
   // ---------- Header scroll state ----------
