@@ -11,6 +11,7 @@
     'nav-cta-m':'Comienza el camino',
 
     'hero-eyebrow':'Coaching de parejas basado en la fe',
+    'blog-feat':'<span class="post-kicker">Devocional &middot; por Paula Villalpando</span><h3><a href="blog/tu-valor-no-depende-de-tu-rendimiento.html">Tu valor no depende de tu rendimiento</a></h3><p>Una reflexi&oacute;n sobre Efesios 1 &mdash; qui&eacute;n eres, para qu&eacute; est&aacute;s aqu&iacute;, y la trampa de la aprobaci&oacute;n que nunca satisface.</p><a href="blog/tu-valor-no-depende-de-tu-rendimiento.html" class="btn btn-outline">Leer el devocional <span class="arrow">&rarr;</span></a>',
     'hero-h1':'Marcando el <span class="accent">camino de regreso</span> a la vida para la que fuiste creado.',
     'hero-lead':'Durante más de cinco décadas hemos caminado junto a parejas y personas a través de las temporadas más difíciles del amor y de la vida, ayudándoles a encontrar el camino a casa. Dondequiera que estés, hay un camino de regreso.',
     'hero-cta1':'Descubre el coaching <span class="arrow">→</span>',

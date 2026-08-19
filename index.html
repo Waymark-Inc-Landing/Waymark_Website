@@ -389,6 +389,9 @@
   .blog-soon { max-width: 600px; margin: 50px auto 0; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 54px 44px; box-shadow: var(--shadow-sm); }
   .blog-soon .soon-ic { width: 62px; height: 62px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; color: var(--gold-deep); margin: 0 auto 22px; }
   .blog-soon .soon-ic svg { width: 30px; height: 30px; }
+  .blog-soon .post-kicker { display: block; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 14px; font-weight: 600; }
+  .blog-soon h3 a { color: inherit; text-decoration: none; transition: color .25s ease; }
+  .blog-soon h3 a:hover { color: var(--gold-deep); }
   .blog-soon h3 { font-size: 30px; margin-bottom: 12px; }
   .blog-soon p { color: var(--muted); max-width: 440px; margin: 0 auto 26px; }
 
@@ -863,10 +866,12 @@
     </div>
 
     <div class="blog-soon reveal">
-      <div class="soon-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4C14 4 7 7 5 14l-2 7 7-2c7-2 10-9 10-15z"/><path d="M5 19l8-8"/></svg></div>
-      <h3 data-i18n="blog-soon-h">Coming soon</h3>
-      <p data-i18n="blog-soon-p">We're preparing reflections on love, faith, and finding the way back. The journal opens soon — check back before long.</p>
-      <a href="#contact" class="btn btn-outline" data-i18n="blog-soon-cta">Get in touch <span class="arrow">→</span></a>
+      <div data-i18n="blog-feat">
+        <span class="post-kicker">Devotional &middot; by Paula Villalpando</span>
+        <h3><a href="blog/your-worth-does-not-depend-on-your-performance.html">Your worth doesn&rsquo;t depend on your performance</a></h3>
+        <p>A reflection on Ephesians 1 &mdash; who you are, why you are here, and the approval trap that never satisfies. Con versi&oacute;n en espa&ntilde;ol.</p>
+        <a href="blog/your-worth-does-not-depend-on-your-performance.html" class="btn btn-outline">Read the devotional <span class="arrow">&rarr;</span></a>
+      </div>
     </div>
   </div>
 </section>
