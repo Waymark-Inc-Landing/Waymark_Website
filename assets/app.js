@@ -115,8 +115,6 @@
     'testi2-role':'Reconstruyendo tras el divorcio',
     'testi3-quote':'«Cuando llegué a Waymark, me sentía rota en un millón de pedazos. Mi esposo y yo nos habíamos herido durante años, y yo estaba agotada emocional y espiritualmente; otras consejerías y un sinfín de videos solo me dejaban más sin esperanza. Aquí por fin comencé a sanar. He aprendido la verdad sobre quién soy y mi verdadero valor: que soy plenamente amada, completamente perdonada y agradable a Dios. Si sientes ese mismo dolor o esa desesperanza, emprende este camino; no tienes que quedarte rota.»',
     'testi3-role':'En su proceso de sanación',
-    'testi4-quote':'«El divorcio tocaba a la puerta, pero Jesús abrió la puerta de la esperanza usando a José y a Paula.»',
-    'testi4-role':'Matrimonio restaurado',
 
     'cta-eyebrow':'Dondequiera que estés',
     'cta-h2':'Hay un camino de regreso. Permítenos ayudarte a encontrarlo.',
