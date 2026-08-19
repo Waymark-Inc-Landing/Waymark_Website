@@ -10,7 +10,7 @@
     'nav-cta':'Comienza el camino <span class="arrow">→</span>',
     'nav-cta-m':'Comienza el camino',
 
-    'hero-eyebrow':'Coaching cristiano para parejas',
+    'hero-eyebrow':'Coaching de parejas basado en la fe',
     'hero-h1':'Marcando el <span class="accent">camino de regreso</span> a la vida para la que fuiste creado.',
     'hero-lead':'Durante más de cinco décadas hemos caminado junto a parejas y personas a través de las temporadas más difíciles del amor y de la vida, ayudándoles a encontrar el camino a casa. Dondequiera que estés, hay un camino de regreso.',
     'hero-cta1':'Descubre el coaching <span class="arrow">→</span>',
