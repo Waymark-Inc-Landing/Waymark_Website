@@ -160,6 +160,8 @@
     });
     document.documentElement.lang = lang;
     toggles.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+    var fb = lang === 'es' ? 'https://www.facebook.com/waymarkespanol' : 'https://www.facebook.com/waymarken';
+    document.querySelectorAll('a[data-fb]').forEach(function (el) { el.href = fb; });
     try { localStorage.setItem('wm-lang', lang); } catch (e) {}
     setYear();
   }
