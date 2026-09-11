@@ -162,6 +162,8 @@
     toggles.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
     var fb = lang === 'es' ? 'https://www.facebook.com/waymarkespanol' : 'https://www.facebook.com/waymarken';
     document.querySelectorAll('a[data-fb]').forEach(function (el) { el.href = fb; });
+    var ig = lang === 'es' ? 'https://www.instagram.com/waymarkespanol/' : 'https://www.instagram.com/_waymarkenglish/';
+    document.querySelectorAll('a[data-ig]').forEach(function (el) { el.href = ig; });
     try { localStorage.setItem('wm-lang', lang); } catch (e) {}
     setYear();
   }
