@@ -354,6 +354,28 @@
   .rec-head p { margin-top: 14px; color: var(--muted); font-size: 17px; }
   .rec-reading .book-grid { margin-top: 38px; }
 
+  /* ---------- Sponsor a couple ---------- */
+  .sponsor { background: var(--sage-soft); }
+  .sp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1040px; margin: 56px auto 0; }
+  .sp-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 34px 32px 30px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform .35s ease, box-shadow .35s ease; }
+  .sp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .sp-card:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+  .sp-amount { font-family: var(--serif); font-size: 42px; color: var(--gold-deep); line-height: 1; margin-bottom: 16px; }
+  .sp-card h3 { font-size: 22px; margin-bottom: 10px; }
+  .sp-card p { font-size: 15.5px; color: var(--muted); font-weight: 300; }
+  .sp-card .sp-go { margin-top: auto; padding-top: 20px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
+  .sp-card:hover .sp-go .arrow { transform: translateX(4px); }
+  .sp-go .arrow { display: inline-block; transition: transform .25s ease; }
+  .sp-note { max-width: 720px; margin: 28px auto 0; text-align: center; color: var(--muted); font-size: 16px; }
+  .sp-note a { color: var(--gold-deep); text-decoration: underline; }
+  .sp-privacy { background: var(--navy); border-radius: 18px; padding: 44px 48px; max-width: 880px; margin: 54px auto 0; color: rgba(251,248,241,0.85); }
+  .sp-privacy h3 { color: var(--gold-light); font-size: 25px; margin-bottom: 16px; }
+  .sp-privacy p { font-weight: 300; font-size: 16.5px; margin-bottom: 14px; }
+  .sp-privacy p:last-child { margin-bottom: 0; }
+  .sp-fine { max-width: 880px; margin: 30px auto 0; }
+  .sp-fine p { font-size: 13.5px; line-height: 1.65; color: var(--muted); margin-bottom: 10px; }
+  @media (max-width: 920px) { .sp-grid { grid-template-columns: 1fr; max-width: 470px; } .sp-privacy { padding: 36px 30px; } }
+
   /* ---------- Testimonial ---------- */
   .testi { background: var(--cream-deep); }
   .testi-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 26px; align-items: start; max-width: 1040px; margin: 54px auto 0; }
@@ -574,7 +596,7 @@
       <a class="navlink" href="#training" data-i18n="nav-training">Training</a>
       <a class="navlink" href="#books" data-i18n="nav-resources">Resources</a>
       <a class="navlink" href="#blog" data-i18n="nav-blog">Blog</a>
-      <a class="btn btn-contribute desktop-cta" href="https://buy.stripe.com/00w9AV9ZKdcccYc4hCfMA00" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.35-9.5-9C1 9 2.5 5 6.5 5 9 5 12 7.5 12 7.5S15 5 17.5 5C21.5 5 23 9 21.5 12 19 16.65 12 21 12 21z"/></svg> <span data-i18n="nav-contribute">Contribute</span></a>
+      <a class="btn btn-contribute desktop-cta" href="#sponsor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.35-9.5-9C1 9 2.5 5 6.5 5 9 5 12 7.5 12 7.5S15 5 17.5 5C21.5 5 23 9 21.5 12 19 16.65 12 21 12 21z"/></svg> <span data-i18n="nav-sponsor">Sponsor a Couple</span></a>
       <a class="btn btn-gold desktop-cta" href="#contact" data-i18n="nav-cta">Begin the journey <span class="arrow">→</span></a>
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang="en">EN</button>
@@ -608,7 +630,7 @@
   <a href="#training" data-i18n="nav-training">Training</a>
   <a href="#books" data-i18n="nav-resources">Resources</a>
   <a href="#blog" data-i18n="nav-blog">Blog</a>
-  <a class="btn btn-contribute" href="https://buy.stripe.com/00w9AV9ZKdcccYc4hCfMA00" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.35-9.5-9C1 9 2.5 5 6.5 5 9 5 12 7.5 12 7.5S15 5 17.5 5C21.5 5 23 9 21.5 12 19 16.65 12 21 12 21z"/></svg> <span data-i18n="nav-contribute">Contribute</span></a>
+  <a class="btn btn-contribute" href="#sponsor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.35-9.5-9C1 9 2.5 5 6.5 5 9 5 12 7.5 12 7.5S15 5 17.5 5C21.5 5 23 9 21.5 12 19 16.65 12 21 12 21z"/></svg> <span data-i18n="nav-sponsor">Sponsor a Couple</span></a>
   <a class="btn btn-gold" href="#contact" data-i18n="nav-cta-m">Begin the journey</a>
 </div>
 
@@ -858,6 +880,53 @@
   </div>
 </section>
 
+<!-- ================= SPONSOR A COUPLE ================= -->
+<section class="block sponsor" id="sponsor">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow center" data-i18n="sp-eyebrow">Walk with someone</span>
+      <h2 data-i18n="sp-h2">Sponsor a couple who can't afford the way back.</h2>
+      <p data-i18n="sp-intro">Couples run out of resources long before they run out of trouble. Some reach the end of what they can manage alone and still can't afford the help they need. You can cover the cost of their coaching, so the way back is waiting when they finally ask for it.</p>
+    </div>
+
+    <div class="sp-grid">
+      <!-- Temporary: all three cards use the open-amount link until the fixed-amount Payment Links exist -->
+      <a class="sp-card reveal" href="https://buy.stripe.com/00w9AV9ZKdcccYc4hCfMA00" target="_blank" rel="noopener">
+        <div class="sp-amount">$100</div>
+        <h3 data-i18n="sp1-h">One session</h3>
+        <p data-i18n="sp1-p">Covers a single hour of coaching. Often the first one, which is the hour that decides whether a couple comes back.</p>
+        <span class="sp-go" data-i18n="sp-go">Sponsor <span class="arrow">→</span></span>
+      </a>
+      <a class="sp-card reveal" href="https://buy.stripe.com/00w9AV9ZKdcccYc4hCfMA00" target="_blank" rel="noopener">
+        <div class="sp-amount">$450</div>
+        <h3 data-i18n="sp2-h">Half a course</h3>
+        <p data-i18n="sp2-p">Paired with another sponsor to carry one couple all the way through. If we can't match your half within thirty days, it goes to the next couple in line.</p>
+        <span class="sp-go" data-i18n="sp-go">Sponsor <span class="arrow">→</span></span>
+      </a>
+      <a class="sp-card reveal" href="https://buy.stripe.com/00w9AV9ZKdcccYc4hCfMA00" target="_blank" rel="noopener">
+        <div class="sp-amount">$900</div>
+        <h3 data-i18n="sp3-h">A full course</h3>
+        <p data-i18n="sp3-p">All nine sessions, one couple, beginning to end. You'll know your sponsorship went to a real couple, and nothing more than that. No names, no photograph, no testimony read aloud at an event.</p>
+        <span class="sp-go" data-i18n="sp-go">Sponsor <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <p class="sp-note reveal" data-i18n="sp-note">Every sponsorship pays for coaching for a couple who asked for help and couldn't afford it. Nothing is held back for overhead.</p>
+    <p class="sp-note reveal" data-i18n="sp-alt">Want to give a different amount, or sponsor more than one couple? Write to <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a> and we'll set it up by hand.</p>
+
+    <div class="sp-privacy reveal">
+      <h3 data-i18n="sp-priv-h">What stays in the room</h3>
+      <p data-i18n="sp-priv-p1">Couples come to us at the hardest point in their marriage. What they say in that room stays in it &mdash; and that includes staying away from the person who paid.</p>
+      <p data-i18n="sp-priv-p2">No names, no photograph, no testimony read aloud at an event. We know that makes a sponsorship harder to feel. But a couple who suspects their marriage might become somebody's update won't tell the truth in session six, and session six is where the work happens.</p>
+    </div>
+
+    <div class="sp-fine reveal">
+      <p data-i18n="sp-fine1">Waymark Inc. is a for-profit company, not a charity. Sponsoring a couple means buying coaching for someone else, the way you might pay for a friend's meal. It's a purchase, not a charitable donation, and it isn't tax-deductible.</p>
+      <p data-i18n="sp-fine2">If a sponsorship can't be matched to a couple within ninety days, we'll write and ask whether to hold it for the next couple or refund it in full. Either answer is fine, and no one will follow up asking you to reconsider.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ================= BLOG ================= -->
 <section class="block blog" id="blog">
   <div class="wrap">
@@ -950,6 +1019,7 @@
             <option value="Boundary Coaching" data-i18n="opt-boundary">Boundary Coaching</option>
             <option value="Premarital Guidance" data-i18n="opt-premarital">Premarital Guidance</option>
             <option value="Coach Training" data-i18n="opt-training">Coach Training</option>
+            <option value="Sponsored Coaching" data-i18n="opt-sponsored">Sponsored coaching</option>
             <option value="Something else" data-i18n="opt-other">Something else</option>
           </select>
         </div>
@@ -994,7 +1064,7 @@
         <h4 data-i18n="foot-connect-h">Connect</h4>
         <a href="tel:14058228300" class="li">(405) 822-8300</a>
         <a href="mailto:coaching@waymarkinc.com" class="li">coaching@waymarkinc.com</a>
-        <span class="li">Shawnee, OK</span>
+        <span class="li">19223 Charleston Pointe<br />Shawnee, OK 74801</span>
       </div>
     </div>
     <div class="foot-bottom">
