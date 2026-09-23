@@ -196,6 +196,15 @@
   applyLang(saved);
 
   // ---------- Header social row: opacity tracks scroll ----------
+  // Hero video: honour a visitor's reduced-motion setting — show the poster, load nothing.
+  var heroVideo = document.getElementById('heroVideo');
+  if (heroVideo && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+    heroVideo.removeAttribute('src');
+    heroVideo.load();
+  }
+
   var headSocial = document.getElementById('headSocial');
   if (headSocial) {
     var FADE_END = 250; // fully transparent by 250px of scroll
