@@ -196,13 +196,11 @@
   applyLang(saved);
 
   // ---------- Header social row: opacity tracks scroll ----------
-  // Hero video: honour a visitor's reduced-motion setting — show the poster, load nothing.
+  // Hero video: autoplay, muted, looping. Nudge playback in case the attribute alone is ignored.
   var heroVideo = document.getElementById('heroVideo');
-  if (heroVideo && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    heroVideo.removeAttribute('autoplay');
-    heroVideo.pause();
-    heroVideo.removeAttribute('src');
-    heroVideo.load();
+  if (heroVideo && heroVideo.paused) {
+    var started = heroVideo.play();
+    if (started && started.catch) started.catch(function () {});
   }
 
   var headSocial = document.getElementById('headSocial');
