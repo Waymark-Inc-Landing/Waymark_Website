@@ -29,7 +29,7 @@
     'about-h2':'Una señal firme que dice: el camino sigue aquí.',
     'about-p1':'Un waymark es una señal colocada a lo largo de un sendero —una piedra, un poste, una marca pintada— dejada por quienes caminaron antes para que nadie que los siga pierda el rumbo. Cuando el camino se cubre de maleza y baja la niebla, un waymark le recuerda al viajero cansado que no está perdido. Solo está entre una señal y la siguiente.',
     'about-pullout':'Eso es lo que hacemos. Marcamos el camino de regreso: a tu matrimonio, a tu familia, a tu fe, a ti mismo.',
-    'about-p2':'Waymark es el siguiente capítulo de la obra de toda una vida del <strong>Dr. Jim Talley</strong>, cuyo acompañamiento ayudó a incontables parejas a pasar del borde de la separación a relaciones restauradas y duraderas. Continuamos esa obra con la misma convicción que la sostuvo: que la sanación es posible, que los límites son un acto de amor, y que ninguna relación está jamás verdaderamente más allá de toda reparación.',
+    'about-p2':'Waymark es el siguiente capítulo de la obra de toda una vida del <a href="/dr-jim-talley/"><strong>Dr. Jim Talley</strong></a>, cuyo acompañamiento ayudó a incontables parejas a pasar del borde de la separación a relaciones restauradas y duraderas. Continuamos esa obra con la misma convicción que la sostuvo: que la sanación es posible, que los límites son un acto de amor, y que ninguna relación está jamás verdaderamente más allá de toda reparación.',
     'about-nm':'El equipo de Waymark',
     'about-rl':'Continuando la obra',
 

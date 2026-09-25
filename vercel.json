@@ -8,13 +8,297 @@
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://waymarkcoach.com https://formsubmit.co; form-action 'self'; upgrade-insecure-requests"
         },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
-        { "key": "Cross-Origin-Resource-Policy", "value": "same-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/about-dr-talley",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/about-dr-talley-2",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/Meet.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/Meet.php",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/counseling",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/fees-and-services",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/Services.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/6-month-program",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/dating-relationship-trouble",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/become-a-coach",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#training",
+      "permanent": true
+    },
+    {
+      "source": "/become-a-coach-1",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#training",
+      "permanent": true
+    },
+    {
+      "source": "/audios",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/Resource.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/Storelink/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/3rdopinion/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/forum/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#blog",
+      "permanent": true
+    },
+    {
+      "source": "/event-details/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#blog",
+      "permanent": true
+    },
+    {
+      "source": "/divorce/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce:rest*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/5-stages-of-grief/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/5stagesgrief.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?drtalley\\.com"
+        }
+      ],
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
     }
   ]
 }
