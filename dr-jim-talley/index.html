@@ -10,7 +10,7 @@
 <meta property="og:title" content="Dr. Jim Talley (1942–2025)" />
 <meta property="og:description" content="His life's work was helping couples find their way back to each other. Waymark Inc. carries it forward." />
 <meta property="og:url" content="https://www.waymarkinc.com/dr-jim-talley/" />
-<meta property="og:image" content="https://www.waymarkinc.com/assets/about-cairn.jpg" />
+<meta property="og:image" content="https://www.waymarkinc.com/assets/dr-jim-talley.jpg" />
 <meta property="og:locale" content="en_US" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="../assets/waymark-symbol.svg" />
@@ -31,6 +31,7 @@
     "name": "Dr. Jim Talley",
     "birthDate": "1942",
     "deathDate": "2025",
+    "image": "https://www.waymarkinc.com/assets/dr-jim-talley.jpg",
     "description": "Christian couples counselor whose life's work centered on reconciliation and building strong, lasting marriages."
   }
 }
@@ -61,6 +62,10 @@
   h1 { font-family: var(--serif); font-size: clamp(38px, 6vw, 58px); line-height: 1.1; color: var(--ink); font-weight: 600; margin-bottom: 10px; }
   .years { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--muted); margin-bottom: 40px; }
   article > .wrap > p { margin-bottom: 22px; }
+  .portrait { float: right; width: 286px; margin: 4px 0 20px 36px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px 12px 4px; box-shadow: 0 10px 30px rgba(16,30,52,0.08); }
+  .portrait img { width: 100%; height: auto; display: block; border-radius: 9px; }
+  .portrait figcaption { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; text-align: center; padding: 14px 4px 12px; }
+  .portrait figcaption span { display: block; margin-top: 4px; letter-spacing: 0.08em; text-transform: none; font-size: 12.5px; font-weight: 400; color: var(--muted); font-family: var(--serif); font-style: italic; }
   .lead { font-size: 20px; color: var(--ink); }
   h2 { font-family: var(--serif); font-size: clamp(25px, 4vw, 33px); color: var(--ink); font-weight: 600; margin: 52px 0 22px; }
 
@@ -88,6 +93,9 @@
   footer a { color: rgba(251,248,241,0.82); text-decoration: none; }
   footer a:hover { color: var(--gold-light); }
 
+  @media (max-width: 720px) {
+    .portrait { float: none; width: 100%; max-width: 330px; margin: 0 auto 30px; }
+  }
   @media (max-width: 640px) {
     article { padding: 48px 0 30px; }
     .carry { padding: 30px 24px; }
@@ -111,6 +119,11 @@
     <span class="eyebrow">In memory</span>
     <h1>Dr. Jim Talley</h1>
     <p class="years">1942 &ndash; 2025</p>
+
+    <figure class="portrait">
+      <img src="/assets/dr-jim-talley.jpg" alt="Dr. Jim Talley at his desk" width="600" height="756" />
+      <figcaption>Dr. Jim Talley<span>1942 &ndash; 2025</span></figcaption>
+    </figure>
 
     <p class="lead">For more than fifty years, Dr. Jim Talley sat with couples at the worst moment of their marriage and told them the truth: that the way back exists, and that it can be walked one honest step at a time.</p>
 
