@@ -189,13 +189,33 @@
     setYear();
   }
 
+  // Each language has its own page (/ and /es/), so on those the toggle navigates
+  // instead of swapping text in place — one URL per language for search engines.
+  var staticLang = document.documentElement.getAttribute('data-static-lang');
+
   toggles.forEach(function (b) {
-    b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+    b.addEventListener('click', function () {
+      var lang = b.getAttribute('data-lang');
+      if (staticLang) {
+        try { localStorage.setItem('wm-lang', lang); } catch (e) {}
+        if (lang !== staticLang) window.location.href = lang === 'es' ? '/es/' : '/';
+      } else {
+        applyLang(lang);
+      }
+    });
   });
 
-  var saved = 'en';
-  try { saved = localStorage.getItem('wm-lang') || 'en'; } catch (e) {}
-  applyLang(saved);
+  if (staticLang) {
+    toggles.forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === staticLang);
+    });
+    try { localStorage.setItem('wm-lang', staticLang); } catch (e) {}
+    setYear();
+  } else {
+    var saved = 'en';
+    try { saved = localStorage.getItem('wm-lang') || 'en'; } catch (e) {}
+    applyLang(saved);
+  }
 
   // ---------- Header social row: opacity tracks scroll ----------
   // Hero video: autoplay, muted, looping. Nudge playback in case the attribute alone is ignored.
