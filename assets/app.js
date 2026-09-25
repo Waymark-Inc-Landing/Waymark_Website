@@ -48,6 +48,8 @@
     'svc5-p':'Conversaciones directas y privadas cuando necesitas un consejo sabio con prontitud. Llama al <strong>(405) 822-8300</strong> para comenzar.',
     'svc6-h':'Orientación prematrimonial',
     'svc6-p':'Comienza en el orden correcto. Una preparación que ayuda a las parejas a construir intimidad sobre un cimiento lo suficientemente firme para toda la vida.',
+    'svc7-h':'Reconstrucción tras el divorcio',
+    'svc7-p':'Para la temporada después de que un matrimonio termina: darle sentido a la pérdida, recuperar el equilibrio y seguir adelante sin llevar las mismas heridas a lo que viene.',
 
     'appr-eyebrow':'Cómo funciona',
     'appr-h2':'Tres pasos, una dirección honesta',

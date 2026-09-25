@@ -303,6 +303,8 @@
   .services .sec-head .eyebrow::before, .services .sec-head .eyebrow::after { background: var(--gold-light); }
   .services .sec-head p { color: rgba(251,248,241,0.74); }
   .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
+  /* A lone card on the last row sits in the middle column rather than off to one side. */
+  @media (min-width: 981px) { .svc-grid > .svc:nth-child(7):last-child { grid-column: 2; } }
   .svc {
     display: block; text-decoration: none; color: inherit;
     background: rgba(251,248,241,0.05); border: 1px solid rgba(251,248,241,0.12); border-radius: 18px;
@@ -754,6 +756,11 @@
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
         <h3 data-i18n="svc6-h">Premarital Guidance</h3>
         <p data-i18n="svc6-p">Begin in the right order. Preparation that helps couples build intimacy on a foundation strong enough to last a lifetime.</p>
+      </a>
+      <a class="svc reveal" href="https://waymarkcoach.com/book/">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18h18"/><path d="M12 3v3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1"/><path d="M6.5 18a5.5 5.5 0 0 1 11 0"/></svg></div>
+        <h3 data-i18n="svc7-h">Rebuilding After Divorce</h3>
+        <p data-i18n="svc7-p">For the season after a marriage ends — making sense of the loss, finding your footing again, and moving forward without carrying the same wounds into what comes next.</p>
       </a>
     </div>
   </div>
