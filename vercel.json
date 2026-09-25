@@ -299,6 +299,141 @@
       ],
       "destination": "https://www.waymarkinc.com/dr-jim-talley/",
       "permanent": true
+    },
+    {
+      "source": "/about-dr-talley",
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/about-dr-talley-2",
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/Meet.html",
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/Meet.php",
+      "destination": "https://www.waymarkinc.com/dr-jim-talley/",
+      "permanent": true
+    },
+    {
+      "source": "/counseling",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/fees-and-services",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/Services.html",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/6-month-program",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/dating-relationship-trouble",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-men",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-women",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-kids",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-no-kids",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-single-mom",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/divorce-single-dad",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/5-stages-of-grief",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/5stagesgrief.html",
+      "destination": "https://www.waymarkinc.com/#services",
+      "permanent": true
+    },
+    {
+      "source": "/become-a-coach",
+      "destination": "https://www.waymarkinc.com/#training",
+      "permanent": true
+    },
+    {
+      "source": "/become-a-coach-1",
+      "destination": "https://www.waymarkinc.com/#training",
+      "permanent": true
+    },
+    {
+      "source": "/audios",
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/Resource.html",
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/Storelink/:path*",
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/3rdopinion/:path*",
+      "destination": "https://www.waymarkinc.com/#books",
+      "permanent": true
+    },
+    {
+      "source": "/forum/:path*",
+      "destination": "https://www.waymarkinc.com/#blog",
+      "permanent": true
+    },
+    {
+      "source": "/event-details/:path*",
+      "destination": "https://www.waymarkinc.com/#blog",
+      "permanent": true
     }
   ]
 }
