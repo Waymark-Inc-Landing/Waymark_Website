@@ -323,6 +323,7 @@
             ? '¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto muy pronto.'
             : 'Thank you — we’ve received your message and will be in touch very soon.';
           form.reset();
+          if (window.wmTrack) { window.wmTrack('lead'); }
         } else { throw new Error('submit failed'); }
       })
       .catch(function () {
@@ -334,4 +335,12 @@
       .finally(function () { btn.disabled = false; btn.innerHTML = orig; });
     });
   }
+
+  // A tapped phone number and a click through to booking both count.
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.wmTrack) { window.wmTrack('call'); } });
+  });
+  document.querySelectorAll('a[href*="waymarkcoach.com/book"]').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.wmTrack) { window.wmTrack('booking'); } });
+  });
 })();
