@@ -6,7 +6,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-src https://td.doubleclick.net https://googleads.g.doubleclick.net; frame-ancestors 'none'; script-src 'self' https://www.googletagmanager.com https://www.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com; connect-src 'self' https://waymarkcoach.com https://formsubmit.co https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://td.doubleclick.net; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-src https://td.doubleclick.net https://googleads.g.doubleclick.net; frame-ancestors 'none'; script-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.googleadservices.com; connect-src 'self' https://waymarkcoach.com https://formsubmit.co https://www.google.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://td.doubleclick.net https://ad.doubleclick.net; form-action 'self'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",
