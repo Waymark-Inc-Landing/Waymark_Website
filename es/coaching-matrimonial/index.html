@@ -102,6 +102,20 @@
   footer a { color: rgba(251,248,241,0.8); text-decoration: none; }
   footer a:hover { color: var(--gold-light); }
 
+  /* Phones only: the number stays within reach the whole way down. */
+  .callbar { display: none; }
+  @media (max-width: 760px) {
+    .callbar {
+      display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+      background: var(--gold); color: #fff; text-align: center; text-decoration: none;
+      font-size: 16.5px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 15px 16px calc(15px + env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 18px rgba(16,30,52,0.18);
+    }
+    .callbar:active { background: var(--gold-deep); }
+    body { padding-bottom: 72px; }
+  }
+
   @media (max-width: 860px) {
     .steps, .cards { grid-template-columns: 1fr; }
   }
@@ -127,8 +141,8 @@
     <h1>El camino de regreso existe</h1>
     <p class="lead">Coaching matrimonial <strong>en español</strong>, basado en la fe, por teléfono o video en todo Estados Unidos. Cincuenta años de trabajo con parejas detrás de cada conversación.</p>
     <div class="actions">
-      <a class="btn btn-gold" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Agenda una conversación</a>
-      <a class="btn btn-line" href="tel:14058228300">Llámanos ahora</a>
+      <a class="btn btn-gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
+      <a class="btn btn-line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Agenda una conversación</a>
     </div>
     <div class="marks">
       <span>En español e inglés</span>
@@ -204,17 +218,17 @@
           <input id="lp-name" type="text" name="name" autocomplete="name" required />
         </div>
         <div class="field">
-          <label for="lp-phone">Teléfono (opcional)</label>
-          <input id="lp-phone" type="tel" name="phone" autocomplete="tel" />
+          <label for="lp-phone">Teléfono</label>
+          <input id="lp-phone" type="tel" name="phone" autocomplete="tel" required />
         </div>
       </div>
       <div class="field">
-        <label for="lp-email">Correo electrónico</label>
-        <input id="lp-email" type="email" name="email" autocomplete="email" required />
+        <label for="lp-email">Correo electrónico (opcional)</label>
+        <input id="lp-email" type="email" name="email" autocomplete="email" />
       </div>
       <div class="field">
-        <label for="lp-message">¿Cómo podemos ayudar?</label>
-        <textarea id="lp-message" name="message" required></textarea>
+        <label for="lp-message">¿Cómo podemos ayudar? (opcional)</label>
+        <textarea id="lp-message" name="message"></textarea>
       </div>
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <button type="submit" class="btn btn-gold">Enviar mensaje</button>
@@ -230,6 +244,8 @@
     <span><a href="/es/">waymarkinc.com</a> &middot; <a href="tel:14058228300">(405) 822-8300</a> &middot; <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a></span>
   </div>
 </footer>
+
+<a class="callbar" href="tel:14058228300">Llama ahora &middot; (405)&nbsp;822-8300</a>
 
 <script src="/assets/lp.js"></script>
 </body>
