@@ -3,7 +3,8 @@
   var form = document.getElementById('lpForm');
 
   // A tapped phone number and a click through to booking are both real intent.
-  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+  // A tapped number and a WhatsApp message are both someone reaching out.
+  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(function (a) {
     a.addEventListener('click', function () { window.wmTrack('call'); });
   });
   document.querySelectorAll('a[data-booking]').forEach(function (a) {

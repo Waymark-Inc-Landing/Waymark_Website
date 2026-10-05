@@ -69,7 +69,8 @@
   .step p { font-size: 15.5px; }
 
   .plain { padding: 56px 0; }
-  .cards { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+  .cards { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+  .disclosure { margin-top: 28px; font-size: 15px; line-height: 1.7; color: var(--muted); }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px 26px; }
   .card h3 { font-size: 21px; margin-bottom: 10px; }
   .card p { font-size: 16px; }
@@ -103,16 +104,24 @@
   footer a:hover { color: var(--gold-light); }
 
   /* Phones only: the number stays within reach the whole way down. */
+  .btn-wa { background: #1f7a4d; color: #fff; }
+  .btn-wa:hover { background: #18613d; }
+
   .callbar { display: none; }
   @media (max-width: 760px) {
     .callbar {
-      display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-      background: var(--gold); color: #fff; text-align: center; text-decoration: none;
-      font-size: 16.5px; font-weight: 600; letter-spacing: 0.04em;
-      padding: 15px 16px calc(15px + env(safe-area-inset-bottom));
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
       box-shadow: 0 -4px 18px rgba(16,30,52,0.18);
     }
-    .callbar:active { background: var(--gold-deep); }
+    .callbar a {
+      flex: 1 1 50%; text-align: center; text-decoration: none; color: #fff;
+      font-size: 16.5px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 15px 10px calc(15px + env(safe-area-inset-bottom));
+    }
+    .callbar a:first-child { background: var(--gold); }
+    .callbar a:first-child:active { background: var(--gold-deep); }
+    .callbar a:last-child { background: #1f7a4d; }
+    .callbar a:last-child:active { background: #18613d; }
     body { padding-bottom: 72px; }
   }
 
@@ -142,6 +151,7 @@
     <p class="lead">Coaching matrimonial <strong>en español</strong>, basado en la fe, por teléfono o video en todo Estados Unidos. Cincuenta años de trabajo con parejas detrás de cada conversación.</p>
     <div class="actions">
       <a class="btn btn-gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
+      <a class="btn btn-wa" href="https://wa.me/14058228300?text=Hola%2C%20vi%20su%20anuncio%20y%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20matrimonial." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
       <a class="btn btn-line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Agenda una conversación</a>
     </div>
     <div class="marks">
@@ -191,14 +201,12 @@
         <p>No compartimos con nadie lo que se habla en una sesión. Quien patrocina el coaching de una pareja nunca sabe su nombre ni su historia.</p>
       </div>
       <div class="card">
-        <h3>Coaching, no consejería licenciada</h3>
-        <p>Somos coaches. No somos consejeros licenciados ni terapeutas, no hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que ustedes necesitan es un profesional licenciado, se lo diremos con claridad.</p>
-      </div>
-      <div class="card">
         <h3>Para parejas y para una sola persona</h3>
         <p>A veces solo una de las dos personas está lista para empezar. Eso también sirve, y es un buen lugar por donde comenzar.</p>
       </div>
     </div>
+    <p class="disclosure">Somos coaches. No somos consejeros licenciados ni terapeutas, no hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que ustedes necesitan es un profesional licenciado, se lo diremos con claridad y les ayudaremos a buscarlo.</p>
+
     <p class="legacy">Waymark Inc. continúa el trabajo del <a href="/es/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), quien pasó más de cincuenta años sentado con parejas en el peor momento de su matrimonio, diciéndoles la verdad: que el camino de regreso existe y se recorre un paso honesto a la vez.</p>
   </div>
 </section>
@@ -245,7 +253,10 @@
   </div>
 </footer>
 
-<a class="callbar" href="tel:14058228300">Llama ahora &middot; (405)&nbsp;822-8300</a>
+<div class="callbar">
+  <a href="tel:14058228300">Llamar</a>
+  <a href="https://wa.me/14058228300?text=Hola%2C%20vi%20su%20anuncio%20y%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20matrimonial." target="_blank" rel="noopener">WhatsApp</a>
+</div>
 
 <script src="/assets/lp.js"></script>
 </body>
