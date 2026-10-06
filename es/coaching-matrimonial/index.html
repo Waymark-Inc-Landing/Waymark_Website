@@ -56,7 +56,10 @@
   .marks span { display: inline-flex; align-items: center; gap: 8px; }
   .marks span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
 
-  .strip { display: block; width: 100%; height: clamp(190px, 28vw, 320px); object-fit: cover; object-position: center 58%; }
+  .team { max-width: 560px; margin: 0 auto; padding: 0 24px; text-align: center; }
+  .team img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 10px 30px rgba(16,30,52,0.12); }
+  .team figcaption { margin-top: 14px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
+  .team figcaption span { display: block; margin-top: 5px; font-family: var(--serif); font-style: italic; font-size: 16px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--muted); }
 
   .band { background: var(--cream-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 56px 0; }
   h2 { font-size: clamp(26px, 4vw, 34px); margin-bottom: 12px; }
@@ -163,7 +166,10 @@
   </div>
 </section>
 
-<img class="strip" src="/assets/lp-trail.jpg" width="1200" height="628" loading="lazy" alt="Una pareja caminando junta por un sendero de montaña" />
+<figure class="team">
+  <img src="/assets/jose-paula.jpg" width="960" height="716" loading="lazy" alt="José y Paula Villalpando, de Waymark Inc." />
+  <figcaption>José y Paula Villalpando<span>Con ustedes desde la primera llamada</span></figcaption>
+</figure>
 
 <section class="band">
   <div class="wrap">
