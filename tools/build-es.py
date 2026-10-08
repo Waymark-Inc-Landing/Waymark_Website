@@ -104,6 +104,11 @@ def main() -> int:
         el['href'] = 'https://www.instagram.com/waymarkespanol/'
     for el in soup.select('a[href="/dr-jim-talley/"]'):
         el['href'] = '/es/dr-jim-talley/'
+    # The booking flow speaks Spanish, but only when asked: CLCM_I18n::current_lang()
+    # reads a logged-in user's meta or the clcm_lang cookie, and a cold visitor has
+    # neither. Without this the Spanish pages hand Spanish speakers an English form.
+    for el in soup.select('a[href^="https://waymarkcoach.com/book"]'):
+        el['href'] = 'https://waymarkcoach.com/book/?clcm_lang=es'
 
     for b in soup.select('.lang-toggle button'):
         b['class'] = [c for c in b.get('class', []) if c != 'active'] + (
