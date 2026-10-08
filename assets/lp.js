@@ -4,8 +4,13 @@
 
   // A tapped phone number and a click through to booking are both real intent.
   // A tapped number and a WhatsApp message are both someone reaching out.
-  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(function (a) {
+  // Phone and WhatsApp are different channels and were sharing one label, so a
+  // zero on each was the same zero counted twice. They report separately now.
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
     a.addEventListener('click', function () { window.wmTrack('call'); });
+  });
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+    a.addEventListener('click', function () { window.wmTrack('whatsapp'); });
   });
   document.querySelectorAll('a[data-booking]').forEach(function (a) {
     a.addEventListener('click', function () { window.wmTrack('booking'); });

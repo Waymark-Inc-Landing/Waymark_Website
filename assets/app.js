@@ -344,8 +344,11 @@
   }
 
   // A tapped phone number, a WhatsApp message and a click through to booking all count.
-  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(function (a) {
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
     a.addEventListener('click', function () { if (window.wmTrack) { window.wmTrack('call'); } });
+  });
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.wmTrack) { window.wmTrack('whatsapp'); } });
   });
   document.querySelectorAll('a[href*="waymarkcoach.com/book"]').forEach(function (a) {
     a.addEventListener('click', function () { if (window.wmTrack) { window.wmTrack('booking'); } });

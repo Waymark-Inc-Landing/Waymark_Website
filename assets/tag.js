@@ -13,6 +13,7 @@
   var CONVERSIONS = {
     lead:    'AW-18476771155/0qjACNfL5IYdENPOtOpE',  // contact form submitted
     call:    'AW-18476771155/fVzvCNrL5IYdENPOtOpE',  // tapped the phone number
+    whatsapp:'AW-18476771155/gpLnCNnpiZYdENPOtOpE',  // opened a WhatsApp chat
     booking: 'AW-18476771155/BwvxCN3L5IYdENPOtOpE'   // clicked through to booking
   };
 
