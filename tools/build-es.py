@@ -202,6 +202,12 @@ def main() -> int:
     # neither. Without this the Spanish pages hand Spanish speakers an English form.
     for el in soup.select('a[href^="https://waymarkcoach.com/book"]'):
         el['href'] = 'https://waymarkcoach.com/book/?clcm_lang=es'
+    # The footer language link is a real <a> so Googlebot can follow it; the EN/ES toggle is
+    # <button>s and a crawler cannot use those. On the Spanish page it has to point back.
+    for el in soup.select('a[data-langlink]'):
+        el['href'] = '/'
+        el['hreflang'] = 'en'
+        el.string = 'English'
 
     for b in soup.select('.lang-toggle button'):
         b['class'] = [c for c in b.get('class', []) if c != 'active'] + (

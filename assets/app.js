@@ -35,6 +35,7 @@
 
     'svc-eyebrow':'Acompañamiento personalizado',
     'svc-h2':'Coaching y dirección espiritual',
+    'svc-note':'Somos coaches, no consejeros licenciados ni terapeutas. No hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es atención con licencia, te lo diremos con claridad y te ayudaremos a encontrarla.',
     'svc-sub':'Para cuando prefieres caminar acompañado en lugar de caminar solo. Confidencial, compasivo y respaldado por décadas de experiencia.',
     'svc1-h':'Coaching para parejas',
     'svc1-p':'Sesiones estructuradas para parejas en crisis, que reconstruyen tras una traición o que simplemente desean acercarse más. Te encontramos donde estás.',
