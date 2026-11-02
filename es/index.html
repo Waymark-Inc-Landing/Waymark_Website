@@ -532,7 +532,11 @@
     .hero .lead { font-size: 18px; }
     .testi-card { padding: 44px 26px; }
     .floating-badge { left: 8px; top: -16px; }
-    .about-visual .seal { width: 108px; height: 108px; right: 8px; }
+    /* The seal shrinks here but its longest string does not: "Est. Marcando el camino de
+       regreso" wraps to five lines where English takes four, and at 13px that overflowed the
+       circle. Sized to fit the longest line count rather than scoped to one language. */
+    .about-visual .seal { width: 108px; height: 108px; right: 8px; padding: 12px; }
+    .about-visual .seal span { font-size: 11.5px; line-height: 1.22; }
   }
 </style>
 <script type="application/ld+json">{
