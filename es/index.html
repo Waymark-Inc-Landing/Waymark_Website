@@ -18,13 +18,15 @@
 <meta content="Waymark Inc." property="og:site_name"/>
 <meta content="es_US" property="og:locale"/>
 <meta content="es_ES" property="og:locale:alternate"/>
-<meta content="https://www.waymarkinc.com/assets/hero-poster.jpg" property="og:image"/>
-<meta content="A couple hiking a mountain trail at golden hour" property="og:image:alt"/>
+<meta content="https://www.waymarkinc.com/assets/waymark-og-founders.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Jose y Paula Villalpando de Waymark Inc." property="og:image:alt"/>
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Waymark Inc. | Coaching cristiano para parejas y matrimonios | Shawnee, OK" name="twitter:title"/>
 <meta content="Coaching de parejas basado en la fe, restauración matrimonial y dirección espiritual en Shawnee, OK y en línea, en español e inglés. Con más de 50 años de acompañamiento del Dr. Jim Talley. Llama al (405) 822-8300." name="twitter:description"/>
-<meta content="https://www.waymarkinc.com/assets/hero-poster.jpg" name="twitter:image"/>
+<meta content="https://www.waymarkinc.com/assets/waymark-og-founders.jpg" name="twitter:image"/>
 <link href="/favicon.ico" rel="icon" sizes="any"/>
 <link href="/assets/waymark-symbol.svg" rel="icon" type="image/svg+xml"/>
 <link href="/assets/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -291,7 +293,9 @@
     border-left: 2px solid var(--gold); padding-left: 22px; margin: 30px 0; line-height: 1.4;
   }
   .about-body p { margin-bottom: 18px; }
-  .sign { margin-top: 28px; }
+  .sign { margin-top: 28px; display: flex; align-items: center; gap: 16px; }
+  .sign-photo { flex: none; width: 104px; height: 156px; object-fit: cover; border-radius: 12px;
+    border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(16,30,52,0.10); display: block; }
   .sign .nm { font-family: var(--serif); font-size: 26px; color: var(--ink); }
   .sign .rl { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
@@ -817,8 +821,11 @@
 <p class="pullout" data-i18n="about-pullout">Eso es lo que hacemos. Marcamos el camino de regreso: a tu matrimonio, a tu familia, a tu fe, a ti mismo.</p>
 <p data-i18n="about-p2">Waymark es el siguiente capítulo de la obra de toda una vida del <a href="/es/dr-jim-talley/"><strong>Dr. Jim Talley</strong></a>, cuyo acompañamiento ayudó a incontables parejas a pasar del borde de la separación a relaciones restauradas y duraderas. Continuamos esa obra con la misma convicción que la sostuvo: que la sanación es posible, que los límites son un acto de amor, y que ninguna relación está jamás verdaderamente más allá de toda reparación.</p>
 <div class="sign">
+<img alt="Jose and Paula Villalpando" class="sign-photo" height="720" loading="lazy" src="/assets/waymark-founders-sm.jpg" width="480"/>
+<div>
 <div class="nm" data-i18n="about-nm">El equipo de Waymark</div>
 <div class="rl" data-i18n="about-rl">Continuando la obra</div>
+</div>
 </div>
 </div>
 </div>
