@@ -548,7 +548,11 @@
   "description": "Faith-based Christian marriage coaching ministry offering couples coaching, marriage restoration, spiritual direction, boundary coaching, premarital guidance, and coach training — in English and Spanish, in person and online.",
   "url": "https://www.waymarkinc.com/",
   "logo": "https://www.waymarkinc.com/assets/favicon-512.png",
-  "image": "https://www.waymarkinc.com/assets/hero-poster.jpg",
+  "image": [
+    "https://www.waymarkinc.com/assets/waymark-founders-4x3.jpg",
+    "https://www.waymarkinc.com/assets/waymark-founders-1x1.jpg",
+    "https://www.waymarkinc.com/assets/waymark-founders.jpg"
+  ],
   "telephone": "+14058228300",
   "email": "coaching@waymarkinc.com",
   "address": {
@@ -568,12 +572,19 @@
     {"@type": "State", "name": "Oklahoma"},
     {"@type": "Country", "name": "United States"}
   ],
-  "serviceType": ["Couples Coaching","Marriage Restoration Coaching","Spiritual Direction","Boundary Coaching","Premarital Guidance","Coach Training"],
+  "makesOffer": [
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Couples Coaching"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Marriage Restoration Coaching"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Spiritual Direction"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Boundary Coaching"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Premarital Guidance"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Coach Training"}}
+  ],
   "founder": [
     {"@type": "Person", "name": "Jose Villalpando"},
     {"@type": "Person", "name": "Paula Villalpando"}
   ],
-  "availableLanguage": ["English", "Spanish"],
+  "knowsLanguage": ["en", "es"],
   "priceRange": "$100 per session",
   "sameAs": [
     "https://www.facebook.com/waymarken",
