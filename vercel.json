@@ -42,7 +42,17 @@
       "permanent": false
     },
     {
+      "source": "/es/p/:slug/",
+      "destination": "/es/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
+      "permanent": false
+    },
+    {
       "source": "/p/:slug",
+      "destination": "/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
+      "permanent": false
+    },
+    {
+      "source": "/p/:slug/",
       "destination": "/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
       "permanent": false
     },
