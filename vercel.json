@@ -35,27 +35,25 @@
       ]
     }
   ],
-  "redirects": [
+  "rewrites": [
     {
       "source": "/es/p/:slug",
-      "destination": "/es/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
-      "permanent": false
+      "destination": "/es/index.html"
     },
     {
       "source": "/es/p/:slug/",
-      "destination": "/es/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
-      "permanent": false
+      "destination": "/es/index.html"
     },
     {
       "source": "/p/:slug",
-      "destination": "/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
-      "permanent": false
+      "destination": "/index.html"
     },
     {
       "source": "/p/:slug/",
-      "destination": "/?utm_source=youversion&utm_medium=reading_plan&utm_campaign=:slug",
-      "permanent": false
-    },
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
     {
       "source": "/",
       "has": [
