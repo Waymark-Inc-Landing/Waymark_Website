@@ -1,2 +1,12 @@
 .DS_Store
 node_modules/
+__pycache__/
+
+# Working material that lives with the project but must NEVER be published.
+# This repo IS the deployed site: anything committed here becomes a public URL
+# on waymarkinc.com. These folders hold ad creatives, raw source media, old
+# drafts and social copy — none of it is part of the website.
+/Ads/
+/Source Media/
+/Archive/
+/Drafts/
