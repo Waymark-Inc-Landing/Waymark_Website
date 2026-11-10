@@ -205,7 +205,7 @@
     });
     document.documentElement.lang = lang;
     toggles.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
-    var fb = lang === 'es' ? 'https://www.facebook.com/waymarkespanol' : 'https://www.facebook.com/waymarken';
+    var fb = lang === 'es' ? 'https://www.facebook.com/waymarkespanol' : 'https://www.facebook.com/waymarkinc';
     document.querySelectorAll('a[data-fb]').forEach(function (el) { el.href = fb; });
     var ig = lang === 'es' ? 'https://www.instagram.com/waymarkespanol/' : 'https://www.instagram.com/waymarkinc/';
     document.querySelectorAll('a[data-ig]').forEach(function (el) { el.href = ig; });
