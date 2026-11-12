@@ -171,6 +171,7 @@ def main() -> int:
         ('meta[property="og:description"]', 'content', ES_DESC),
         ('meta[property="og:url"]', 'content', 'https://www.waymarkinc.com/es/'),
         ('meta[property="og:locale"]', 'content', 'es_US'),
+        ('meta[property="og:locale:alternate"]', 'content', 'en_US'),
         ('meta[property="og:image:alt"]', 'content', 'Jose y Paula Villalpando de Waymark Inc.'),
         ('meta[name="twitter:title"]', 'content', ES_TITLE),
         ('meta[name="twitter:description"]', 'content', ES_DESC),
