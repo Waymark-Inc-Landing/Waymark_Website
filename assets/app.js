@@ -59,6 +59,8 @@
     'svc6-p':'Comienza en el orden correcto. Una preparación que ayuda a las parejas a construir intimidad sobre un cimiento lo suficientemente firme para toda la vida.',
     'svc7-h':'Reconstrucción tras el divorcio',
     'svc7-p':'Para la temporada después de que un matrimonio termina: darle sentido a la pérdida, recuperar el equilibrio y seguir adelante sin llevar las mismas heridas a lo que viene.',
+    'foot-online':'Coaching en línea',
+    'foot-train':'Formación de coaches',
 
     'appr-eyebrow':'Cómo funciona',
     'appr-h2':'Tres pasos, una dirección honesta',

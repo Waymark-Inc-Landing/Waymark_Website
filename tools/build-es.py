@@ -25,6 +25,19 @@ ES_DESC = ('Coaching de parejas basado en la fe, restauración matrimonial y dir
            'del Dr. Jim Talley. Llama al (405) 822-8300.')
 
 
+# English service-page slug -> Spanish slug. Keep in step with tools/build-services.py.
+SERVICE_ES = {
+    'couples-coaching': 'coaching-para-parejas',
+    'marriage-restoration': 'restauracion-matrimonial',
+    'spiritual-direction': 'direccion-espiritual',
+    'coaching-for-ministers-and-leaders': 'coaching-para-ministros-y-lideres',
+    'premarital-guidance': 'orientacion-prematrimonial',
+    'rebuilding-after-divorce': 'reconstruccion-tras-el-divorcio',
+    'coach-training': 'formacion-de-coaches',
+    'online-christian-marriage-coaching': 'coaching-matrimonial-cristiano-en-linea',
+}
+
+
 def es_dictionary(js: str) -> dict:
     """Pull the ES object literal out of app.js. Each entry is one line: 'key':'value',"""
     start = js.index('var ES = {')
@@ -199,6 +212,10 @@ def main() -> int:
         el['href'] = 'https://www.instagram.com/waymarkespanol/'
     for el in soup.select('a[href="/dr-jim-talley/"]'):
         el['href'] = '/es/dr-jim-talley/'
+    # Service pages: same pairs as tools/build-services.py.
+    for en, es in SERVICE_ES.items():
+        for el in soup.select('a[href="/%s/"]' % en):
+            el['href'] = '/es/%s/' % es
     # The booking flow speaks Spanish, but only when asked: CLCM_I18n::current_lang()
     # reads a logged-in user's meta or the clcm_lang cookie, and a cold visitor has
     # neither. Without this the Spanish pages hand Spanish speakers an English form.
