@@ -98,6 +98,10 @@ section.block { padding: 120px 0; }
 .related-list a:hover span { transform: translateX(10px); color: var(--gold-deep); }
 .related-list a:hover i { transform: translateX(8px); }
 @media (max-width: 800px) { .related-list { grid-template-columns: 1fr; margin-top: 40px; } }
+.areas { margin-top: 40px; font-size: 15.5px; color: var(--muted); line-height: 2; }
+.areas span { display: block; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
+.areas a { color: var(--navy); border-bottom: 1px solid var(--gold); }
+.areas a:hover { color: var(--gold-deep); }
 
 /* ---------- Closing call ---------- */
 .contact { position: relative; color: var(--cream); padding: 130px 0 120px;

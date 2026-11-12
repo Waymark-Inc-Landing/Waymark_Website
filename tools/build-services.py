@@ -18,6 +18,7 @@ from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import shell  # noqa: E402  (tools/shell.py: the shared header and footer)
+from cities import CITIES  # noqa: E402  (tools/cities.py: the Oklahoma city pages)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://www.waymarkinc.com'
@@ -52,6 +53,7 @@ UI = {
         'disclosure': 'We are coaches, not licensed counselors or therapists. We do not diagnose and we do not treat mental health conditions. If licensed care is what you need, we will say so plainly and help you find it.',
         'legacy': 'Waymark Inc. continues the work of <a href="/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), who spent more than fifty years sitting with couples at the worst moment of their marriage and telling them the truth: that the way back exists, and that it is walked one honest step at a time.',
         'related_h': 'Other ways we can walk with you',
+        'areas_label': 'Marriage coaching in Oklahoma',
         'cta_h': 'There is a way back. Let us help you find it.',
         'cta_p': 'Start with one conversation, with no obligation. Tell us where you are and we will help you find the next marker on the road.',
         'foot_home': 'waymarkinc.com', 'crumb_home': 'Home',
@@ -83,6 +85,7 @@ UI = {
         'disclosure': 'Somos coaches. No somos consejeros licenciados ni terapeutas, no hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es un profesional licenciado, te lo diremos con claridad y te ayudaremos a buscarlo.',
         'legacy': 'Waymark Inc. continúa el trabajo del <a href="/es/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), quien pasó más de cincuenta años sentado con parejas en el peor momento de su matrimonio, diciéndoles la verdad: que el camino de regreso existe y se recorre un paso honesto a la vez.',
         'related_h': 'Otras formas en que podemos acompañarte',
+        'areas_label': 'Coaching matrimonial en Oklahoma',
         'cta_h': 'Hay un camino de regreso. Permítenos ayudarte a encontrarlo.',
         'cta_p': 'Comienza con una sola conversación, sin compromiso. Cuéntanos dónde estás y te ayudaremos a encontrar la siguiente señal en el camino.',
         'foot_home': 'waymarkinc.com/es', 'crumb_home': 'Inicio',
@@ -510,7 +513,8 @@ def jsonld(lang: str, svc: dict, d: dict, url: str) -> str:
         'name': d['name'], 'serviceType': d['name'], 'description': d['desc'],
         'url': url, 'inLanguage': lang,
         'provider': {'@type': 'LocalBusiness', '@id': ORG, 'name': 'Waymark Inc.', 'url': SITE + '/'},
-        'areaServed': [{'@type': 'State', 'name': ui['state']}, {'@type': 'Country', 'name': ui['country']}],
+        'areaServed': ([{'@type': 'City', 'name': svc['city']}] if svc.get('city') else [])
+        + [{'@type': 'State', 'name': ui['state']}, {'@type': 'Country', 'name': ui['country']}],
         'availableLanguage': ['en', 'es'],
     }
     if svc.get('kind') != 'training':
@@ -564,6 +568,9 @@ def render(lang: str, svc: dict) -> str:
         '<a class="reveal" href="%s"><span>%s</span><i aria-hidden="true">→</i></a>'
         % (path(lang, s[lang]['slug']), s[lang]['name'].replace('&', '&amp;'))
         for s in SERVICES if s is not svc)
+    areas = ' · '.join(
+        '<a href="%s">%s</a>' % (path(lang, c[lang]['slug']), c['city'])
+        for c in CITIES if c is not svc)
     steps_h = d.get('steps_h', ui['steps_h'])
 
     return f'''<!DOCTYPE html>
@@ -685,6 +692,7 @@ def render(lang: str, svc: dict) -> str:
     <nav class="related-list" aria-label="{esc_attr(ui['related_h'])}">
       {related}
     </nav>
+    <p class="areas reveal"><span>{ui['areas_label']}</span> {areas}</p>
   </div>
 </section>
 
@@ -718,7 +726,7 @@ def render(lang: str, svc: dict) -> str:
 
 def main() -> int:
     n = 0
-    for svc in SERVICES:
+    for svc in SERVICES + CITIES:
         for lang in ('en', 'es'):
             d = svc[lang]
             for field, limit in (('title', 75), ('desc', 200)):
@@ -728,7 +736,7 @@ def main() -> int:
             os.makedirs(os.path.dirname(out), exist_ok=True)
             open(out, 'w', encoding='utf-8').write(render(lang, svc))
             n += 1
-    print('wrote %d service pages' % n)
+    print('wrote %d service and city pages' % n)
     return 0
 
 
