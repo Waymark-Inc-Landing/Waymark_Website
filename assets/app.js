@@ -29,7 +29,7 @@
     'tl-start':'Hace cinco décadas',
     'tl-end':'Hoy',
     'cairn-cap':'Una piedra a la vez',
-    'shelf-hint':'Arrastra o desliza el estante →',
+    'shelf-hint':'Desliza el estante →',
     'about-eyebrow':'¿Qué es un waymark?',
     'about-h2':'Una señal firme que dice: el camino sigue aquí.',
     'about-p1':'Un waymark es una señal colocada a lo largo de un sendero —una piedra, un poste, una marca pintada— dejada por quienes caminaron antes para que nadie que los siga pierda el rumbo. Cuando el camino se cubre de maleza y baja la niebla, un waymark le recuerda al viajero cansado que no está perdido. Solo está entre una señal y la siguiente.',
