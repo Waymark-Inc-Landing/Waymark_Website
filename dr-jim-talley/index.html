@@ -117,28 +117,60 @@
   @keyframes wmRise { from { opacity: 0; transform: translateY(14px); } }
   @media (prefers-reduced-motion: no-preference) { h1 { animation: wmRise .9s cubic-bezier(.2,.7,.2,1) both; } }
 </style>
+<!-- shell:head -->
+<link rel="stylesheet" href="/assets/shell.css" />
+<script src="/assets/pre.js"></script>
+<!-- /shell:head -->
 <script src="/assets/tag.js"></script>
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-in">
-    <a class="home" href="/" aria-label="Waymark Inc. — Marking the way back">
-      <img src="../assets/waymark-logo-horizontal.svg" alt="Waymark Inc. — Marking the way back" />
+<!-- shell:header -->
+<div class="wm-head" id="wmHead" role="banner">
+  <div class="wm-nav">
+    <a href="/" class="wm-brand" aria-label="Waymark Inc. — Marking the way back">
+      <img class="neg" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marking the way back" />
+      <img class="lockup" src="/assets/waymark-logo-horizontal.svg" alt="" />
+      <img class="symbol" src="/assets/waymark-logo-mobile.svg" alt="" />
     </a>
-    <div class="bar-links">
-      <a class="bar-link" href="/es/dr-jim-talley/" hreflang="es">Espa&ntilde;ol</a>
-      <a class="bar-link" href="/#services">Explore coaching</a>
+    <nav class="wm-links" aria-label="Primary">
+      <a class="navlink" href="/#about">Our Story</a>
+      <a class="navlink" href="/#services">Coaching</a>
+      <a class="navlink" href="/#training">Training</a>
+      <a class="navlink" href="/#books">Resources</a>
+      <a class="navlink" href="/#blog">Blog</a>
+      <a class="wm-btn gold" href="/#contact">Begin the journey <span aria-hidden="true">→</span></a>
+      <a class="wm-lang" href="/es/dr-jim-talley/" hreflang="es">Español</a>
+    </nav>
+    <div class="wm-actions">
+      <a class="wm-lang" href="/es/dr-jim-talley/" hreflang="es">Español</a>
+      <button class="wm-menu-btn" id="wmMenuBtn" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </div>
-</header>
+</div>
+<div class="wm-mobile" id="wmMobile">
+  <a href="/#about">Our Story</a>
+  <a href="/#services">Coaching</a>
+  <a href="/#training">Training</a>
+  <a href="/#books">Resources</a>
+  <a href="/#blog">Blog</a>
+  <a class="wm-btn gold" href="/#contact">Begin the journey</a>
+</div>
+<!-- /shell:header -->
 
+<section class="wm-hero wm-dark short">
+  <div class="wm-hero-in">
+    <span class="kicker">In memory</span>
+    <h1>Dr. Jim Talley</h1>
+    <p class="lead">1942 &ndash; 2025</p>
+  </div>
+</section>
+
+<main class="wm-main">
 <article>
   <div class="wrap">
-    <span class="eyebrow">In memory</span>
-    <h1>Dr. Jim Talley</h1>
-    <p class="years">1942 &ndash; 2025</p>
-
     <figure class="portrait">
       <img src="/assets/dr-jim-talley.jpg" alt="Dr. Jim Talley at his desk" width="600" height="756" />
       <figcaption>Dr. Jim Talley<span>1942 &ndash; 2025</span></figcaption>
@@ -173,12 +205,58 @@
   </div>
 </article>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; <span>2026</span> Waymark Inc. &middot; In loving memory of Dr. Jim Talley.</span>
-    <span><a href="/">waymarkinc.com</a> &middot; <a href="tel:14058228300">(405) 822-8300</a></span>
+</main>
+
+<!-- shell:footer -->
+<div class="wm-foot" role="contentinfo">
+  <div class="wm-foot-in">
+    <div class="wm-foot-grid">
+      <div>
+        <img class="lockup" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marking the way back" width="252" height="70" loading="lazy" />
+        <p class="brand-p">Helping couples and individuals find the path home — through coaching and guidance rooted in five decades of relationship restoration. Continuing the legacy of Dr. Jim Talley.</p>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Explore</h4>
+        <a href="/#about">Our Story</a>
+        <a href="/#services">Coaching</a>
+        <a href="/#training">Training</a>
+        <a href="/#books">Resources</a>
+        <a href="/#blog">Blog</a>
+        <a href="/#contact">Contact</a>
+        <a href="/es/dr-jim-talley/" hreflang="es">Español</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Coaching</h4>
+        <a href="/couples-coaching/">Couples Coaching</a>
+        <a href="/marriage-restoration/">Marriage Restoration</a>
+        <a href="/spiritual-direction/">Spiritual Direction</a>
+        <a href="/premarital-guidance/">Premarital Guidance</a>
+        <a href="/rebuilding-after-divorce/">Rebuilding After Divorce</a>
+        <a href="/coaching-for-ministers-and-leaders/">Coaching for Ministers &amp; Leaders</a>
+        <a href="/online-christian-marriage-coaching/">Online Coaching</a>
+        <a href="/coach-training/">Coach Training</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Connect</h4>
+        <a href="tel:14058228300">(405) 822-8300</a>
+        <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a>
+        <span class="li">19223 Charleston Pointe<br />Shawnee, OK 74801</span>
+      </div>
+    </div>
+    <div class="wm-foot-bottom">
+      <span>© <span id="wmYear">2026</span> Waymark Inc. All rights reserved. · In loving memory of Dr. Jim Talley.</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/waymarkinc" target="_blank" rel="noopener" aria-label="Waymark on Facebook"><img src="/assets/waymark-facebook-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.instagram.com/waymarkinc/" target="_blank" rel="noopener" aria-label="Waymark on Instagram"><img src="/assets/waymark-instagram-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.youtube.com/@WaymarkInc" target="_blank" rel="noopener" aria-label="Waymark on YouTube"><img src="/assets/waymark-youtube-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://wa.me/14058228300" target="_blank" rel="noopener" aria-label="Message Waymark on WhatsApp"><img src="/assets/waymark-whatsapp-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark on the YouVersion Bible App"><img src="/assets/waymark-youversion-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+      </div>
+    </div>
   </div>
-</footer>
+</div>
+<script src="/assets/shell.js" defer></script>
+<!-- /shell:footer -->
 
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

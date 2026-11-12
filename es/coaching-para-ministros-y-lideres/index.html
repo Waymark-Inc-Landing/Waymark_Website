@@ -26,6 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/shell.css" />
+<script src="/assets/pre.js"></script>
 <link rel="stylesheet" href="/assets/service.css" />
 <script type="application/ld+json">
 {
@@ -120,27 +122,49 @@
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-in">
-    <a class="home" href="/es/" aria-label="Waymark Inc. — Marcando el camino de regreso"><img src="/assets/waymark-logo-horizontal.svg" alt="Waymark Inc." width="180" height="42" /></a>
-    <div class="bar-links">
-      <a class="bar-link" href="/coaching-for-ministers-and-leaders/" hreflang="en">English</a>
-      <a class="bar-phone" href="tel:14058228300">(405)&nbsp;822-8300</a>
+<div class="wm-head" id="wmHead" role="banner">
+  <div class="wm-nav">
+    <a href="/es/" class="wm-brand" aria-label="Waymark Inc. — Marcando el camino de regreso">
+      <img class="neg" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marcando el camino de regreso" />
+      <img class="lockup" src="/assets/waymark-logo-horizontal.svg" alt="" />
+      <img class="symbol" src="/assets/waymark-logo-mobile.svg" alt="" />
+    </a>
+    <nav class="wm-links" aria-label="Primary">
+      <a class="navlink" href="/es/#about">Nuestra Historia</a>
+      <a class="navlink" href="/es/#services">Coaching</a>
+      <a class="navlink" href="/es/#training">Formación</a>
+      <a class="navlink" href="/es/#books">Recursos</a>
+      <a class="navlink" href="/es/#blog">Blog</a>
+      <a class="wm-btn gold" href="/es/#contact">Comienza el camino <span aria-hidden="true">→</span></a>
+      <a class="wm-lang" href="/coaching-for-ministers-and-leaders/" hreflang="en">English</a>
+    </nav>
+    <div class="wm-actions">
+      <a class="wm-lang" href="/coaching-for-ministers-and-leaders/" hreflang="en">English</a>
+      <button class="wm-menu-btn" id="wmMenuBtn" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </div>
-</header>
+</div>
+<div class="wm-mobile" id="wmMobile">
+  <a href="/es/#about">Nuestra Historia</a>
+  <a href="/es/#services">Coaching</a>
+  <a href="/es/#training">Formación</a>
+  <a href="/es/#books">Recursos</a>
+  <a href="/es/#blog">Blog</a>
+  <a class="wm-btn gold" href="/es/#contact">Comienza el camino</a>
+</div>
 
-<main>
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Coaching para ministros y líderes</span>
+<section class="wm-hero wm-dark">
+  <div class="wm-hero-in">
+    <span class="kicker">Coaching para ministros y líderes</span>
     <h1>Tú cargas con todos. ¿Quién camina contigo?</h1>
     <p class="lead">Apoyo confidencial para <strong>pastores, ministros y líderes</strong> que se entregan por los demás: cuida tu propio matrimonio, tu familia y tu llamado mientras sirves.</p>
     <p class="offer">Cada sesión cuesta $100. <strong>La primera llamada de 15 minutos es gratis</strong>, sin compromiso.</p>
     <div class="actions">
-      <a class="btn btn-gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
-      <a class="btn btn-wa" href="https://wa.me/14058228300?text=Hola%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20para%20ministros%20y%20l%C3%ADderes." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
-      <a class="btn btn-line" href="https://waymarkcoach.com/book/?clcm_lang=es" target="_blank" rel="noopener" data-booking>Llamada gratis de 15 minutos</a>
+      <a class="wm-btn gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
+      <a class="wm-btn wa" href="https://wa.me/14058228300?text=Hola%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20para%20ministros%20y%20l%C3%ADderes." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+      <a class="wm-btn line" href="https://waymarkcoach.com/book/?clcm_lang=es" target="_blank" rel="noopener" data-booking>Llamada gratis de 15 minutos</a>
     </div>
     <div class="marks">
       <span>En español e inglés</span>
@@ -151,97 +175,157 @@
   </div>
 </section>
 
-<section class="band">
+<main class="wm-main">
+
+<section class="block">
   <div class="wrap">
-    <h2>Para quién es</h2>
-    <div class="cards">
-      <div class="card"><h3>Pastores y parejas en el ministerio</h3><p>La iglesia recibe tus mejores horas y tu matrimonio recibe lo que queda. Los dos lo sienten.</p></div>
-      <div class="card"><h3>Líderes casi vacíos</h3><p>Sigues presentándote, pero cada vez hay menos detrás, y no hay nadie dentro de la iglesia a quien puedas contárselo con seguridad.</p></div>
-      <div class="card"><h3>Líderes en transición</h3><p>Un nuevo cargo, una temporada difícil en la congregación o una decisión sobre lo que sigue.</p></div>
+    <div class="sec-head reveal">
+      <span class="eyebrow">¿Te suena conocido?</span>
+      <h2>Para quién es</h2>
+    </div>
+    <div class="trio">
+      <div class="item reveal"><h3>Pastores y parejas en el ministerio</h3><p>La iglesia recibe tus mejores horas y tu matrimonio recibe lo que queda. Los dos lo sienten.</p></div>
+      <div class="item reveal"><h3>Líderes casi vacíos</h3><p>Sigues presentándote, pero cada vez hay menos detrás, y no hay nadie dentro de la iglesia a quien puedas contárselo con seguridad.</p></div>
+      <div class="item reveal"><h3>Líderes en transición</h3><p>Un nuevo cargo, una temporada difícil en la congregación o una decisión sobre lo que sigue.</p></div>
     </div>
   </div>
 </section>
 
-<section class="plain">
+<section class="dark wm-dark">
   <div class="wrap">
-    <h2>Cómo es el trabajo</h2>
-    <div class="steps">
-      <div class="step"><b>PRIMERO</b><h3>Una conversación privada</h3><p>Fuera de tu iglesia y de tu denominación. Puedes decir lo que es verdad.</p></div>
-      <div class="step"><b>DESPUÉS</b><h3>Una mirada clara</h3><p>A tu matrimonio, tu familia, tu ritmo y los límites que se han ido desgastando.</p></div>
-      <div class="step"><b>Y LUEGO</b><h3>Una forma sostenible de servir</h3><p>Cambios concretos, trabajados entre sesiones, para que el llamado no te cueste tu hogar.</p></div>
+    <div class="sec-head reveal">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Tres pasos, una dirección honesta</h2>
+    </div>
+    <div class="rows">
+      <div class="row reveal"><span class="n">01</span><div><span class="lbl">PRIMERO</span><h3>Una conversación privada</h3></div><p>Fuera de tu iglesia y de tu denominación. Puedes decir lo que es verdad.</p></div>
+      <div class="row reveal"><span class="n">02</span><div><span class="lbl">DESPUÉS</span><h3>Una mirada clara</h3></div><p>A tu matrimonio, tu familia, tu ritmo y los límites que se han ido desgastando.</p></div>
+      <div class="row reveal"><span class="n">03</span><div><span class="lbl">Y LUEGO</span><h3>Una forma sostenible de servir</h3></div><p>Cambios concretos, trabajados entre sesiones, para que el llamado no te cueste tu hogar.</p></div>
     </div>
   </div>
 </section>
 
-<figure class="team">
-  <img src="/assets/jose-paula.jpg" width="960" height="716" loading="lazy" alt="José y Paula Villalpando, de Waymark Inc." />
-  <figcaption>José y Paula Villalpando<span>Contigo desde la primera llamada</span></figcaption>
-</figure>
-
-<section class="plain">
-  <div class="wrap">
-    <h2>Lo que la gente pregunta primero</h2>
-    <div class="faq">
-      <div class="qa"><h3>¿Alguien en mi iglesia se va a enterar?</h3><p>No. No compartimos con nadie lo que se habla en una sesión, y no somos parte de tu iglesia ni de tu denominación.</p></div>
-      <div class="qa"><h3>¿Puede participar mi cónyuge?</h3><p>Sí. Muchos líderes vienen en pareja y otros empiezan solos. Las dos formas funcionan.</p></div>
-      <div class="qa"><h3>¿Trabajan con equipos de liderazgo completos?</h3><p>También trabajamos con iglesias y sus líderes. Cuéntanos lo que estás enfrentando en la primera conversación y te diremos con honestidad si somos la ayuda indicada.</p></div>
+<section class="block about">
+  <div class="wrap about-grid">
+    <div class="portrait reveal">
+      <div class="clip"><img src="/assets/waymark-founders.jpg" alt="José y Paula Villalpando, de Waymark Inc." width="1200" height="1800" loading="lazy" /></div>
+    </div>
+    <div class="about-body">
+      <span class="eyebrow reveal">Con quién vas a hablar</span>
+      <h2 class="reveal">Contigo desde la primera llamada.</h2>
+      <ul class="know reveal">
+        <li><b>Lo que se dice aquí, se queda aquí</b>No compartimos con nadie lo que se habla en una sesión.</li>
+        <li><b>Hay ayuda para pagar el coaching</b>Cuando el dinero es la razón por la que alguien nunca llama, otra familia puede cubrir parte del costo. Pregúntanos por el coaching patrocinado.</li>
+        <li><b>En persona o desde casa</b>La mayoría de las sesiones son por teléfono o video. También hay sesiones en persona en Shawnee, Oklahoma.</li>
+      </ul>
+      <p class="disclosure reveal">Somos coaches. No somos consejeros licenciados ni terapeutas, no hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es un profesional licenciado, te lo diremos con claridad y te ayudaremos a buscarlo.</p>
+      <p class="legacy reveal">Waymark Inc. continúa el trabajo del <a href="/es/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), quien pasó más de cincuenta años sentado con parejas en el peor momento de su matrimonio, diciéndoles la verdad: que el camino de regreso existe y se recorre un paso honesto a la vez.</p>
+      <div class="sign reveal"><div class="nm">José y Paula Villalpando</div><div class="rl">Fundadores de Waymark Inc.</div></div>
     </div>
   </div>
 </section>
 
-<section class="band">
-  <div class="wrap">
-    <h2>Bueno saberlo</h2>
-    <div class="cards">
-      <div class="card"><h3>Lo que se dice aquí, se queda aquí</h3><p>No compartimos con nadie lo que se habla en una sesión.</p></div>
-      <div class="card"><h3>Hay ayuda para pagar el coaching</h3><p>Cuando el dinero es la razón por la que alguien nunca llama, otra familia puede cubrir parte del costo. Pregúntanos por el coaching patrocinado.</p></div>
-      <div class="card"><h3>En persona o desde casa</h3><p>La mayoría de las sesiones son por teléfono o video. También hay sesiones en persona en Shawnee, Oklahoma.</p></div>
+<section class="block faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Antes de comenzar</span>
+      <h2>Lo que la gente pregunta primero</h2>
     </div>
-    <p class="disclosure">Somos coaches. No somos consejeros licenciados ni terapeutas, no hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es un profesional licenciado, te lo diremos con claridad y te ayudaremos a buscarlo.</p>
-    <p class="legacy">Waymark Inc. continúa el trabajo del <a href="/es/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), quien pasó más de cincuenta años sentado con parejas en el peor momento de su matrimonio, diciéndoles la verdad: que el camino de regreso existe y se recorre un paso honesto a la vez.</p>
+    <div class="faq-list">
+      <details class="faq-item reveal" open><summary>¿Alguien en mi iglesia se va a enterar?</summary><p>No. No compartimos con nadie lo que se habla en una sesión, y no somos parte de tu iglesia ni de tu denominación.</p></details>
+      <details class="faq-item reveal"><summary>¿Puede participar mi cónyuge?</summary><p>Sí. Muchos líderes vienen en pareja y otros empiezan solos. Las dos formas funcionan.</p></details>
+      <details class="faq-item reveal"><summary>¿Trabajan con equipos de liderazgo completos?</summary><p>También trabajamos con iglesias y sus líderes. Cuéntanos lo que estás enfrentando en la primera conversación y te diremos con honestidad si somos la ayuda indicada.</p></details>
+    </div>
   </div>
 </section>
 
-<section class="plain">
+<section class="block related">
   <div class="wrap">
-    <h2>Otras formas en que podemos acompañarte</h2>
-    <nav class="related" aria-label="Otras formas en que podemos acompañarte">
-      <a href="/es/coaching-para-parejas/">Coaching para parejas</a>
-      <a href="/es/restauracion-matrimonial/">Restauración matrimonial</a>
-      <a href="/es/direccion-espiritual/">Dirección espiritual</a>
-      <a href="/es/orientacion-prematrimonial/">Orientación prematrimonial</a>
-      <a href="/es/reconstruccion-tras-el-divorcio/">Reconstrucción tras el divorcio</a>
-      <a href="/es/formacion-de-coaches/">Formación y certificación de coaches</a>
-      <a href="/es/coaching-matrimonial-cristiano-en-linea/">Coaching matrimonial cristiano en línea</a>
+    <div class="sec-head reveal">
+      <span class="eyebrow">Más de Waymark</span>
+      <h2>Otras formas en que podemos acompañarte</h2>
+    </div>
+    <nav class="related-list" aria-label="Otras formas en que podemos acompañarte">
+      <a class="reveal" href="/es/coaching-para-parejas/"><span>Coaching para parejas</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/restauracion-matrimonial/"><span>Restauración matrimonial</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/direccion-espiritual/"><span>Dirección espiritual</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/orientacion-prematrimonial/"><span>Orientación prematrimonial</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/reconstruccion-tras-el-divorcio/"><span>Reconstrucción tras el divorcio</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/formacion-de-coaches/"><span>Formación y certificación de coaches</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/es/coaching-matrimonial-cristiano-en-linea/"><span>Coaching matrimonial cristiano en línea</span><i aria-hidden="true">→</i></a>
     </nav>
   </div>
 </section>
 
-<section class="contact">
+<section class="contact wm-dark">
   <div class="wrap">
-    <h2>Hay un camino de regreso. Permítenos ayudarte a encontrarlo.</h2>
-    <p class="sub">Comienza con una sola conversación, sin compromiso. Cuéntanos dónde estás y te ayudaremos a encontrar la siguiente señal en el camino.</p>
-    <div class="actions">
-      <a class="btn btn-gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
-      <a class="btn btn-wa" href="https://wa.me/14058228300?text=Hola%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20para%20ministros%20y%20l%C3%ADderes." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
-      <a class="btn btn-line" href="https://waymarkcoach.com/book/?clcm_lang=es" target="_blank" rel="noopener" data-booking>Llamada gratis de 15 minutos</a>
+    <span class="eyebrow reveal">Dondequiera que estés</span>
+    <h2 class="reveal">Hay un camino de regreso. Permítenos ayudarte a encontrarlo.</h2>
+    <p class="sub reveal">Comienza con una sola conversación, sin compromiso. Cuéntanos dónde estás y te ayudaremos a encontrar la siguiente señal en el camino.</p>
+    <div class="actions reveal">
+      <a class="wm-btn gold" href="tel:14058228300">Llama al (405)&nbsp;822-8300</a>
+      <a class="wm-btn wa" href="https://wa.me/14058228300?text=Hola%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20para%20ministros%20y%20l%C3%ADderes." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+      <a class="wm-btn line" href="https://waymarkcoach.com/book/?clcm_lang=es" target="_blank" rel="noopener" data-booking>Llamada gratis de 15 minutos</a>
     </div>
   </div>
 </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; <span id="lpYear">2026</span> Waymark Inc. &middot; 19223 Charleston Pointe, Shawnee, OK 74801</span>
-    <span><a href="/es/">waymarkinc.com/es</a> &middot; <a href="tel:14058228300">(405) 822-8300</a> &middot; <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a></span>
+<div class="wm-foot" role="contentinfo">
+  <div class="wm-foot-in">
+    <div class="wm-foot-grid">
+      <div>
+        <img class="lockup" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marcando el camino de regreso" width="252" height="70" loading="lazy" />
+        <p class="brand-p">Ayudando a parejas y personas a encontrar el camino a casa, a través del coaching y el acompañamiento arraigados en cinco décadas de restauración de relaciones. Continuando el legado del Dr. Jim Talley.</p>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Explorar</h4>
+        <a href="/es/#about">Nuestra Historia</a>
+        <a href="/es/#services">Coaching</a>
+        <a href="/es/#training">Formación</a>
+        <a href="/es/#books">Recursos</a>
+        <a href="/es/#blog">Blog</a>
+        <a href="/es/#contact">Contacto</a>
+        <a href="/coaching-for-ministers-and-leaders/" hreflang="en">English</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Coaching</h4>
+        <a href="/es/coaching-para-parejas/">Coaching para parejas</a>
+        <a href="/es/restauracion-matrimonial/">Restauración matrimonial</a>
+        <a href="/es/direccion-espiritual/">Dirección espiritual</a>
+        <a href="/es/orientacion-prematrimonial/">Orientación prematrimonial</a>
+        <a href="/es/reconstruccion-tras-el-divorcio/">Reconstrucción tras el divorcio</a>
+        <a href="/es/coaching-para-ministros-y-lideres/">Coaching para ministros y líderes</a>
+        <a href="/es/coaching-matrimonial-cristiano-en-linea/">Coaching en línea</a>
+        <a href="/es/formacion-de-coaches/">Formación de coaches</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Comunícate</h4>
+        <a href="tel:14058228300">(405) 822-8300</a>
+        <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a>
+        <span class="li">19223 Charleston Pointe<br />Shawnee, OK 74801</span>
+      </div>
+    </div>
+    <div class="wm-foot-bottom">
+      <span>© <span id="wmYear">2026</span> Waymark Inc. Todos los derechos reservados. · En memoria del Dr. Jim Talley.</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/waymarkespanol" target="_blank" rel="noopener" aria-label="Waymark en Facebook"><img src="/assets/waymark-facebook-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.instagram.com/waymarkespanol/" target="_blank" rel="noopener" aria-label="Waymark en Instagram"><img src="/assets/waymark-instagram-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.youtube.com/@WaymarkInc" target="_blank" rel="noopener" aria-label="Waymark en YouTube"><img src="/assets/waymark-youtube-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://wa.me/14058228300" target="_blank" rel="noopener" aria-label="Escribe a Waymark por WhatsApp"><img src="/assets/waymark-whatsapp-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark en la app de la Biblia YouVersion"><img src="/assets/waymark-youversion-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+      </div>
+    </div>
   </div>
-</footer>
+</div>
 
 <div class="callbar">
   <a href="tel:14058228300">Llamar</a>
   <a href="https://wa.me/14058228300?text=Hola%2C%20quisiera%20saber%20m%C3%A1s%20sobre%20el%20coaching%20para%20ministros%20y%20l%C3%ADderes." target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
+<script src="/assets/shell.js" defer></script>
 <script src="/assets/lp.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

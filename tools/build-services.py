@@ -6,7 +6,8 @@ Run this after ANY change to the copy below or to the template:
     python3 tools/build-services.py
 
 Every page is written from the SERVICES list and one template, so the sixteen pages
-cannot drift apart. The styles live in assets/service.css. The homepage links to these
+cannot drift apart. The header and footer come from tools/shell.py (styles in
+assets/shell.css); the page sections are styled by assets/service.css. The homepage links to these
 pages; tools/build-es.py carries the same English-to-Spanish path pairs (SERVICE_ES)
 so the Spanish homepage links to the Spanish pages. Keep the two in step.
 """
@@ -14,6 +15,9 @@ import json
 import os
 import sys
 from urllib.parse import quote
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import shell  # noqa: E402  (tools/shell.py: the shared header and footer)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://www.waymarkinc.com'
@@ -34,7 +38,11 @@ UI = {
         'marks': ['In English and Spanish', 'By phone or video', 'Anywhere in the United States', 'In person in Shawnee, OK'],
         'team_alt': 'Jose and Paula Villalpando of Waymark Inc.',
         'team_cap': 'Jose and Paula Villalpando', 'team_sub': 'With you from the first call',
-        'for_h': 'Who this is for', 'steps_h': 'How the work goes', 'faq_h': 'Questions people ask first',
+        'for_eyebrow': 'Is this you?', 'steps_eyebrow': 'How it works',
+        'about_eyebrow': 'Who you will talk to', 'about_h': 'With you from the first call.',
+        'team_role': 'Founders, Waymark Inc.',
+        'faq_eyebrow': 'Before you begin', 'related_eyebrow': 'More from Waymark', 'cta_eyebrow': 'Wherever you are',
+        'for_h': 'Who this is for', 'steps_h': 'Three steps, one honest direction', 'faq_h': 'Questions people ask first',
         'know_h': 'Good to know',
         'know': [
             ('What is said here stays here', 'We do not share what is said in a session with anyone.'),
@@ -61,7 +69,11 @@ UI = {
         'marks': ['En español e inglés', 'Por teléfono o video', 'Todo Estados Unidos', 'En persona en Shawnee, OK'],
         'team_alt': 'José y Paula Villalpando, de Waymark Inc.',
         'team_cap': 'José y Paula Villalpando', 'team_sub': 'Contigo desde la primera llamada',
-        'for_h': 'Para quién es', 'steps_h': 'Cómo es el trabajo', 'faq_h': 'Lo que la gente pregunta primero',
+        'for_eyebrow': '¿Te suena conocido?', 'steps_eyebrow': 'Cómo funciona',
+        'about_eyebrow': 'Con quién vas a hablar', 'about_h': 'Contigo desde la primera llamada.',
+        'team_role': 'Fundadores de Waymark Inc.',
+        'faq_eyebrow': 'Antes de comenzar', 'related_eyebrow': 'Más de Waymark', 'cta_eyebrow': 'Dondequiera que estés',
+        'for_h': 'Para quién es', 'steps_h': 'Tres pasos, una dirección honesta', 'faq_h': 'Lo que la gente pregunta primero',
         'know_h': 'Bueno saberlo',
         'know': [
             ('Lo que se dice aquí, se queda aquí', 'No compartimos con nadie lo que se habla en una sesión.'),
@@ -383,6 +395,7 @@ SERVICES = [
             'eyebrow': 'For coaches and leaders',
             'h1': 'Learn to walk couples back to wholeness.',
             'lead': '<strong>Training and certification in the Talley method</strong>, structured for pastors, lay coaches, and leaders who want to make a lasting difference in the marriages around them.',
+            'steps_h': 'What the training includes',
             'offer': 'Tell us about your ministry or practice and we will walk you through how the training works.',
             'for': [
                 ('Pastors and ministry leaders', 'Couples already come to you in crisis, and you want more than instinct to offer them.'),
@@ -407,6 +420,7 @@ SERVICES = [
             'eyebrow': 'Para coaches y líderes',
             'h1': 'Aprende a acompañar a las parejas de regreso a la plenitud.',
             'lead': '<strong>Formación y certificación en el método Talley</strong>, estructurada para pastores, coaches y líderes que desean generar un impacto duradero en los matrimonios que los rodean.',
+            'steps_h': 'Lo que incluye la formación',
             'offer': 'Cuéntanos sobre tu ministerio o tu práctica y te explicaremos cómo funciona la formación.',
             'for': [
                 ('Pastores y líderes de ministerio', 'Las parejas ya llegan a ti en crisis, y quieres ofrecerles algo más que intuición.'),
@@ -529,22 +543,28 @@ def render(lang: str, svc: dict) -> str:
     offer = d.get('offer', ui['offer'])
 
     if training:
-        third = '<a class="btn btn-line" href="%s">%s</a>' % (mail, ui['email_label'])
+        third = '<a class="wm-btn line" href="%s">%s</a>' % (mail, ui['email_label'])
     else:
-        third = '<a class="btn btn-line" href="%s" target="_blank" rel="noopener" data-booking>%s</a>' % (ui['book'], ui['book_label'])
+        third = '<a class="wm-btn line" href="%s" target="_blank" rel="noopener" data-booking>%s</a>' % (ui['book'], ui['book_label'])
     actions = (
-        '<a class="btn btn-gold" href="tel:14058228300">%s</a>\n'
-        '      <a class="btn btn-wa" href="%s" target="_blank" rel="noopener">%s</a>\n'
+        '<a class="wm-btn gold" href="tel:14058228300">%s</a>\n'
+        '      <a class="wm-btn wa" href="%s" target="_blank" rel="noopener">%s</a>\n'
         '      %s' % (ui['call'], wa, ui['wa'], third))
 
     marks = '\n      '.join('<span>%s</span>' % m for m in ui['marks'])
-    cards = '\n      '.join('<div class="card"><h3>%s</h3><p>%s</p></div>' % c for c in d['for'])
-    steps = '\n      '.join('<div class="step"><b>%s</b><h3>%s</h3><p>%s</p></div>' % s for s in d['steps'])
-    faq = '\n      '.join('<div class="qa"><h3>%s</h3><p>%s</p></div>' % qa for qa in d['faq'])
-    know = '\n      '.join('<div class="card"><h3>%s</h3><p>%s</p></div>' % k for k in ui['know'])
+    items = '\n      '.join('<div class="item reveal"><h3>%s</h3><p>%s</p></div>' % c for c in d['for'])
+    rows = '\n      '.join(
+        '<div class="row reveal"><span class="n">%02d</span><div><span class="lbl">%s</span><h3>%s</h3></div><p>%s</p></div>'
+        % (i + 1, s[0], s[1], s[2]) for i, s in enumerate(d['steps']))
+    faq = '\n      '.join(
+        '<details class="faq-item reveal"%s><summary>%s</summary><p>%s</p></details>'
+        % (' open' if i == 0 else '', q, a) for i, (q, a) in enumerate(d['faq']))
+    know = '\n        '.join('<li><b>%s</b>%s</li>' % k for k in ui['know'])
     related = '\n      '.join(
-        '<a href="%s">%s</a>' % (path(lang, s[lang]['slug']), s[lang]['name'].replace('&', '&amp;'))
+        '<a class="reveal" href="%s"><span>%s</span><i aria-hidden="true">→</i></a>'
+        % (path(lang, s[lang]['slug']), s[lang]['name'].replace('&', '&amp;'))
         for s in SERVICES if s is not svc)
+    steps_h = d.get('steps_h', ui['steps_h'])
 
     return f'''<!DOCTYPE html>
 <html lang="{lang}">
@@ -574,6 +594,7 @@ def render(lang: str, svc: dict) -> str:
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+{shell.HEAD_ASSETS}
 <link rel="stylesheet" href="/assets/service.css" />
 <script type="application/ld+json">
 {jsonld(lang, svc, d, url)}
@@ -582,20 +603,11 @@ def render(lang: str, svc: dict) -> str:
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-in">
-    <a class="home" href="{ui['home']}" aria-label="{esc_attr(ui['home_label'])}"><img src="/assets/waymark-logo-horizontal.svg" alt="Waymark Inc." width="180" height="42" /></a>
-    <div class="bar-links">
-      <a class="bar-link" href="{other_path}" hreflang="{ui['other_code']}">{ui['other_lang']}</a>
-      <a class="bar-phone" href="tel:14058228300">(405)&nbsp;822-8300</a>
-    </div>
-  </div>
-</header>
+{shell.header(lang, other_path)}
 
-<main>
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">{d['eyebrow']}</span>
+<section class="wm-hero wm-dark">
+  <div class="wm-hero-in">
+    <span class="kicker">{d['eyebrow']}</span>
     <h1>{d['h1']}</h1>
     <p class="lead">{d['lead']}</p>
     <p class="offer">{offer}</p>
@@ -608,81 +620,95 @@ def render(lang: str, svc: dict) -> str:
   </div>
 </section>
 
-<section class="band">
+<main class="wm-main">
+
+<section class="block">
   <div class="wrap">
-    <h2>{ui['for_h']}</h2>
-    <div class="cards">
-      {cards}
+    <div class="sec-head reveal">
+      <span class="eyebrow">{ui['for_eyebrow']}</span>
+      <h2>{ui['for_h']}</h2>
+    </div>
+    <div class="trio">
+      {items}
     </div>
   </div>
 </section>
 
-<section class="plain">
+<section class="dark wm-dark">
   <div class="wrap">
-    <h2>{ui['steps_h']}</h2>
-    <div class="steps">
-      {steps}
+    <div class="sec-head reveal">
+      <span class="eyebrow">{ui['steps_eyebrow']}</span>
+      <h2>{steps_h}</h2>
+    </div>
+    <div class="rows">
+      {rows}
     </div>
   </div>
 </section>
 
-<figure class="team">
-  <img src="/assets/jose-paula.jpg" width="960" height="716" loading="lazy" alt="{esc_attr(ui['team_alt'])}" />
-  <figcaption>{ui['team_cap']}<span>{ui['team_sub']}</span></figcaption>
-</figure>
+<section class="block about">
+  <div class="wrap about-grid">
+    <div class="portrait reveal">
+      <div class="clip"><img src="/assets/waymark-founders.jpg" alt="{esc_attr(ui['team_alt'])}" width="1200" height="1800" loading="lazy" /></div>
+    </div>
+    <div class="about-body">
+      <span class="eyebrow reveal">{ui['about_eyebrow']}</span>
+      <h2 class="reveal">{ui['about_h']}</h2>
+      <ul class="know reveal">
+        {know}
+      </ul>
+      <p class="disclosure reveal">{ui['disclosure']}</p>
+      <p class="legacy reveal">{ui['legacy']}</p>
+      <div class="sign reveal"><div class="nm">{ui['team_cap']}</div><div class="rl">{ui['team_role']}</div></div>
+    </div>
+  </div>
+</section>
 
-<section class="plain">
-  <div class="wrap">
-    <h2>{ui['faq_h']}</h2>
-    <div class="faq">
+<section class="block faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head reveal">
+      <span class="eyebrow">{ui['faq_eyebrow']}</span>
+      <h2>{ui['faq_h']}</h2>
+    </div>
+    <div class="faq-list">
       {faq}
     </div>
   </div>
 </section>
 
-<section class="band">
+<section class="block related">
   <div class="wrap">
-    <h2>{ui['know_h']}</h2>
-    <div class="cards">
-      {know}
+    <div class="sec-head reveal">
+      <span class="eyebrow">{ui['related_eyebrow']}</span>
+      <h2>{ui['related_h']}</h2>
     </div>
-    <p class="disclosure">{ui['disclosure']}</p>
-    <p class="legacy">{ui['legacy']}</p>
-  </div>
-</section>
-
-<section class="plain">
-  <div class="wrap">
-    <h2>{ui['related_h']}</h2>
-    <nav class="related" aria-label="{esc_attr(ui['related_h'])}">
+    <nav class="related-list" aria-label="{esc_attr(ui['related_h'])}">
       {related}
     </nav>
   </div>
 </section>
 
-<section class="contact">
+<section class="contact wm-dark">
   <div class="wrap">
-    <h2>{ui['cta_h']}</h2>
-    <p class="sub">{ui['cta_p']}</p>
-    <div class="actions">
+    <span class="eyebrow reveal">{ui['cta_eyebrow']}</span>
+    <h2 class="reveal">{ui['cta_h']}</h2>
+    <p class="sub reveal">{ui['cta_p']}</p>
+    <div class="actions reveal">
       {actions}
     </div>
   </div>
 </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; <span id="lpYear">2026</span> Waymark Inc. &middot; 19223 Charleston Pointe, Shawnee, OK 74801</span>
-    <span><a href="{ui['home']}">{ui['foot_home']}</a> &middot; <a href="tel:14058228300">(405) 822-8300</a> &middot; <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a></span>
-  </div>
-</footer>
+{shell.footer(lang, other_path)}
 
 <div class="callbar">
   <a href="tel:14058228300">{ui['callbar_call']}</a>
   <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
+{shell.FOOT_SCRIPT}
 <script src="/assets/lp.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

@@ -148,19 +148,55 @@
   .btn-gold:hover { background: #E3CB95; }
   @keyframes wmRise { from { opacity: 0; transform: translateY(14px); } }
   @media (prefers-reduced-motion: no-preference) { h1 { animation: wmRise .9s cubic-bezier(.2,.7,.2,1) both; } }
+  /* Founders portrait (2:3) under the dark hero. */
+  .team { max-width: 400px; margin-top: 76px; margin-bottom: 70px; }
+  .team img { border-radius: 0; }
+  .wm-hero .eyebrow { margin-bottom: 0; }
 </style>
+<!-- shell:head -->
+<link rel="stylesheet" href="/assets/shell.css" />
+<script src="/assets/pre.js"></script>
+<!-- /shell:head -->
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-in">
-    <img src="/assets/waymark-logo-horizontal.svg" alt="Waymark Inc." width="180" height="42" />
-    <a class="bar-phone" href="tel:14058228300">(405)&nbsp;822-8300</a>
+<!-- shell:header -->
+<div class="wm-head" id="wmHead" role="banner">
+  <div class="wm-nav">
+    <a href="/es/" class="wm-brand" aria-label="Waymark Inc. — Marcando el camino de regreso">
+      <img class="neg" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marcando el camino de regreso" />
+      <img class="lockup" src="/assets/waymark-logo-horizontal.svg" alt="" />
+      <img class="symbol" src="/assets/waymark-logo-mobile.svg" alt="" />
+    </a>
+    <nav class="wm-links" aria-label="Primary">
+      <a class="navlink" href="/es/#about">Nuestra Historia</a>
+      <a class="navlink" href="/es/#services">Coaching</a>
+      <a class="navlink" href="/es/#training">Formación</a>
+      <a class="navlink" href="/es/#books">Recursos</a>
+      <a class="navlink" href="/es/#blog">Blog</a>
+      <a class="wm-btn gold" href="/es/#contact">Comienza el camino <span aria-hidden="true">→</span></a>
+      <a class="wm-lang" href="/" hreflang="en">English</a>
+    </nav>
+    <div class="wm-actions">
+      <a class="wm-lang" href="/" hreflang="en">English</a>
+      <button class="wm-menu-btn" id="wmMenuBtn" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
   </div>
-</header>
+</div>
+<div class="wm-mobile" id="wmMobile">
+  <a href="/es/#about">Nuestra Historia</a>
+  <a href="/es/#services">Coaching</a>
+  <a href="/es/#training">Formación</a>
+  <a href="/es/#books">Recursos</a>
+  <a href="/es/#blog">Blog</a>
+  <a class="wm-btn gold" href="/es/#contact">Comienza el camino</a>
+</div>
+<!-- /shell:header -->
 
-<section class="hero">
-  <div class="wrap">
+<section class="wm-hero wm-dark">
+  <div class="wm-hero-in">
     <span class="eyebrow">Coaching cristiano para parejas</span>
     <h1>¿Quieren salvar su matrimonio?</h1>
     <p class="lead">Coaching matrimonial <strong>en español</strong>, basado en la fe, por teléfono o video en todo Estados Unidos. Cincuenta años de trabajo con parejas detrás de cada conversación. <strong>No es terapia.</strong></p>
@@ -179,8 +215,10 @@
   </div>
 </section>
 
+<main class="wm-main">
+
 <figure class="team">
-  <img src="/assets/jose-paula.jpg" width="960" height="716" loading="lazy" alt="José y Paula Villalpando, de Waymark Inc." />
+  <img src="/assets/waymark-founders.jpg" width="1200" height="1800" loading="lazy" alt="José y Paula Villalpando, fundadores de Waymark Inc." />
   <figcaption>José y Paula Villalpando<span>Con ustedes desde la primera llamada</span></figcaption>
 </figure>
 
@@ -265,12 +303,58 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; <span id="lpYear">2026</span> Waymark Inc. &middot; 19223 Charleston Pointe, Shawnee, OK 74801</span>
-    <span><a href="/es/">waymarkinc.com</a> &middot; <a href="tel:14058228300">(405) 822-8300</a> &middot; <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a></span>
+</main>
+
+<!-- shell:footer -->
+<div class="wm-foot" role="contentinfo">
+  <div class="wm-foot-in">
+    <div class="wm-foot-grid">
+      <div>
+        <img class="lockup" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marcando el camino de regreso" width="252" height="70" loading="lazy" />
+        <p class="brand-p">Ayudando a parejas y personas a encontrar el camino a casa, a través del coaching y el acompañamiento arraigados en cinco décadas de restauración de relaciones. Continuando el legado del Dr. Jim Talley.</p>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Explorar</h4>
+        <a href="/es/#about">Nuestra Historia</a>
+        <a href="/es/#services">Coaching</a>
+        <a href="/es/#training">Formación</a>
+        <a href="/es/#books">Recursos</a>
+        <a href="/es/#blog">Blog</a>
+        <a href="/es/#contact">Contacto</a>
+        <a href="/" hreflang="en">English</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Coaching</h4>
+        <a href="/es/coaching-para-parejas/">Coaching para parejas</a>
+        <a href="/es/restauracion-matrimonial/">Restauración matrimonial</a>
+        <a href="/es/direccion-espiritual/">Dirección espiritual</a>
+        <a href="/es/orientacion-prematrimonial/">Orientación prematrimonial</a>
+        <a href="/es/reconstruccion-tras-el-divorcio/">Reconstrucción tras el divorcio</a>
+        <a href="/es/coaching-para-ministros-y-lideres/">Coaching para ministros y líderes</a>
+        <a href="/es/coaching-matrimonial-cristiano-en-linea/">Coaching en línea</a>
+        <a href="/es/formacion-de-coaches/">Formación de coaches</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Comunícate</h4>
+        <a href="tel:14058228300">(405) 822-8300</a>
+        <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a>
+        <span class="li">19223 Charleston Pointe<br />Shawnee, OK 74801</span>
+      </div>
+    </div>
+    <div class="wm-foot-bottom">
+      <span>© <span id="wmYear">2026</span> Waymark Inc. Todos los derechos reservados. · En memoria del Dr. Jim Talley.</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/waymarkespanol" target="_blank" rel="noopener" aria-label="Waymark en Facebook"><img src="/assets/waymark-facebook-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.instagram.com/waymarkespanol/" target="_blank" rel="noopener" aria-label="Waymark en Instagram"><img src="/assets/waymark-instagram-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.youtube.com/@WaymarkInc" target="_blank" rel="noopener" aria-label="Waymark en YouTube"><img src="/assets/waymark-youtube-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://wa.me/14058228300" target="_blank" rel="noopener" aria-label="Escribe a Waymark por WhatsApp"><img src="/assets/waymark-whatsapp-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark en la app de la Biblia YouVersion"><img src="/assets/waymark-youversion-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+      </div>
+    </div>
   </div>
-</footer>
+</div>
+<script src="/assets/shell.js" defer></script>
+<!-- /shell:footer -->
 
 <div class="callbar">
   <a href="tel:14058228300">Llamar</a>

@@ -26,6 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/shell.css" />
+<script src="/assets/pre.js"></script>
 <link rel="stylesheet" href="/assets/service.css" />
 <script type="application/ld+json">
 {
@@ -120,27 +122,49 @@
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-in">
-    <a class="home" href="/" aria-label="Waymark Inc. — Marking the way back"><img src="/assets/waymark-logo-horizontal.svg" alt="Waymark Inc." width="180" height="42" /></a>
-    <div class="bar-links">
-      <a class="bar-link" href="/es/restauracion-matrimonial/" hreflang="es">Español</a>
-      <a class="bar-phone" href="tel:14058228300">(405)&nbsp;822-8300</a>
+<div class="wm-head" id="wmHead" role="banner">
+  <div class="wm-nav">
+    <a href="/" class="wm-brand" aria-label="Waymark Inc. — Marking the way back">
+      <img class="neg" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marking the way back" />
+      <img class="lockup" src="/assets/waymark-logo-horizontal.svg" alt="" />
+      <img class="symbol" src="/assets/waymark-logo-mobile.svg" alt="" />
+    </a>
+    <nav class="wm-links" aria-label="Primary">
+      <a class="navlink" href="/#about">Our Story</a>
+      <a class="navlink" href="/#services">Coaching</a>
+      <a class="navlink" href="/#training">Training</a>
+      <a class="navlink" href="/#books">Resources</a>
+      <a class="navlink" href="/#blog">Blog</a>
+      <a class="wm-btn gold" href="/#contact">Begin the journey <span aria-hidden="true">→</span></a>
+      <a class="wm-lang" href="/es/restauracion-matrimonial/" hreflang="es">Español</a>
+    </nav>
+    <div class="wm-actions">
+      <a class="wm-lang" href="/es/restauracion-matrimonial/" hreflang="es">Español</a>
+      <button class="wm-menu-btn" id="wmMenuBtn" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </div>
-</header>
+</div>
+<div class="wm-mobile" id="wmMobile">
+  <a href="/#about">Our Story</a>
+  <a href="/#services">Coaching</a>
+  <a href="/#training">Training</a>
+  <a href="/#books">Resources</a>
+  <a href="/#blog">Blog</a>
+  <a class="wm-btn gold" href="/#contact">Begin the journey</a>
+</div>
 
-<main>
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Marriage restoration</span>
+<section class="wm-hero wm-dark">
+  <div class="wm-hero-in">
+    <span class="kicker">Marriage restoration</span>
     <h1>Separated, or close to it? No marriage is beyond repair.</h1>
     <p class="lead">An intensive, guided path for <strong>marriages on the brink</strong>: proven steps that move a couple from separation back toward a lasting covenant. It is more structured than general couples coaching, and both of you do the work.</p>
     <p class="offer">Nine one-hour sessions, $100 per session. <strong>The first 15-minute call is free</strong>, with no obligation.</p>
     <div class="actions">
-      <a class="btn btn-gold" href="tel:14058228300">Call (405)&nbsp;822-8300</a>
-      <a class="btn btn-wa" href="https://wa.me/14058228300?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20marriage%20restoration." target="_blank" rel="noopener">Message us on WhatsApp</a>
-      <a class="btn btn-line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Free 15-minute call</a>
+      <a class="wm-btn gold" href="tel:14058228300">Call (405)&nbsp;822-8300</a>
+      <a class="wm-btn wa" href="https://wa.me/14058228300?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20marriage%20restoration." target="_blank" rel="noopener">Message us on WhatsApp</a>
+      <a class="wm-btn line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Free 15-minute call</a>
     </div>
     <div class="marks">
       <span>In English and Spanish</span>
@@ -151,97 +175,157 @@
   </div>
 </section>
 
-<section class="band">
+<main class="wm-main">
+
+<section class="block">
   <div class="wrap">
-    <h2>Who this is for</h2>
-    <div class="cards">
-      <div class="card"><h3>Couples who are separated</h3><p>You live apart, or are about to, and at least one of you is not ready to call it finished.</p></div>
-      <div class="card"><h3>Couples facing divorce</h3><p>The word has been said out loud, maybe papers have been filed, and you want to know if there is another way.</p></div>
-      <div class="card"><h3>Couples after a betrayal</h3><p>Trust has broken and you need more than good intentions: you need an order to do things in.</p></div>
+    <div class="sec-head reveal">
+      <span class="eyebrow">Is this you?</span>
+      <h2>Who this is for</h2>
+    </div>
+    <div class="trio">
+      <div class="item reveal"><h3>Couples who are separated</h3><p>You live apart, or are about to, and at least one of you is not ready to call it finished.</p></div>
+      <div class="item reveal"><h3>Couples facing divorce</h3><p>The word has been said out loud, maybe papers have been filed, and you want to know if there is another way.</p></div>
+      <div class="item reveal"><h3>Couples after a betrayal</h3><p>Trust has broken and you need more than good intentions: you need an order to do things in.</p></div>
     </div>
   </div>
 </section>
 
-<section class="plain">
+<section class="dark wm-dark">
   <div class="wrap">
-    <h2>How the work goes</h2>
-    <div class="steps">
-      <div class="step"><b>FIRST</b><h3>An honest look</h3><p>A conversation about where the marriage really stands and whether both of you are willing to walk the path.</p></div>
-      <div class="step"><b>THEN</b><h3>Nine structured sessions</h3><p>A set sequence of steps, with work between sessions, built on the reconciliation method Dr. Jim Talley taught for decades.</p></div>
-      <div class="step"><b>AND THEN</b><h3>A marriage that holds</h3><p>Rebuilt trust, healthier boundaries, and the tools to keep walking after the sessions end.</p></div>
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps, one honest direction</h2>
+    </div>
+    <div class="rows">
+      <div class="row reveal"><span class="n">01</span><div><span class="lbl">FIRST</span><h3>An honest look</h3></div><p>A conversation about where the marriage really stands and whether both of you are willing to walk the path.</p></div>
+      <div class="row reveal"><span class="n">02</span><div><span class="lbl">THEN</span><h3>Nine structured sessions</h3></div><p>A set sequence of steps, with work between sessions, built on the reconciliation method Dr. Jim Talley taught for decades.</p></div>
+      <div class="row reveal"><span class="n">03</span><div><span class="lbl">AND THEN</span><h3>A marriage that holds</h3></div><p>Rebuilt trust, healthier boundaries, and the tools to keep walking after the sessions end.</p></div>
     </div>
   </div>
 </section>
 
-<figure class="team">
-  <img src="/assets/jose-paula.jpg" width="960" height="716" loading="lazy" alt="Jose and Paula Villalpando of Waymark Inc." />
-  <figcaption>Jose and Paula Villalpando<span>With you from the first call</span></figcaption>
-</figure>
-
-<section class="plain">
-  <div class="wrap">
-    <h2>Questions people ask first</h2>
-    <div class="faq">
-      <div class="qa"><h3>What is marriage restoration?</h3><p>An intensive, guided path for marriages on the brink: nine sessions of proven steps that move a couple from separation back toward a lasting covenant. It is more structured than general couples coaching.</p></div>
-      <div class="qa"><h3>What if my spouse will not come?</h3><p>Start with a conversation anyway. One person can begin, and we will tell you plainly what is and is not possible from there.</p></div>
-      <div class="qa"><h3>Is this counseling or therapy?</h3><p>No. It is coaching. We are not licensed counselors or therapists, and if licensed care is what your situation needs we will say so and help you find it.</p></div>
+<section class="block about">
+  <div class="wrap about-grid">
+    <div class="portrait reveal">
+      <div class="clip"><img src="/assets/waymark-founders.jpg" alt="Jose and Paula Villalpando of Waymark Inc." width="1200" height="1800" loading="lazy" /></div>
+    </div>
+    <div class="about-body">
+      <span class="eyebrow reveal">Who you will talk to</span>
+      <h2 class="reveal">With you from the first call.</h2>
+      <ul class="know reveal">
+        <li><b>What is said here stays here</b>We do not share what is said in a session with anyone.</li>
+        <li><b>There is help paying for coaching</b>When money is the reason someone never calls, another family can cover part of the cost. Ask us about sponsored coaching.</li>
+        <li><b>In person or from home</b>Most sessions happen by phone or video. In-person sessions are available in Shawnee, Oklahoma.</li>
+      </ul>
+      <p class="disclosure reveal">We are coaches, not licensed counselors or therapists. We do not diagnose and we do not treat mental health conditions. If licensed care is what you need, we will say so plainly and help you find it.</p>
+      <p class="legacy reveal">Waymark Inc. continues the work of <a href="/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), who spent more than fifty years sitting with couples at the worst moment of their marriage and telling them the truth: that the way back exists, and that it is walked one honest step at a time.</p>
+      <div class="sign reveal"><div class="nm">Jose and Paula Villalpando</div><div class="rl">Founders, Waymark Inc.</div></div>
     </div>
   </div>
 </section>
 
-<section class="band">
-  <div class="wrap">
-    <h2>Good to know</h2>
-    <div class="cards">
-      <div class="card"><h3>What is said here stays here</h3><p>We do not share what is said in a session with anyone.</p></div>
-      <div class="card"><h3>There is help paying for coaching</h3><p>When money is the reason someone never calls, another family can cover part of the cost. Ask us about sponsored coaching.</p></div>
-      <div class="card"><h3>In person or from home</h3><p>Most sessions happen by phone or video. In-person sessions are available in Shawnee, Oklahoma.</p></div>
+<section class="block faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Before you begin</span>
+      <h2>Questions people ask first</h2>
     </div>
-    <p class="disclosure">We are coaches, not licensed counselors or therapists. We do not diagnose and we do not treat mental health conditions. If licensed care is what you need, we will say so plainly and help you find it.</p>
-    <p class="legacy">Waymark Inc. continues the work of <a href="/dr-jim-talley/">Dr. Jim Talley</a> (1942&ndash;2025), who spent more than fifty years sitting with couples at the worst moment of their marriage and telling them the truth: that the way back exists, and that it is walked one honest step at a time.</p>
+    <div class="faq-list">
+      <details class="faq-item reveal" open><summary>What is marriage restoration?</summary><p>An intensive, guided path for marriages on the brink: nine sessions of proven steps that move a couple from separation back toward a lasting covenant. It is more structured than general couples coaching.</p></details>
+      <details class="faq-item reveal"><summary>What if my spouse will not come?</summary><p>Start with a conversation anyway. One person can begin, and we will tell you plainly what is and is not possible from there.</p></details>
+      <details class="faq-item reveal"><summary>Is this counseling or therapy?</summary><p>No. It is coaching. We are not licensed counselors or therapists, and if licensed care is what your situation needs we will say so and help you find it.</p></details>
+    </div>
   </div>
 </section>
 
-<section class="plain">
+<section class="block related">
   <div class="wrap">
-    <h2>Other ways we can walk with you</h2>
-    <nav class="related" aria-label="Other ways we can walk with you">
-      <a href="/couples-coaching/">Couples Coaching</a>
-      <a href="/spiritual-direction/">Spiritual Direction</a>
-      <a href="/coaching-for-ministers-and-leaders/">Coaching for Ministers &amp; Leaders</a>
-      <a href="/premarital-guidance/">Premarital Guidance</a>
-      <a href="/rebuilding-after-divorce/">Rebuilding After Divorce</a>
-      <a href="/coach-training/">Coach Training &amp; Certification</a>
-      <a href="/online-christian-marriage-coaching/">Online Christian Marriage Coaching</a>
+    <div class="sec-head reveal">
+      <span class="eyebrow">More from Waymark</span>
+      <h2>Other ways we can walk with you</h2>
+    </div>
+    <nav class="related-list" aria-label="Other ways we can walk with you">
+      <a class="reveal" href="/couples-coaching/"><span>Couples Coaching</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/spiritual-direction/"><span>Spiritual Direction</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/coaching-for-ministers-and-leaders/"><span>Coaching for Ministers &amp; Leaders</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/premarital-guidance/"><span>Premarital Guidance</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/rebuilding-after-divorce/"><span>Rebuilding After Divorce</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/coach-training/"><span>Coach Training &amp; Certification</span><i aria-hidden="true">→</i></a>
+      <a class="reveal" href="/online-christian-marriage-coaching/"><span>Online Christian Marriage Coaching</span><i aria-hidden="true">→</i></a>
     </nav>
   </div>
 </section>
 
-<section class="contact">
+<section class="contact wm-dark">
   <div class="wrap">
-    <h2>There is a way back. Let us help you find it.</h2>
-    <p class="sub">Start with one conversation, with no obligation. Tell us where you are and we will help you find the next marker on the road.</p>
-    <div class="actions">
-      <a class="btn btn-gold" href="tel:14058228300">Call (405)&nbsp;822-8300</a>
-      <a class="btn btn-wa" href="https://wa.me/14058228300?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20marriage%20restoration." target="_blank" rel="noopener">Message us on WhatsApp</a>
-      <a class="btn btn-line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Free 15-minute call</a>
+    <span class="eyebrow reveal">Wherever you are</span>
+    <h2 class="reveal">There is a way back. Let us help you find it.</h2>
+    <p class="sub reveal">Start with one conversation, with no obligation. Tell us where you are and we will help you find the next marker on the road.</p>
+    <div class="actions reveal">
+      <a class="wm-btn gold" href="tel:14058228300">Call (405)&nbsp;822-8300</a>
+      <a class="wm-btn wa" href="https://wa.me/14058228300?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20marriage%20restoration." target="_blank" rel="noopener">Message us on WhatsApp</a>
+      <a class="wm-btn line" href="https://waymarkcoach.com/book/" target="_blank" rel="noopener" data-booking>Free 15-minute call</a>
     </div>
   </div>
 </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; <span id="lpYear">2026</span> Waymark Inc. &middot; 19223 Charleston Pointe, Shawnee, OK 74801</span>
-    <span><a href="/">waymarkinc.com</a> &middot; <a href="tel:14058228300">(405) 822-8300</a> &middot; <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a></span>
+<div class="wm-foot" role="contentinfo">
+  <div class="wm-foot-in">
+    <div class="wm-foot-grid">
+      <div>
+        <img class="lockup" src="/assets/waymark-logo-horizontal-negative.svg" alt="Waymark Inc. — Marking the way back" width="252" height="70" loading="lazy" />
+        <p class="brand-p">Helping couples and individuals find the path home — through coaching and guidance rooted in five decades of relationship restoration. Continuing the legacy of Dr. Jim Talley.</p>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Explore</h4>
+        <a href="/#about">Our Story</a>
+        <a href="/#services">Coaching</a>
+        <a href="/#training">Training</a>
+        <a href="/#books">Resources</a>
+        <a href="/#blog">Blog</a>
+        <a href="/#contact">Contact</a>
+        <a href="/es/restauracion-matrimonial/" hreflang="es">Español</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Coaching</h4>
+        <a href="/couples-coaching/">Couples Coaching</a>
+        <a href="/marriage-restoration/">Marriage Restoration</a>
+        <a href="/spiritual-direction/">Spiritual Direction</a>
+        <a href="/premarital-guidance/">Premarital Guidance</a>
+        <a href="/rebuilding-after-divorce/">Rebuilding After Divorce</a>
+        <a href="/coaching-for-ministers-and-leaders/">Coaching for Ministers &amp; Leaders</a>
+        <a href="/online-christian-marriage-coaching/">Online Coaching</a>
+        <a href="/coach-training/">Coach Training</a>
+      </div>
+      <div class="wm-foot-col">
+        <h4>Connect</h4>
+        <a href="tel:14058228300">(405) 822-8300</a>
+        <a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a>
+        <span class="li">19223 Charleston Pointe<br />Shawnee, OK 74801</span>
+      </div>
+    </div>
+    <div class="wm-foot-bottom">
+      <span>© <span id="wmYear">2026</span> Waymark Inc. All rights reserved. · In loving memory of Dr. Jim Talley.</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/waymarkinc" target="_blank" rel="noopener" aria-label="Waymark on Facebook"><img src="/assets/waymark-facebook-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.instagram.com/waymarkinc/" target="_blank" rel="noopener" aria-label="Waymark on Instagram"><img src="/assets/waymark-instagram-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.youtube.com/@WaymarkInc" target="_blank" rel="noopener" aria-label="Waymark on YouTube"><img src="/assets/waymark-youtube-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://wa.me/14058228300" target="_blank" rel="noopener" aria-label="Message Waymark on WhatsApp"><img src="/assets/waymark-whatsapp-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+        <a href="https://www.bible.com/organizations/9590a5f6-7857-48f0-a82e-61268c694a67" target="_blank" rel="noopener" aria-label="Waymark on the YouVersion Bible App"><img src="/assets/waymark-youversion-icon.png" alt="" width="38" height="38" loading="lazy" /></a>
+      </div>
+    </div>
   </div>
-</footer>
+</div>
 
 <div class="callbar">
   <a href="tel:14058228300">Call</a>
   <a href="https://wa.me/14058228300?text=Hello%2C%20I%27d%20like%20to%20know%20more%20about%20marriage%20restoration." target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
+<script src="/assets/shell.js" defer></script>
 <script src="/assets/lp.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
