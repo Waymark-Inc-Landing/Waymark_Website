@@ -52,23 +52,26 @@
     --gold:       #C8A45D;
     --gold-deep:  #8A6C29;
     --gold-light: #E3CB95;
-    --line:       rgba(16,42,67,0.12);
+    --line:       rgba(16,42,67,0.14);
     --shadow-sm:  0 2px 20px rgba(16,30,52,0.07);
     --shadow-md:  0 18px 50px rgba(16,30,52,0.12);
     --shadow-lg:  0 30px 80px rgba(16,30,52,0.16);
     --serif: 'Lora', Georgia, serif;
     --sans:  'Urbanist', system-ui, sans-serif;
     --maxw:  1180px;
+    --ease:  cubic-bezier(.2,.7,.2,1);
+    --t0:    1.3s;   /* when the hero entrance starts: after the opening screen lifts */
   }
+  html.seen, html:not(.motion) { --t0: .15s; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
     font-family: var(--sans);
     color: var(--ink-soft);
-    background: var(--cream);
+    background: var(--navy-deep);
     line-height: 1.7;
     font-weight: 400;
     font-size: 17px;
@@ -76,124 +79,137 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, .serif { font-family: var(--serif); color: var(--ink); font-weight: 500; line-height: 1.12; }
+  h1, h2, h3, .serif { font-family: var(--serif); color: var(--ink); font-weight: 500; line-height: 1.12; letter-spacing: -0.015em; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
 
-  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  /* The left gutter is where the gold trail runs. */
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 40px 0 84px; }
+  @media (max-width: 900px) { .wrap { padding: 0 22px 0 44px; } }
+
+  /* Paper grain over the page (desktop only: a fixed blended layer is costly on phones). */
+  @media (hover: hover) and (min-width: 900px) {
+    body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .07; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  }
 
   .eyebrow {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+    display: block; font-family: var(--sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 18px;
   }
-  .eyebrow::before {
-    content: "";
-    width: 28px; height: 1px;
-    background: var(--gold);
-    display: inline-block;
-  }
-  .eyebrow.center::after {
-    content: "";
-    width: 28px; height: 1px;
-    background: var(--gold);
-    display: inline-block;
-  }
+  /* Section index in front of each section label: 01 / … */
+  main { counter-reset: sec; }
+  main > section:not(.legacy) { counter-increment: sec; }
+  main .eyebrow::before { content: counter(sec, decimal-leading-zero) "\00a0\00a0/\00a0\00a0"; color: var(--gold); font-weight: 500; }
+  main .rec-head .eyebrow::before { content: none; }
 
   /* ---------- Buttons ---------- */
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--sans); font-size: 13.5px; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 16px 30px; border-radius: 100px; cursor: pointer;
-    transition: transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    padding: 17px 26px; border-radius: 3px; cursor: pointer;
+    transition: background .25s ease, color .25s ease, border-color .25s ease;
     border: 1px solid transparent; white-space: nowrap;
   }
-  .btn .arrow { transition: transform .25s ease; }
-  .btn:hover .arrow { transform: translateX(4px); }
-  .btn-gold { background: var(--gold); color: #fff; box-shadow: 0 10px 30px rgba(138,108,41,0.28); }
-  .btn-gold:hover { background: var(--gold-deep); box-shadow: 0 14px 36px rgba(138,108,41,0.34); }
-  .btn-outline { background: transparent; color: var(--navy); border-color: rgba(28,44,76,0.32); }
-  .btn-outline:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
-  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn .arrow { display: inline-block; transition: transform .3s var(--ease); }
+  .btn:hover .arrow { transform: translateX(5px); }
+  .btn-gold { background: var(--gold); color: var(--navy-deep); }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-outline { background: transparent; color: var(--navy); border-color: rgba(16,42,67,0.35); }
+  .btn-outline:hover { background: var(--navy); color: var(--cream); border-color: var(--navy); }
   .btn-contribute { background: var(--sage); color: var(--navy); border-color: var(--sage); gap: 8px; }
-  .btn-contribute:hover { background: #7C947A; border-color: #7C947A; color: var(--navy); }
+  .btn-contribute:hover { background: #7C947A; border-color: #7C947A; }
   .btn-contribute svg { width: 16px; height: 16px; }
+
+  /* ---------- Opening screen (first visit of a session only; see assets/pre.js) ---------- */
+  #veil { display: none; }
+  .motion:not(.seen) #veil {
+    position: fixed; inset: 0; z-index: 200; background: var(--navy-deep);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    animation: veilUp 1s cubic-bezier(.76,0,.24,1) .95s forwards;
+  }
+  #veil img { width: 52px; animation: breathe 1.4s ease-in-out infinite alternate; }
+  #veil b { display: block; width: 120px; height: 1px; background: rgba(227,203,149,.22); position: relative; overflow: hidden; margin-top: 28px; }
+  #veil b::after { content: ""; position: absolute; inset: 0; background: var(--gold-light); transform: scaleX(0); transform-origin: left; animation: draw .85s .1s var(--ease) forwards; }
+  @keyframes veilUp { to { transform: translateY(-100%); visibility: hidden; } }
+  @keyframes breathe { from { opacity: .55; scale: .96; } to { opacity: 1; scale: 1; } }
+  @keyframes draw { to { transform: scaleX(1); } }
+  @keyframes fade { to { opacity: 1; } }
+  @keyframes up { to { transform: none; } }
+
+  /* Cursor ring (added by app.js on devices with a mouse) */
+  #cur { position: fixed; left: 0; top: 0; z-index: 150; pointer-events: none; opacity: 0; transition: opacity .3s; }
+  #cur.live { opacity: 1; }
+  #cur i { display: block; width: 34px; height: 34px; margin: -17px; border: 1px solid var(--gold); border-radius: 50%; transition: transform .4s var(--ease), background .4s; }
+  #cur.big i { transform: scale(2.1); background: rgba(200,164,93,.16); }
 
   /* ---------- Nav ---------- */
   header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    transition: background .4s ease, box-shadow .4s ease, padding .4s ease, border-color .4s ease;
-    border-bottom: 1px solid transparent;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50; color: #fff;
+    transition: background .4s ease, box-shadow .4s ease, color .4s ease, transform .55s var(--ease);
   }
-  header.scrolled {
-    background: rgba(251,248,241,0.86);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 1px 0 rgba(16,30,52,0.05);
-    border-bottom: 1px solid var(--line);
+  header.scrolled, header.menu-open {
+    background: rgba(247,244,238,0.92); color: var(--ink);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgba(16,42,67,0.08);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 92px; transition: height .4s ease; }
-  header.scrolled .nav { height: 74px; }
-  .brand { display: flex; align-items: center; }
-  .brand-lockup { height: 54px; width: auto; display: block; flex: none; transition: height .4s ease; }
-  header.scrolled .brand-lockup { height: 45px; }
-  .brand-symbol { display: none; height: 44px; width: auto; flex: none; transition: height .4s ease; }
-  header.scrolled .brand-symbol { height: 38px; }
+  header.menu-open { background: var(--cream); box-shadow: none; }
+  .motion header.hide { transform: translateY(-100%); }
+  #prog { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left; opacity: 0; }
+  header.scrolled #prog { opacity: 1; }
+  header .wrap { max-width: 1320px; padding: 0 32px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 88px; transition: height .4s ease; }
+  header.scrolled .nav { height: 72px; }
+  .brand { position: relative; display: flex; align-items: center; }
+  .brand img { height: 52px; width: auto; max-width: none; flex: none; transition: opacity .4s ease, height .4s ease; }
+  header.scrolled .brand img { height: 45px; }
+  .brand-lockup, .brand-symbol { position: absolute; left: 0; top: 0; opacity: 0; }
+  .brand-symbol { display: none; }
+  header.scrolled .brand-neg, header.menu-open .brand-neg { opacity: 0; }
+  header.scrolled .brand-lockup, header.menu-open .brand-lockup { opacity: 1; }
   @media (max-width: 700px) {
+    .brand img, header.scrolled .brand img { height: 40px; }
     .brand-lockup { display: none; }
     .brand-symbol { display: block; }
+    header.scrolled .brand-symbol, header.menu-open .brand-symbol { opacity: 1; }
   }
 
   /* Social row under the Contribute / Begin-the-journey buttons.
-     Absolutely positioned so it adds NO height to the fixed header — it can
-     never push the hero down or leave a tall empty bar once it fades out.
+     Absolutely positioned so it adds NO height to the fixed header.
      Opacity is driven from app.js and tracks scroll position. */
   .head-social { position: absolute; left: 0; right: 0; top: 100%; pointer-events: none; }
-  /* padding-right lines the icons up under the Contribute / Begin-the-journey
-     buttons instead of under the EN|ES toggle. It replaces .wrap's own 24px
-     right padding, so it is 24 + toggle width (89) + gap (12) = 129px. The
-     toggle is the same width in both languages, so this holds for EN and ES. */
-  .hs-wrap { display: flex; justify-content: flex-end; gap: 10px; padding-top: 2px; padding-right: 129px; }
+  /* padding-right lines the icons up under the buttons instead of under the EN|ES toggle:
+     header padding (32) + toggle width (89) + gap (12) = 133px. */
+  .hs-wrap { display: flex; justify-content: flex-end; gap: 10px; padding-top: 2px; }
+  header .hs-wrap { padding-right: 133px; }
   .head-social a { display: block; line-height: 0; border-radius: 7px; overflow: hidden;
     pointer-events: auto; transition: transform .2s ease; }
   .head-social a:hover { transform: translateY(-2px); }
-  .head-social a:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
-  @media (max-width: 1240px) {
-    .hs-wrap { justify-content: center; gap: 12px; padding-right: 0; }
-  }
+  .head-social a:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  @media (max-width: 1240px) { header .hs-wrap { justify-content: center; gap: 12px; padding-right: 32px; } }
   @media (prefers-reduced-motion: reduce) { .head-social a { transition: none; } }
 
-
-
-  .nav-links { display: flex; align-items: center; gap: 12px; }
+  .nav-links { display: flex; align-items: center; gap: 14px; }
   .nav-links a.navlink {
-    font-size: 13.5px; font-weight: 400; letter-spacing: 0.04em; color: var(--ink-soft);
-    position: relative; padding: 6px 0; transition: color .25s ease;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: inherit;
+    position: relative; padding: 6px 0; margin-right: 8px;
   }
   .nav-links a.navlink::after {
-    content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
-    background: var(--gold); transition: width .3s ease;
+    content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
+    background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease);
   }
-  .nav-links a.navlink:hover { color: var(--ink); }
-  .nav-links a.navlink:hover::after { width: 100%; }
-  .nav .btn { padding: 10px 16px; font-size: 12px; }
+  .nav-links a.navlink:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav .btn { padding: 11px 16px; font-size: 12px; }
 
-  .lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; }
-  .lang-toggle button { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 100px; border: none; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s ease, color .2s ease; }
-  .lang-toggle button:hover { color: var(--ink); }
-  .lang-toggle button.active { background: var(--navy); color: var(--cream); }
-  .lang-toggle button.active:hover { color: var(--cream); }
-  .lang-toggle.mobile { margin-top: 22px; transform: scale(1.2); }
+  .lang-toggle { display: inline-flex; align-items: center; gap: 2px; border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; padding: 3px; transition: border-color .4s ease; }
+  .lang-toggle button { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 100px; border: none; background: transparent; color: inherit; opacity: .8; cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease; }
+  .lang-toggle button:hover { opacity: 1; }
+  .lang-toggle button.active { background: var(--gold-light); color: var(--navy-deep); opacity: 1; }
+  header.scrolled .lang-toggle, header.menu-open .lang-toggle { border-color: var(--line); }
+  header.scrolled .lang-toggle button.active, header.menu-open .lang-toggle button.active { background: var(--navy); color: var(--cream); }
 
-  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--ink); padding: 8px; }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: inherit; padding: 8px; }
   .menu-btn svg { width: 26px; height: 26px; }
   .nav-actions { display: none; align-items: center; gap: 12px; }
   .lang-bar button { font-size: 11px; padding: 5px 9px; }
@@ -205,287 +221,393 @@
     padding: 80px 28px 44px; visibility: hidden; overflow-y: auto;
   }
   .mobile-menu.open { transform: translateY(0); visibility: visible; }
-  .mobile-menu a:not(.btn) { font-family: var(--serif); font-size: 23px; color: var(--ink); padding: 9px; }
+  .mobile-menu a:not(.btn) { font-family: var(--serif); font-size: 25px; color: var(--ink); padding: 9px; }
   .mobile-menu a:not(.btn):hover { color: var(--gold-deep); }
-  .mobile-menu .btn { font-family: var(--sans); font-size: 13.5px; padding: 14px 28px; margin-top: 12px; }
-  .mobile-menu .lang-toggle.mobile { margin-top: 24px; transform: scale(1.1); }
+  .mobile-menu .btn { padding: 14px 28px; margin-top: 12px; }
 
   /* ---------- Hero ---------- */
   .hero {
-    position: relative; padding: 178px 0 110px;
-    background:
-      radial-gradient(1100px 620px at 78% -8%, rgba(227,203,149,0.45), transparent 60%),
-      radial-gradient(900px 560px at 6% 108%, rgba(143,165,139,0.55), transparent 58%),
-      linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
-    overflow: hidden;
+    position: relative; z-index: 0; min-height: 100vh; min-height: 100svh; overflow: hidden;
+    background: var(--navy-deep); color: #fff; display: flex; align-items: flex-end;
   }
-  .hero-path { position: absolute; inset: 0; pointer-events: none; opacity: .5; }
-  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
-  .hero h1 { font-size: clamp(46px, 6.4vw, 86px); letter-spacing: -0.5px; margin: 26px 0 0; }
-  .hero h1 .accent { font-style: italic; color: var(--gold-deep); }
-  .hero .lead { font-size: 20px; font-weight: 300; color: var(--ink-soft); max-width: 540px; margin: 30px 0 38px; }
-  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-  .hero-proof { margin-top: 46px; display: flex; align-items: center; gap: 16px; color: var(--muted); font-size: 13.5px; }
-  .hero-proof .dots { display: flex; }
-  .hero-proof .dots span { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--cream); margin-left: -10px; background: var(--sage-soft); display: grid; place-items: center; font-family: var(--serif); font-weight: 600; color: var(--forest); font-size: 14px; }
+  /* Pinned so the page slides up over it. Only where the whole hero is sure to fit on screen. */
+  @media (min-width: 901px) and (min-height: 700px) { .motion .hero { position: sticky; top: 0; height: 100vh; } }
+  .hero-bg { position: absolute; inset: 0; background: url(/assets/hero-poster.jpg) center 40% / cover no-repeat; transform-origin: 50% 60%; will-change: transform; }
+  .hero-bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(8,20,34,.93) 0%, rgba(8,20,34,.6) 38%, rgba(8,20,34,.22) 70%, rgba(8,20,34,.45) 100%); }
+  .hero-in { position: relative; z-index: 2; width: 100%; max-width: 1320px; margin: 0 auto; padding: 150px 32px 9vh; }
+  .kicker { display: block; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-light); font-weight: 500; }
+  .hero h1 { color: #fff; font-weight: 400; font-size: clamp(38px, min(6.2vw, 11.5vh), 96px); max-width: 15ch; margin: 18px 0 26px; }
+  html[lang="es"] .hero h1 { font-size: clamp(34px, min(5.2vw, 9.6vh), 80px); max-width: 19ch; }
+  .hero h1 .accent { font-style: italic; color: var(--gold-light); position: relative; display: inline-block; }
+  .hero h1 .accent::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .05em; background: var(--gold); transform-origin: left; }
+  .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+  .hero h1 .w > i { display: inline-block; font-style: inherit; }
+  .hero-row { display: flex; gap: 48px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
+  .hero .lead { max-width: 46ch; color: rgba(255,255,255,.88); font-size: 18px; font-weight: 300; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .btn-outline { color: #fff; border-color: rgba(255,255,255,.5); }
+  .hero .btn-outline:hover { background: rgba(255,255,255,.1); border-color: #fff; color: #fff; }
+  .scrollcue { position: absolute; z-index: 2; left: 50%; bottom: 18px; width: 1px; height: 44px; background: rgba(255,255,255,.25); overflow: hidden; }
+  .hero-meta { position: absolute; z-index: 2; right: 32px; top: 184px; max-width: 24ch; text-align: right;
+    font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.45; color: rgba(255,255,255,.78); }
+  @media (max-width: 1240px) { .hero-meta { top: 170px; } }
+  @media (max-width: 900px) {
+    .hero-in { padding: 128px 22px 84px; }
+    .hero .lead { font-size: 16.5px; }
+    .hero-meta { display: none; }
+    .hero-row { gap: 26px; }
+  }
 
-  /* Hero art card */
-  .hero-art { position: relative; }
-  .hero-card {
-    position: relative; background: #fff; border-radius: 22px; padding: 14px;
-    box-shadow: var(--shadow-lg); border: 1px solid rgba(255,255,255,0.7);
-  }
-  .hero-card .photo {
-    border-radius: 14px; height: 540px;
-    background: linear-gradient(160deg, #102A43, #0B1E32);
-    position: relative; overflow: hidden; display: flex; align-items: flex-end;
-  }
-  .hero-card .photo img, .hero-card .photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .hero-card .photo .scrim { position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to top, rgba(8,20,34,0.88) 0%, rgba(8,20,34,0.32) 42%, rgba(8,20,34,0) 68%); }
-  .hero-card .photo .quote { position: relative; z-index: 2; padding: 34px; }
-  .hero-card .photo .quote p { font-family: var(--serif); font-style: italic; font-size: 25px; line-height: 1.3; color: #fff; max-width: 320px; }
-  .hero-card .photo .quote .q-mark { font-family: var(--serif); font-size: 80px; line-height: 0; color: var(--gold-light); opacity: .7; display: block; height: 34px; }
-  .floating-badge {
-    position: absolute; z-index: 5; top: -22px; left: -26px; background: var(--cream);
-    border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px;
-    box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 14px;
-  }
-  .floating-badge .ico { width: 42px; height: 42px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; color: var(--gold-deep); }
-  .floating-badge .ico svg { width: 22px; height: 22px; }
-  .floating-badge .t { font-family: var(--serif); font-size: 22px; color: var(--ink); line-height: 1; }
-  .floating-badge .s { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+  /* Hero entrance (plays once the opening screen has lifted) */
+  .motion .kicker, .motion .hero-row, .motion .hero-meta { opacity: 0; animation: fade 1.1s ease forwards; animation-delay: var(--t0); }
+  .motion .hero-row { animation-delay: calc(var(--t0) + 1.1s); }
+  .motion .hero-meta { animation-delay: calc(var(--t0) + 1.5s); }
+  .motion .hero h1 { opacity: 0; animation: fade 1.2s ease forwards; animation-delay: calc(var(--t0) + .2s); }
+  .motion .hero h1.split { opacity: 1; animation: none; }
+  .motion .hero h1.split .w > i { transform: translateY(112%); animation: up 1.1s var(--ease) forwards; }
+  .motion .hero h1 .accent::after { transform: scaleX(0); animation: draw 1.2s var(--ease) forwards; animation-delay: calc(var(--t0) + 1.2s); }
+  .motion .scrollcue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--gold-light); animation: cue 2.2s ease-in-out infinite; }
+  @keyframes cue { to { top: 110%; } }
+  /* Safety net: after a few seconds force the finished state whatever happened to the animations. */
+  .shown .kicker, .shown .hero-row, .shown .hero-meta, .shown .hero h1 { opacity: 1 !important; animation: none !important; }
+  .shown .hero h1 .w > i, .shown .hero h1 .accent::after { transform: none !important; animation: none !important; }
 
-  /* ---------- Marquee / legacy strip ---------- */
-  .legacy { background: var(--forest); color: var(--cream); padding: 26px 0; }
-  .legacy .wrap { display: flex; align-items: center; justify-content: center; gap: 70px; flex-wrap: wrap; }
-  .legacy .item { display: flex; align-items: center; gap: 14px; }
-  .legacy .item .big { font-family: var(--serif); font-size: 34px; color: var(--gold-light); line-height: 1; }
-  .legacy .item .lbl { font-size: 12.5px; letter-spacing: 0.06em; color: rgba(251,248,241,0.74); max-width: 150px; }
-  .legacy .divider { width: 1px; height: 40px; background: rgba(251,248,241,0.16); }
+  /* ---------- Page body (slides over the hero) ---------- */
+  main { position: relative; z-index: 2; background: var(--cream); border-radius: 30px 30px 0 0; overflow: clip; box-shadow: 0 -30px 80px rgba(8,20,34,.35); }
+  main > section { scroll-margin-top: 40px; }
+  section.block { padding: 120px 0; }
 
-  /* ---------- Section scaffolding ---------- */
-  section.block { padding: 110px 0; }
-  .sec-head { max-width: 720px; }
-  .sec-head.center { margin: 0 auto; text-align: center; }
-  .sec-head h2 { font-size: clamp(34px, 4.4vw, 54px); margin: 18px 0 0; letter-spacing: -0.3px; }
-  .sec-head p { margin-top: 20px; font-size: 18.5px; color: var(--muted); font-weight: 300; }
+  /* Trail (drawn by app.js) */
+  #trail { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 5; }
+  #trail .ghost { fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-dasharray: 2 9; opacity: .38; }
+  #trail .live { fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
+  #trail .mk { fill: var(--cream); stroke: var(--gold); stroke-width: 1.5; transition: fill .5s, r .5s var(--ease); }
+  #trail .mk.on { fill: var(--gold); }
+  #trail .ring { fill: none; stroke: var(--gold); stroke-width: 1; opacity: 0; transform-box: fill-box; transform-origin: center; }
+  #trail .ring.on { animation: ping 1.4s ease-out 1; }
+  @keyframes ping { 0% { opacity: .8; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.6); } }
+  #walker { transition: opacity .3s; }
+
+  /* Entrances: hidden only when motion is on, so the page reads fine without it. */
+  .motion .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .motion .reveal.in { opacity: 1; transform: none; }
+
+  .sec-head { max-width: 760px; }
+  .sec-head h2 { font-size: clamp(34px, 4.4vw, 60px); }
+  .sec-head p { margin-top: 22px; font-size: 18.5px; color: var(--muted); font-weight: 300; }
+
+  /* ---------- Legacy ---------- */
+  .legacy { padding: 110px 0 70px; }
+  .legacy-grid { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: end; }
+  .fifty { font-family: var(--serif); font-size: clamp(120px, 22vw, 300px); line-height: .8; font-weight: 400; letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+    color: var(--navy);
+    background-image: linear-gradient(rgba(16,42,67,.62), rgba(16,42,67,.62)), url(/assets/hero-poster.jpg); background-size: cover; background-position: center 70%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .fifty sup { font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .04em; color: var(--gold); -webkit-text-fill-color: var(--gold); }
+  .legacy h2 { font-size: clamp(24px, 3vw, 38px); max-width: 18ch; margin-bottom: 26px; }
+  .tl { position: relative; height: 1px; background: rgba(16,42,67,.16); margin-bottom: 12px; }
+  .tl::after { content: ""; position: absolute; left: 0; top: -1px; height: 3px; width: 100%; background: var(--gold); transform-origin: left; }
+  .motion .tl.reveal { opacity: 1; transform: none; }
+  .motion .tl::after { transform: scaleX(0); transition: transform 2.6s var(--ease); }
+  .motion .tl.in::after { transform: scaleX(1); }
+  .tl-ends { display: flex; justify-content: space-between; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .conv { display: flex; align-items: center; gap: 22px; margin-top: 44px; }
+  .conv b { font-family: var(--serif); font-weight: 400; font-size: 64px; line-height: 1; color: var(--gold); }
+  .conv span.lbl { display: block; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .conv em { display: block; font-family: var(--serif); font-size: clamp(21px, 2.2vw, 28px); color: var(--navy); line-height: 1.25; margin-top: 4px; }
+  @media (max-width: 800px) { .legacy { padding: 70px 0 40px; } .legacy-grid { grid-template-columns: 1fr; gap: 26px; } }
 
   /* ---------- About ---------- */
-  .about { background: var(--cream); }
-  .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 70px; align-items: center; }
-  .about-visual { position: relative; }
-  .about-visual .mark {
-    aspect-ratio: 2 / 3; border-radius: 26px;
-    border: 1px solid var(--line); box-shadow: var(--shadow-md);
-    position: relative; overflow: hidden;
+  .about { padding: 80px 0 130px; }
+  .about-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,6fr); gap: 84px; align-items: start; }
+  /* The founders photo is 2:3 and must never be cropped: the frame keeps that ratio at every size. */
+  .portrait { position: sticky; top: 110px; aspect-ratio: 2 / 3; width: min(100%, calc((100vh - 170px) * 2 / 3)); justify-self: center; }
+  .portrait .clip { width: 100%; height: 100%; overflow: hidden; }
+  .portrait img.ph { width: 100%; height: 100%; object-fit: cover; }
+  .portrait::before { content: ""; position: absolute; inset: 20px -20px -20px 20px; border: 1px solid var(--gold); z-index: -1; opacity: .8; }
+  .seal { position: absolute; right: -56px; bottom: -56px; width: 136px; height: 136px; z-index: 3; filter: drop-shadow(0 14px 26px rgba(16,42,67,.22)); }
+  .seal svg { width: 100%; height: 100%; display: block; }
+  .seal img { position: absolute; left: 50%; top: 50%; width: 34px; height: auto; transform: translate(-50%,-50%); }
+  .motion .seal .spin { transform-origin: 70px 70px; animation: spin 24s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .motion .portrait.reveal { opacity: 1; transform: none; }
+  .motion .portrait .clip { clip-path: inset(0 0 100% 0); transition: clip-path 1.5s var(--ease); }
+  .motion .portrait.in .clip { clip-path: inset(0 0 0 0); }
+  .motion .portrait img.ph { scale: 1.14; transition: scale 2s var(--ease); }
+  .motion .portrait.in img.ph { scale: 1; }
+  .motion .portrait::before { opacity: 0; transition: opacity 1.2s .9s; }
+  .motion .portrait.in::before { opacity: .8; }
+  .motion .seal { opacity: 0; scale: .7; transition: opacity .8s 1.1s, scale 1s 1.1s var(--ease); }
+  .motion .portrait.in .seal { opacity: 1; scale: 1; }
+  .about-body h2 { font-size: clamp(34px, 4.4vw, 60px); margin-bottom: 30px; }
+  .about-body p { margin-bottom: 20px; max-width: 58ch; }
+  .about-body p a { color: var(--navy); border-bottom: 1px solid var(--gold); }
+  .about-body .pullout { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 40px); line-height: 1.35; color: var(--navy); margin: 38px 0; max-width: 20ch; }
+  .pullout .pw { transition: opacity .35s; }
+  .sign { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sign .nm { font-family: var(--serif); font-size: 24px; color: var(--ink); }
+  .sign .rl { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  @media (max-width: 900px) {
+    .about { padding: 40px 0 80px; }
+    .about-grid { grid-template-columns: 1fr; gap: 64px; }
+    .portrait { position: relative; top: 0; width: min(100%, 340px); justify-self: start; }
+    .portrait::before { inset: 12px -12px -12px 12px; }
+    .seal { right: -14px; bottom: -44px; width: 104px; height: 104px; }
+    .seal img { width: 26px; }
   }
-  .about-visual .mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .about-visual .seal {
-    position: absolute; bottom: -24px; right: -24px; width: 132px; height: 132px; border-radius: 50%;
-    background: var(--gold); color: #fff; display: grid; place-items: center; text-align: center;
-    box-shadow: var(--shadow-md); font-family: var(--serif); padding: 16px;
-  }
-  .about-visual .seal span { font-size: 13px; line-height: 1.35; font-weight: 500; letter-spacing: .02em; }
-  .about-body h2 { font-size: clamp(32px, 4vw, 50px); }
-  .about-body .pullout {
-    font-family: var(--serif); font-style: italic; font-size: 25px; color: var(--forest);
-    border-left: 2px solid var(--gold); padding-left: 22px; margin: 30px 0; line-height: 1.4;
-  }
-  .about-body p { margin-bottom: 18px; }
-  .sign { margin-top: 26px; }
-  .sign .nm { font-family: var(--serif); font-size: 26px; color: var(--ink); }
-  .sign .rl { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
+  /* ---------- Bilingual band ---------- */
+  .marq { overflow: hidden; padding: 26px 0 70px; white-space: nowrap; }
+  .marq-in { display: inline-flex; gap: .5em; align-items: center; font-family: var(--serif); font-style: italic; font-size: clamp(58px, 10vw, 156px); line-height: 1.1; will-change: transform; }
+  .marq-in span { color: transparent; -webkit-text-stroke: 1px rgba(16,42,67,.55); }
+  .marq-in span.f { color: var(--navy); -webkit-text-stroke: 0; }
+  .marq-in img { height: .5em; width: auto; max-width: none; flex: none; }
 
-  /* ---------- Services ---------- */
-  .services { background: var(--forest); color: var(--cream); position: relative; overflow: hidden; }
-  .services .sec-head h2 { color: var(--cream); }
-  .services .sec-head .eyebrow { color: var(--gold-light); }
-  .services .sec-head .eyebrow::before, .services .sec-head .eyebrow::after { background: var(--gold-light); }
-  .services .sec-head p { color: rgba(251,248,241,0.74); }
-  .svc-note { margin: 18px auto 0; max-width: 60ch; padding-top: 18px;
-    font-size: 15px; line-height: 1.65; font-weight: 400;
-    color: rgba(251,248,241,0.6); border-top: 1px solid rgba(251,248,241,0.16); }
-  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
-  /* Coaching has seven cards: four across, then three centred on the row below.
-     Flex (not grid) so the short last row centres itself. Training keeps its 3-up grid. */
-  #services .svc-grid { display: flex; flex-wrap: wrap; justify-content: center; }
-  #services .svc-grid > .svc { flex: 0 1 calc(25% - 16.5px); }
-  #services .svc { padding: 30px 26px; }
-  #services .svc .ic { width: 44px; height: 44px; margin-bottom: 18px; }
-  #services .svc .ic svg { width: 21px; height: 21px; }
-  #services .svc h3 { font-size: 21px; }
-  #services .svc p { font-size: 15px; }
-  @media (max-width: 1240px) { #services .svc-grid > .svc { flex-basis: calc(33.333% - 14.7px); } }
-  @media (max-width: 980px)  { #services .svc-grid > .svc { flex-basis: calc(50% - 11px); } }
-  @media (max-width: 600px)  { #services .svc-grid > .svc { flex-basis: 100%; } }
-  .svc {
-    display: block; text-decoration: none; color: inherit;
-    background: rgba(251,248,241,0.05); border: 1px solid rgba(251,248,241,0.12); border-radius: 18px;
-    padding: 36px 30px; transition: background .3s ease, transform .3s ease, border-color .3s ease;
+  /* ---------- Dark sections: coaching, training ---------- */
+  .dark { position: relative; overflow: hidden; color: rgba(247,244,238,.82);
+    background: radial-gradient(1200px 700px at 85% -10%, #17385a 0%, var(--navy) 55%, var(--navy-deep) 100%); }
+  .contours { position: absolute; inset: -12%; width: 124%; height: 124%; opacity: .5; }
+  .motion .contours { animation: drift 46s ease-in-out infinite alternate; }
+  .contours path { fill: none; stroke: var(--gold-light); stroke-width: .6; opacity: .3; }
+  @keyframes drift { from { transform: translate(-2%,-1%) rotate(-1.4deg) scale(1); } to { transform: translate(2.5%,2%) rotate(1.8deg) scale(1.07); } }
+  .dark .wrap { position: relative; z-index: 2; }
+  .dark h2, .dark h3 { color: var(--cream); }
+  .dark .eyebrow { color: var(--gold-light); }
+  .services, .training { padding: 130px 0; }
+  .svc-head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 64px; align-items: end; }
+  .svc-head h2 { font-size: clamp(36px, 4.6vw, 64px); }
+  .svc-head .sub { margin-top: 22px; font-size: 18.5px; font-weight: 300; max-width: 44ch; }
+  .svc-head .note { font-size: 14.5px; line-height: 1.65; border-left: 1px solid var(--gold); padding-left: 20px; color: rgba(247,244,238,.72); }
+  .row { position: relative; display: grid; grid-template-columns: 70px minmax(0,1fr) minmax(0,1.25fr) 40px; gap: 28px; align-items: baseline; padding: 30px 0; border-top: 1px solid rgba(247,244,238,.14); }
+  .row:last-child { border-bottom: 1px solid rgba(247,244,238,.14); }
+  .row::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease); }
+  .row:hover::before, .row:focus-visible::before { transform: scaleX(1); }
+  .row::after { content: ""; position: absolute; inset: 0 -28px; background: linear-gradient(90deg, rgba(227,203,149,.09), transparent 72%); opacity: 0; transition: opacity .45s; z-index: -1; }
+  .row:hover::after { opacity: 1; }
+  .row:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+  .row .n { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 17px; transition: transform .5s var(--ease); }
+  .row h3 { font-size: clamp(23px, 2.5vw, 33px); font-weight: 400; transition: transform .5s var(--ease), color .3s; }
+  .row:hover h3 { transform: translateX(12px); color: var(--gold-light); }
+  .row:hover .n { transform: translateX(6px); }
+  .row p { font-size: 16px; font-weight: 300; }
+  .row p strong { color: var(--cream); font-weight: 500; }
+  .row .go { color: var(--gold); font-size: 22px; transition: transform .5s var(--ease); justify-self: end; }
+  .row:hover .go { transform: translateX(8px); }
+  .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+  .col { border-top: 1px solid var(--gold); padding-top: 26px; }
+  .col .n { display: block; font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 17px; margin-bottom: 14px; }
+  .col h3 { font-size: clamp(23px, 2.3vw, 30px); font-weight: 400; margin-bottom: 12px; }
+  .col p { font-size: 16px; font-weight: 300; }
+  .cta-row { margin-top: 58px; }
+  @media (max-width: 800px) {
+    .services, .training { padding: 80px 0; }
+    .svc-head { grid-template-columns: 1fr; gap: 26px; margin-bottom: 40px; }
+    .row { grid-template-columns: 34px 1fr 20px; gap: 6px 12px; padding: 22px 0; }
+    .row p { grid-column: 2 / 3; grid-row: 2; }
+    .row .go { grid-column: 3; grid-row: 1; }
+    .cols3 { grid-template-columns: 1fr; gap: 34px; }
   }
-  a.svc { cursor: pointer; }
-  .svc:hover { background: rgba(251,248,241,0.09); transform: translateY(-5px); border-color: rgba(227,203,149,0.4); }
-  a.svc:hover h3 { color: var(--gold-light); }
-  a.svc h3 { transition: color .3s ease; }
-  a.svc:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
-  .svc .ic { width: 50px; height: 50px; border-radius: 50%; background: rgba(227,203,149,0.16); display: grid; place-items: center; color: var(--gold-light); margin-bottom: 22px; }
-  .svc .ic svg { width: 24px; height: 24px; }
-  .svc h3 { color: var(--cream); font-size: 24px; margin-bottom: 10px; }
-  .svc p { font-size: 15.5px; color: rgba(251,248,241,0.72); font-weight: 300; }
 
-  /* ---------- Approach ---------- */
-  .approach { background: var(--cream); }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 60px; position: relative; }
-  .step { text-align: center; padding: 0 10px; }
-  .step .circle {
-    width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 26px; display: grid; place-items: center;
-    background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm); position: relative;
+  /* ---------- How it works (pinned while the three steps play) ---------- */
+  .walk { position: relative; padding: 110px 0; }
+  .walk h2 { font-size: clamp(32px, 4.2vw, 58px); max-width: 16ch; margin-bottom: 5vh; }
+  html[lang="es"] .walk h2 { max-width: 18ch; }
+  .walk-grid { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 60px; align-items: center; }
+  .route svg { width: 100%; height: 70px; display: block; overflow: visible; }
+  .route .g { fill: none; stroke: rgba(16,42,67,.2); stroke-width: 1.2; stroke-dasharray: 2 8; }
+  .route .l { fill: none; stroke: var(--gold); stroke-width: 2.4; stroke-linecap: round; }
+  .stops { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 8px; }
+  .stop .num { font-family: var(--serif); font-style: italic; color: var(--gold-deep); font-size: 17px; display: block; margin-bottom: 8px; }
+  .stop h3 { font-size: clamp(21px, 2.1vw, 29px); margin-bottom: 10px; }
+  .stop p { font-size: 15.5px; line-height: 1.6; }
+  @property --r { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+  .cairn { position: relative; width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 4 / 5; }
+  .cairn::before { content: ""; position: absolute; inset: 0; transform: translate(14px,14px); border: 1px solid var(--gold); border-radius: 999px 999px 6px 6px; opacity: .55; }
+  .cairn-ph { position: absolute; inset: 0; border-radius: 999px 999px 6px 6px; overflow: hidden; background: #e4ddcf; box-shadow: 0 30px 60px -30px rgba(16,42,67,.45); }
+  .cairn-ph i { position: absolute; inset: 0; background: url(/assets/about-cairn.jpg) 49% 48% / auto 135% no-repeat; --r: 0%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--r) - 14%), #000 var(--r)); mask-image: linear-gradient(to bottom, transparent calc(var(--r) - 14%), #000 var(--r)); }
+  .cairn-cap { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 26px; font-weight: 500; }
+  @media (max-width: 900px) {
+    .walk-grid { grid-template-columns: 1fr; gap: 6px; }
+    .cairn-col { grid-row: 1; }
+    .cairn { max-width: 150px; margin: 0 0 18px; }
+    .cairn::before { transform: translate(8px,8px); }
+    .cairn-cap { display: none; }
+    .walk h2 { margin-bottom: 2vh; }
+    .stops { grid-template-columns: 1fr; gap: 14px; }
   }
-  .step .circle .n { font-family: var(--serif); font-size: 32px; color: var(--gold-deep); }
-  .step h3 { font-size: 25px; margin-bottom: 10px; }
-  .step p { font-size: 16px; color: var(--muted); max-width: 320px; margin: 0 auto; }
-  .steps .joiner { position: absolute; top: 45px; left: 16.66%; right: 16.66%; height: 1px; background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 14px); z-index: 0; }
+  @media (min-height: 601px) {
+    .motion .walk { height: 300vh; padding: 0; }
+    .motion .walk-pin { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 560px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+    .motion .stop { opacity: .3; transform: translateY(12px); transition: opacity .6s, transform .8s var(--ease); }
+    .motion .stop.on { opacity: 1; transform: none; }
+    .motion .cairn-ph i { --r: 100%; transform: scale(1.08); transition: --r 1.3s cubic-bezier(.22,.8,.2,1), transform 1.6s cubic-bezier(.22,.8,.2,1); }
+    .motion .cairn.s1 .cairn-ph i { --r: 46%; transform: scale(1.05); }
+    .motion .cairn.s2 .cairn-ph i { --r: 24%; transform: scale(1.025); }
+    .motion .cairn.s3 .cairn-ph i { --r: 0%; transform: none; }
+  }
+  @media (min-height: 601px) and (max-width: 900px) {
+    .motion .stop { transform: none; }
+    .motion .stop p { max-height: 0; overflow: hidden; transition: max-height .6s var(--ease); }
+    .motion .stop.cur p { max-height: 220px; }
+  }
 
-  /* ---------- Books ---------- */
-  .books { background: linear-gradient(180deg, var(--cream), var(--cream-deep)); }
-  .book-grid { display: grid; grid-template-columns: repeat(auto-fit, 148px); justify-content: center; gap: 26px 30px; margin-top: 48px; }
-  .book { text-align: center; }
-  .book .cover { border-radius: 5px; overflow: hidden; box-shadow: var(--shadow-md); line-height: 0; transition: transform .35s ease, box-shadow .35s ease; background: #fff; }
-  .book .cover img { width: 100%; height: auto; display: block; }
-  .book:hover .cover { transform: translateY(-7px) rotate(-1deg); box-shadow: var(--shadow-lg); }
-  .book .cover.c1 { background: linear-gradient(165deg, #20335a, #131f3a); }
-  .book .cover.c2 { background: linear-gradient(165deg, #b88a3c, #846326); }
-  .book .cover.c3 { background: linear-gradient(165deg, #7a5c2e, #4f3f1d); }
-  .book .cover.c4 { background: linear-gradient(165deg, #2a4068, #16243f); }
-  .book .cover .pub { font-size: 7.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-light); }
-  .book .cover .bt { font-family: var(--serif); font-size: 15px; color: #fff; line-height: 1.12; text-align: left; }
-  .book .cover .bd { width: 22px; height: 2px; background: var(--gold-light); margin-top: 8px; }
-  .book .label { margin-top: 13px; }
-  .book .label .bn { font-family: var(--serif); font-size: 15px; color: var(--ink); line-height: 1.2; }
-  .book .label .bs { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .rec-reading { margin-top: 72px; }
-  .rec-head { text-align: center; max-width: 600px; margin: 0 auto; }
-  .rec-head h3 { font-size: clamp(27px, 3.2vw, 36px); margin: 16px 0 0; }
-  .rec-head p { margin-top: 14px; color: var(--muted); font-size: 17px; }
-  .rec-reading .book-grid { margin-top: 38px; }
+  /* ---------- Books (3D shelf) ---------- */
+  .books { padding: 120px 0 110px; background: var(--cream-deep); position: relative; }
+  .books-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap; margin-bottom: 26px; }
+  .books h2 { font-size: clamp(34px, 4.4vw, 60px); }
+  .books-head p { max-width: 40ch; }
+  .hint { display: block; margin-top: 10px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .shelfwrap { position: relative; padding-bottom: 10px; }
+  .shelf { display: flex; gap: 54px; overflow-x: auto; padding: 70px max(44px, calc((100vw - var(--maxw)) / 2 + 84px)) 0; scrollbar-width: none; cursor: grab; position: relative; z-index: 1; }
+  .shelf::-webkit-scrollbar { display: none; }
+  .bk { flex: none; display: block; text-align: left; -webkit-user-drag: none; user-select: none; }
+  .bk span { display: block; }
+  .bk .p3 { perspective: 1100px; perspective-origin: 50% 45%; }
+  .b3 { position: relative; height: 270px; width: -moz-fit-content; width: fit-content; transform-style: preserve-3d; transform: rotateY(var(--ry, -24deg)); transition: transform .7s var(--ease); --d: 34px; }
+  .bk:hover .b3, .bk:focus-visible .b3 { transform: rotateY(-6deg) translateZ(38px) translateY(-10px); }
+  .bk:focus-visible { outline: none; }
+  .bk:focus-visible .t { text-decoration: underline; text-decoration-color: var(--gold); }
+  .b3 .front { position: relative; height: 100%; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; overflow: hidden; background: #fff; }
+  .b3 .front img { height: 100%; width: auto; max-width: none; pointer-events: none; }
+  .b3 .front::before { content: ""; position: absolute; inset: 0; z-index: 1; box-shadow: inset 5px 0 8px -4px rgba(0,0,0,.45), inset -1px 0 0 rgba(255,255,255,.18); }
+  .b3 .front::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.34) 50%, transparent 62%); background-size: 260% 100%; background-position: 130% 0; transition: background-position 1s var(--ease); }
+  .bk:hover .b3 .front::after { background-position: -30% 0; }
+  .b3 .back, .b3 .spine, .b3 .pages, .b3 .top { position: absolute; top: 0; height: 100%; }
+  .b3 .back { left: 0; width: 100%; transform: translateZ(calc(var(--d) / -2)) rotateY(180deg); background: #16263b; }
+  .b3 .spine { left: 0; width: var(--d); transform: translateX(calc(var(--d) / -2)) rotateY(-90deg); background: linear-gradient(90deg, #0b1e32, #17334f 45%, #0d2238); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .b3 .spine span { writing-mode: vertical-rl; font-family: var(--serif); font-size: 11.5px; letter-spacing: .06em; color: var(--gold-light); white-space: nowrap; }
+  .b3 .pages { right: 0; width: var(--d); top: 3px; height: calc(100% - 6px); transform: translateX(calc(var(--d) / 2 - 2px)) rotateY(90deg); background: repeating-linear-gradient(90deg, #f4efe3 0 1.5px, #d9d1bf 1.5px 2.5px); }
+  .b3 .top { left: 0; width: 100%; height: var(--d); transform: translateY(calc(var(--d) / -2)) rotateX(90deg); background: repeating-linear-gradient(0deg, #f4efe3 0 1.5px, #d9d1bf 1.5px 2.5px); }
+  .bk .shadow { height: 14px; margin: -4px 4px 0 -14px; background: radial-gradient(closest-side, rgba(16,42,67,.34), transparent); filter: blur(5px); transition: transform .7s var(--ease), opacity .7s; }
+  .bk:hover .shadow { transform: scale(.82); opacity: .55; }
+  .bk .t { font-family: var(--serif); color: var(--navy); font-size: 17px; margin-top: 34px; line-height: 1.25; max-width: 190px; }
+  .bk .s { font-size: 13px; color: var(--muted); max-width: 190px; line-height: 1.4; margin-top: 3px; }
+  .plank { position: absolute; left: 0; right: 0; top: 340px; height: 11px; background: linear-gradient(#c9b48a, #a48a57); box-shadow: 0 14px 26px rgba(16,42,67,.2); z-index: 0; }
+  .shelf-block { display: grid; grid-template-columns: minmax(0,4fr) minmax(0,7fr); gap: 30px; align-items: center; margin-top: 96px; }
+  .shelf-block .shelf { padding: 70px 40px 0; gap: 46px; }
+  .rec-head h3 { font-size: clamp(28px, 3.4vw, 46px); }
+  .rec-head p { margin-top: 16px; color: var(--muted); max-width: 40ch; }
+  @media (max-width: 900px) {
+    .books { padding: 80px 0; }
+    .shelf-block { grid-template-columns: minmax(0,1fr); gap: 0; margin-top: 70px; }
+    .shelf-block .shelfwrap { margin: 0 -22px 0 -44px; }
+    .shelf-block .shelf { padding: 60px 44px 0; }
+    .shelf-block .plank { top: 330px; }
+  }
 
   /* ---------- Sponsor a couple ---------- */
   .sponsor { background: var(--sage-soft); }
-  .sp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1040px; margin: 56px auto 0; }
-  .sp-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 34px 32px 30px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform .35s ease, box-shadow .35s ease; }
-  .sp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .sp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 64px; border-top: 1px solid var(--gold); }
+  .sp-card { padding: 34px 34px 30px 0; display: flex; flex-direction: column; border-bottom: 1px solid var(--line); }
+  .sp-card + .sp-card { padding-left: 34px; border-left: 1px solid var(--line); }
   .sp-card:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
-  .sp-amount { font-family: var(--serif); font-size: 42px; color: var(--gold-deep); line-height: 1; margin-bottom: 16px; }
-  .sp-card h3 { font-size: 22px; margin-bottom: 10px; }
-  .sp-card p { font-size: 15.5px; color: var(--muted); font-weight: 300; }
-  .sp-card .sp-go { margin-top: auto; padding-top: 20px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
-  .sp-card:hover .sp-go .arrow { transform: translateX(4px); }
-  .sp-go .arrow { display: inline-block; transition: transform .25s ease; }
-  .sp-note { max-width: 720px; margin: 28px auto 0; text-align: center; color: var(--muted); font-size: 16px; }
+  .sp-amount { font-family: var(--serif); font-size: clamp(54px, 6vw, 84px); color: var(--navy); line-height: 1; margin-bottom: 20px; letter-spacing: -.03em; transition: color .3s; }
+  .sp-card:hover .sp-amount { color: var(--gold-deep); }
+  .sp-card h3 { font-size: 24px; margin-bottom: 10px; }
+  .sp-card p { font-size: 15.5px; color: var(--ink-soft); font-weight: 300; }
+  .sp-card .sp-go { margin-top: auto; padding-top: 24px; font-size: 13px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
+  .sp-card:hover .sp-go .arrow { transform: translateX(5px); }
+  .sp-go .arrow { display: inline-block; transition: transform .3s var(--ease); }
+  .sp-note { max-width: 720px; margin: 28px 0 0; color: var(--ink-soft); font-size: 16px; }
   .sp-note a { color: var(--gold-deep); text-decoration: underline; }
-  .sp-privacy { background: var(--navy); border-radius: 18px; padding: 44px 48px; max-width: 880px; margin: 54px auto 0; color: rgba(251,248,241,0.85); }
-  .sp-privacy h3 { color: var(--gold-light); font-size: 25px; margin-bottom: 16px; }
+  .sp-privacy { background: var(--navy); border-radius: 4px; padding: 48px 52px; max-width: 880px; margin: 60px 0 0; color: rgba(251,248,241,0.85); }
+  .sp-privacy h3 { color: var(--gold-light); font-size: 27px; margin-bottom: 16px; }
   .sp-privacy p { font-weight: 300; font-size: 16.5px; margin-bottom: 14px; }
   .sp-privacy p:last-child { margin-bottom: 0; }
-  .sp-fine { max-width: 880px; margin: 30px auto 0; }
+  .sp-fine { max-width: 880px; margin: 30px 0 0; }
   .sp-fine p { font-size: 13.5px; line-height: 1.65; color: var(--muted); margin-bottom: 10px; }
-  @media (max-width: 920px) { .sp-grid { grid-template-columns: 1fr; max-width: 470px; } .sp-privacy { padding: 36px 30px; } }
-
-  /* ---------- FAQ ---------- */
-  .faq { background: var(--cream-deep); }
-  .faq-list { max-width: 820px; margin: 48px auto 0; }
-  .faq-item { background: #fff; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 14px; box-shadow: var(--shadow-sm); overflow: hidden; }
-  .faq-item summary { list-style: none; cursor: pointer; padding: 24px 62px 24px 28px; position: relative;
-    font-family: var(--serif); font-size: 20px; color: var(--ink); font-weight: 500; }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after { content: ""; position: absolute; right: 28px; top: 50%; width: 11px; height: 11px;
-    border-right: 2px solid var(--gold-deep); border-bottom: 2px solid var(--gold-deep);
-    transform: translateY(-70%) rotate(45deg); transition: transform .25s ease; }
-  .faq-item[open] summary::after { transform: translateY(-25%) rotate(-135deg); }
-  .faq-item summary:hover { color: var(--gold-deep); }
-  .faq-item summary:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: -4px; }
-  .faq-item p { padding: 0 28px 26px; font-size: 16.5px; color: var(--muted); font-weight: 300; max-width: 680px; }
-  @media (max-width: 600px) { .faq-item summary { font-size: 18px; padding: 20px 52px 20px 22px; } .faq-item p { padding: 0 22px 22px; } }
-
-  /* ---------- Testimonial ---------- */
-  .testi { background: var(--cream-deep); }
-  .testi-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 26px; align-items: start; max-width: 1040px; margin: 54px auto 0; }
-  .testi-col { display: flex; flex-direction: column; gap: 26px; }
-  .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 34px 36px; box-shadow: var(--shadow-sm); transition: transform .35s ease, box-shadow .35s ease; }
-  .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-  .testi-card .stars { color: var(--gold); letter-spacing: 3px; font-size: 15px; margin-bottom: 16px; }
-  .testi-card blockquote { font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--ink); font-style: italic; }
-  .testi-card.feature blockquote { font-size: 20px; }
-  .testi-card blockquote p { margin: 0 0 14px; }
-  .testi-card blockquote p:last-child { margin-bottom: 0; }
-  .testi-card .who { margin-top: 22px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-deep); font-weight: 500; }
-  .testi-card .who .role { display: block; margin-top: 5px; font-size: 12px; letter-spacing: 0.03em; text-transform: none; color: var(--muted); font-weight: 400; }
-  @media (max-width: 860px) { .testi-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 920px) {
+    .sp-grid { grid-template-columns: 1fr; }
+    .sp-card, .sp-card + .sp-card { padding: 30px 0; border-left: 0; }
+    .sp-privacy { padding: 36px 28px; }
+  }
 
   /* ---------- Blog / journal ---------- */
   .blog { background: var(--cream); }
-  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin: 52px 0 44px; }
-  .post { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .35s ease, box-shadow .35s ease; display: flex; flex-direction: column; }
-  .post:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-  .post .thumb { height: 158px; position: relative; }
-  .post .thumb.t1 { background: linear-gradient(160deg, #102A43, #0B1E32); }
-  .post .thumb.t2 { background: linear-gradient(160deg, #b88a3c, #846326); }
-  .post .thumb.t3 { background: linear-gradient(160deg, #2a4068, #16243f); }
-  .post .cat { position: absolute; top: 14px; left: 14px; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; background: rgba(8,20,34,0.34); padding: 6px 13px; border-radius: 100px; }
-  .post .body { padding: 24px 26px 26px; display: flex; flex-direction: column; flex: 1; }
-  .post h3 { font-size: 23px; line-height: 1.18; margin-bottom: 10px; }
-  .post p { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
-  .post .read { margin-top: auto; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-deep); display: inline-flex; align-items: center; gap: 7px; }
-  .post .read svg { width: 15px; height: 15px; transition: transform .25s ease; }
-  .post:hover .read svg { transform: translateX(4px); }
-  .blog .blog-cta { text-align: center; }
-  .blog-soon { max-width: 600px; margin: 50px auto 0; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 54px 44px; box-shadow: var(--shadow-sm); }
-  .blog-soon .soon-ic { width: 62px; height: 62px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; color: var(--gold-deep); margin: 0 auto 22px; }
-  .blog-soon .soon-ic svg { width: 30px; height: 30px; }
-  .blog-soon .post-kicker { display: block; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 14px; font-weight: 600; }
-  .blog-soon h3 a { color: inherit; text-decoration: none; transition: color .25s ease; }
-  .blog-soon h3 a:hover { color: var(--gold-deep); }
-  .blog-soon h3 { font-size: 30px; margin-bottom: 12px; }
-  .blog-soon p { color: var(--muted); max-width: 440px; margin: 0 auto 26px; }
+  .blog .wrap, .faq .wrap { display: grid; grid-template-columns: minmax(0,4fr) minmax(0,7fr); gap: 70px; align-items: start; }
+  .blog .sec-head h2, .faq .sec-head h2 { font-size: clamp(32px, 3.6vw, 50px); }
+  .blog-soon { border-top: 1px solid var(--gold); padding-top: 30px; }
+  .blog-soon .post-kicker { display: block; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 16px; font-weight: 600; }
+  .blog-soon h3 { font-size: clamp(30px, 3.6vw, 48px); margin-bottom: 16px; font-weight: 400; }
+  .blog-soon h3 a { background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 1px no-repeat; transition: background-size .6s var(--ease); }
+  .blog-soon h3 a:hover { background-size: 100% 1px; }
+  .blog-soon p { color: var(--muted); max-width: 52ch; margin-bottom: 28px; font-size: 18px; font-weight: 300; }
 
-  /* ---------- CTA band ---------- */
-  .contact {
-    background: radial-gradient(720px 420px at 88% 0%, rgba(200,164,93,0.26), transparent 60%), var(--navy-deep);
-    color: var(--cream); padding: 104px 0;
+  /* ---------- Stories ---------- */
+  .voices { background: var(--cream-deep); }
+  .voices h2 { font-size: clamp(24px, 2.6vw, 34px); max-width: 20ch; margin-bottom: 70px; font-weight: 400; color: var(--ink-soft); }
+  .voices figure { margin: 0; }
+  .lead-q { position: relative; }
+  .lead-q::before { content: "\201C"; position: absolute; left: -.1em; top: -.16em; font-family: var(--serif); font-size: clamp(150px, 19vw, 280px); line-height: 1; color: var(--gold); opacity: .2; pointer-events: none; }
+  .lead-q blockquote { position: relative; font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3.6vw, 50px); line-height: 1.28; color: var(--navy); max-width: 24ch; letter-spacing: -.01em; }
+  .who { margin-top: 28px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
+  .who .role { color: var(--muted); font-weight: 400; letter-spacing: 0.04em; text-transform: none; margin-left: 10px; }
+  .voices-2 { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 70px; margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--line); }
+  .voices-2 blockquote { font-family: var(--serif); font-size: 18.5px; line-height: 1.62; color: var(--ink); }
+  .voices-2 blockquote p { margin-bottom: 16px; }
+  .voices-2 blockquote p:last-child { margin-bottom: 0; }
+  @media (max-width: 860px) { .voices-2 { grid-template-columns: 1fr; gap: 56px; margin-top: 70px; } .voices h2 { margin-bottom: 54px; } }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--cream); }
+  .faq .sec-head { position: sticky; top: 110px; }
+  .faq-list { border-top: 1px solid var(--gold); }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 26px 54px 26px 0; position: relative;
+    font-family: var(--serif); font-size: clamp(20px, 2vw, 25px); color: var(--ink); font-weight: 500; transition: color .25s; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::before, .faq-item summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 17px; height: 1.5px; background: var(--gold-deep); transition: transform .35s var(--ease); }
+  .faq-item summary::after { transform: rotate(90deg); }
+  .faq-item[open] summary::after { transform: rotate(0deg); }
+  .faq-item summary:hover { color: var(--gold-deep); }
+  .faq-item summary:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  .faq-item p { padding: 0 54px 28px 0; font-size: 17px; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
+  @media (max-width: 900px) {
+    .blog .wrap, .faq .wrap { grid-template-columns: 1fr; gap: 44px; }
+    .faq .sec-head { position: static; }
+    section.block { padding: 84px 0; }
   }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    position: relative; color: var(--cream); padding: 130px 0 120px;
+    background: radial-gradient(900px 520px at 88% 0%, rgba(200,164,93,0.24), transparent 60%), var(--navy-deep);
+  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center; }
   .contact-intro .eyebrow { color: var(--gold-light); }
-  .contact-intro .eyebrow::before { background: var(--gold-light); }
-  .contact-intro h2 { color: var(--cream); font-size: clamp(34px, 4.4vw, 52px); margin: 18px 0 0; letter-spacing: -0.3px; }
-  .contact-intro p { color: rgba(251,248,241,0.8); font-size: 18px; font-weight: 300; margin: 22px 0 0; max-width: 460px; }
-  .contact-details { list-style: none; margin: 32px 0 0; display: flex; flex-direction: column; gap: 15px; }
+  .contact-intro h2 { color: var(--cream); font-size: clamp(40px, 5.4vw, 78px); font-weight: 400; }
+  .contact-intro p { color: rgba(251,248,241,0.8); font-size: 18px; font-weight: 300; margin: 26px 0 0; max-width: 460px; }
+  .contact-details { list-style: none; margin: 36px 0 0; display: flex; flex-direction: column; gap: 15px; }
   .contact-details li { display: flex; align-items: center; gap: 14px; font-size: 16px; color: var(--cream); }
-  .contact-details .ic { width: 42px; height: 42px; border-radius: 50%; background: rgba(227,203,149,0.15); color: var(--gold-light); display: grid; place-items: center; flex: none; }
-  .contact-details .ic svg { width: 20px; height: 20px; }
+  .contact-details .ic { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(227,203,149,0.4); color: var(--gold-light); display: grid; place-items: center; flex: none; }
+  .contact-details .ic svg { width: 19px; height: 19px; }
   .contact-details a { color: inherit; transition: color .2s ease; }
   .contact-details a:hover { color: var(--gold-light); }
 
-  .contact-card { background: var(--cream); border-radius: 22px; padding: 36px 34px; box-shadow: var(--shadow-lg); }
-  .field { margin-bottom: 15px; }
-  .field label { display: block; font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; font-weight: 500; }
-  .field input, .field select, .field textarea { width: 100%; font-family: var(--sans); font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; transition: border-color .2s ease, box-shadow .2s ease; }
+  .contact-card { background: var(--cream); border-radius: 4px; padding: 40px 38px; box-shadow: var(--shadow-lg); color: var(--ink-soft); }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; font-weight: 600; }
+  .field input, .field select, .field textarea { width: 100%; font-family: var(--sans); font-size: 16px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 13px 14px; transition: border-color .2s ease, box-shadow .2s ease; }
   .field input::placeholder, .field textarea::placeholder { color: #a8a69c; }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,164,93,0.16); }
-  .field textarea { resize: vertical; min-height: 92px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,164,93,0.18); }
+  .field textarea { resize: vertical; min-height: 96px; }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .contact-card .btn { width: 100%; justify-content: center; margin-top: 8px; }
   .contact-card .btn[disabled] { opacity: 0.6; cursor: default; }
-  .form-note { font-size: 12px; color: var(--muted); margin-top: 12px; text-align: center; }
-  .form-status { margin-top: 14px; font-size: 14px; line-height: 1.5; text-align: center; border-radius: 10px; padding: 12px 14px; display: none; }
+  .form-note { font-size: 12.5px; color: var(--muted); margin-top: 12px; text-align: center; }
+  .form-status { margin-top: 14px; font-size: 14px; line-height: 1.5; text-align: center; border-radius: 3px; padding: 12px 14px; display: none; }
   .form-status.ok { display: block; background: rgba(29,158,117,0.13); color: #0f6e56; }
   .form-status.err { display: block; background: rgba(226,75,74,0.12); color: #a32d2d; }
   .hp { position: absolute !important; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 860px) { .contact { padding: 90px 0; } .contact-grid { grid-template-columns: 1fr; gap: 44px; } }
+  @media (max-width: 480px) { .contact-card { padding: 30px 22px; } .field-row { grid-template-columns: 1fr; gap: 0; } }
 
   /* ---------- Footer ---------- */
-  footer { background: var(--ink); color: rgba(251,248,241,0.7); padding: 80px 0 36px; }
+  footer { position: relative; z-index: 2; background: var(--navy-deep); color: rgba(251,248,241,0.7); padding: 80px 0 36px; border-top: 1px solid rgba(251,248,241,0.1); }
+  footer .wrap { padding: 0 40px; }
   .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 44px; }
   .foot-lockup { width: 252px; max-width: 82%; height: auto; display: block; margin-bottom: 24px; }
   .foot-brand p { font-size: 15px; max-width: 320px; font-weight: 300; }
@@ -494,49 +616,23 @@
   .foot-col a:hover { color: var(--gold-light); }
   .foot-bottom { margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(251,248,241,0.12); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: rgba(251,248,241,0.5); }
   .foot-bottom .socials { display: flex; gap: 14px; }
-  .foot-bottom .socials a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(251,248,241,0.18); display: grid; place-items: center; color: rgba(251,248,241,0.65); transition: all .25s ease; }
-  .foot-bottom .socials a:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
-  .foot-bottom .socials a.app-tile { border: none; border-radius: 9px; padding: 0; overflow: hidden; }
+  .foot-bottom .socials a.app-tile { width: 38px; height: 38px; border-radius: 9px; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
   .foot-bottom .socials a.app-tile img { width: 100%; height: 100%; display: block; }
-  .foot-bottom .socials a.app-tile:hover { background: none; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.32); }
-  .foot-bottom .socials svg { width: 17px; height: 17px; }
+  .foot-bottom .socials a.app-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.32); }
+  @media (max-width: 980px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr; } footer .wrap { padding: 0 22px; } }
 
-  /* ---------- Reveal animation ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
-
-  /* ---------- Responsive ---------- */
+  /* ---------- Responsive nav ---------- */
   @media (max-width: 1240px) {
     .nav-links { display: none; }
     .nav-actions { display: flex; }
     .menu-btn { display: block; }
-    .nav .btn.desktop-cta { display: none; }
-  }
-  @media (max-width: 980px) {
-    .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero-art { max-width: 460px; }
-    .svc-grid, .steps, .blog-grid, .foot-grid { grid-template-columns: repeat(2, 1fr); }
-    .steps .joiner { display: none; }
-    .legacy .divider { display: none; }
-    .legacy .wrap { justify-content: center; gap: 30px 44px; }
-    section.block { padding: 84px 0; }
   }
   @media (max-width: 600px) {
-    .wrap { padding: 0 20px; }
-    .brand-symbol { height: 42px; }
-    header.scrolled .brand-symbol { height: 37px; }
+    header .wrap { padding: 0 20px; }
+    .nav { height: 72px; }
+    header.scrolled .nav { height: 64px; }
     .nav-actions { gap: 9px; }
-    .svc-grid, .steps, .blog-grid, .foot-grid { grid-template-columns: 1fr; }
-    .hero { padding: 140px 0 80px; }
-    .hero .lead { font-size: 18px; }
-    .testi-card { padding: 44px 26px; }
-    .floating-badge { left: 8px; top: -16px; }
-    /* The seal shrinks here but its longest string does not: "Est. Marcando el camino de
-       regreso" wraps to five lines where English takes four, and at 13px that overflowed the
-       circle. Sized to fit the longest line count rather than scoped to one language. */
-    .about-visual .seal { width: 108px; height: 108px; right: 8px; padding: 12px; }
-    .about-visual .seal span { font-size: 11.5px; line-height: 1.22; }
   }
 </style>
 <script type="application/ld+json">{
@@ -709,14 +805,17 @@
   ]
 }</script>
 <script src="/assets/tag.js"></script>
+<script src="/assets/pre.js"></script>
 <link href="https://www.waymarkinc.com/es/" hreflang="es" rel="alternate"/><link href="https://www.waymarkinc.com/" hreflang="en" rel="alternate"/><link href="https://www.waymarkinc.com/" hreflang="x-default" rel="alternate"/></head>
 <body>
+<div aria-hidden="true" id="veil"><img alt="" height="70" src="/assets/waymark-symbol.svg" width="52"/><b></b></div>
 <!-- ================= NAV ================= -->
-<header id="header">
+<header id="header"><i aria-hidden="true" id="prog"></i>
 <div class="wrap nav">
 <a aria-label="Waymark Inc. — Marking the way back" class="brand" href="#top">
-<img alt="Waymark Inc. — Marking the way back" class="brand-lockup" src="/assets/waymark-logo-horizontal.svg"/>
-<img alt="Waymark Inc." class="brand-symbol" src="/assets/waymark-logo-mobile.svg"/>
+<img alt="Waymark Inc. — Marking the way back" class="brand-neg" src="/assets/waymark-logo-horizontal-negative.svg"/>
+<img alt="" class="brand-lockup" src="/assets/waymark-logo-horizontal.svg"/>
+<img alt="" class="brand-symbol" src="/assets/waymark-logo-mobile.svg"/>
 </a>
 <nav aria-label="Primary" class="nav-links">
 <a class="navlink" data-i18n="nav-about" href="#about">Nuestra Historia</a>
@@ -762,264 +861,178 @@
 </div>
 <span id="top"></span>
 <!-- ================= HERO ================= -->
-<section class="hero">
-<svg aria-hidden="true" class="hero-path" preserveaspectratio="xMidYMid slice" viewbox="0 0 1440 800">
-<path d="M-50 760 C 300 700, 360 480, 600 460 S 980 420, 1100 250 S 1300 60, 1520 30" fill="none" opacity="0.5" stroke="#C8A45D" stroke-dasharray="2 10" stroke-width="1.5"></path>
-<path d="M-50 800 C 360 740, 420 540, 680 520 S 1080 470, 1220 300" fill="none" opacity="0.45" stroke="#8FA58B" stroke-dasharray="2 12" stroke-width="1"></path>
-</svg>
-<div class="wrap hero-grid">
-<div class="hero-copy reveal">
-<span class="eyebrow" data-i18n="hero-eyebrow">Coaching de parejas basado en la fe</span>
-<h1 data-i18n="hero-h1">Marcando el <span class="accent">camino de regreso</span> a la vida para la que fuiste creado.</h1>
+<section class="hero" id="hero">
+<div class="hero-bg" id="heroBg">
+<video aria-label="A couple walking a mountain trail together" autoplay="" disablepictureinpicture="" height="540" id="heroVideo" loop="" muted="" playsinline="" poster="/assets/hero-poster.jpg" preload="auto" src="/assets/hero-loop.mp4" width="960"></video>
+</div>
+<div class="hero-in" id="heroIn">
+<span class="kicker" data-i18n="hero-eyebrow">Coaching de parejas basado en la fe</span>
+<h1 data-i18n="hero-h1" id="heroH1">Marcando el <span class="accent">camino de regreso</span> a la vida para la que fuiste creado.</h1>
+<div class="hero-row">
 <p class="lead" data-i18n="hero-lead">Durante más de cinco décadas hemos caminado junto a parejas y personas a través de las temporadas más difíciles del amor y de la vida, ayudándoles a encontrar el camino a casa. Dondequiera que estés, hay un camino de regreso.</p>
 <div class="hero-cta">
 <a class="btn btn-gold" data-i18n="hero-cta1" href="#services">Descubre el coaching <span class="arrow">→</span></a>
 <a class="btn btn-outline" data-i18n="hero-cta2" href="#contact">Habla con un guía</a>
 </div>
-<div class="hero-proof">
-<div aria-hidden="true" class="dots"><span>D</span><span>S</span><span>J</span><span>M</span></div>
-<span data-i18n="hero-proof">Caminando junto a las parejas en el regreso hacia el otro.</span>
 </div>
 </div>
-<div class="hero-art reveal">
-<div class="floating-badge">
-<span class="ic ico"><svg fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-9C1 9 2.5 5 6.5 5 9 5 12 7.5 12 7.5S15 5 17.5 5C21.5 5 23 9 21.5 12 19 16.65 12 21 12 21z"></path></svg></span>
-<div><div class="t" data-i18n="badge-t">Ningún matrimonio</div><div class="s" data-i18n="badge-s">es irreparable</div></div>
-</div>
-<div class="hero-card">
-<div class="photo">
-<video aria-label="A couple walking a mountain trail together" autoplay="" disablepictureinpicture="" height="540" id="heroVideo" loop="" muted="" playsinline="" poster="/assets/hero-poster.jpg" preload="auto" src="/assets/hero-loop.mp4" width="960"></video>
-<div class="scrim"></div>
-<div class="quote">
-<span class="q-mark">“</span>
-<p data-i18n="hero-quote">Sanar no es un momento. Es un camino: un paso honesto a la vez.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p class="hero-meta" data-i18n="hero-quote">Sanar no es un momento. Es un camino: un paso honesto a la vez.</p>
+<span aria-hidden="true" class="scrollcue"></span>
 </section>
-<!-- ================= LEGACY STRIP ================= -->
-<section class="legacy">
-<div class="wrap">
-<div class="item"><span class="big">50+</span><span class="lbl" data-i18n="legacy1">Años de coaching relacional</span></div>
-<div class="divider"></div>
-<div class="item"><span class="big">1</span><span class="lbl" data-i18n="legacy2">Convicción que lo guía todo</span></div>
+<main id="main">
+<!-- ================= LEGACY ================= -->
+<section class="legacy" id="legacy">
+<div class="wrap legacy-grid">
+<div class="fifty"><span id="count">50</span><sup>+</sup></div>
+<div>
+<h2 class="reveal" data-i18n="legacy1">Años de coaching relacional</h2>
+<div class="tl reveal"></div>
+<div class="tl-ends"><span data-i18n="tl-start">Hace cinco décadas</span><span data-i18n="tl-end">Hoy</span></div>
+<div class="conv reveal">
+<b>1</b>
+<div><span class="lbl" data-i18n="legacy2">Convicción que lo guía todo</span><em><span data-i18n="badge-t">Ningún matrimonio</span> <span data-i18n="badge-s">es irreparable</span></em></div>
+</div>
+</div>
 </div>
 </section>
 <!-- ================= ABOUT ================= -->
-<section class="block about" id="about">
+<section class="about" id="about">
 <div class="wrap about-grid">
-<div class="about-visual reveal">
-<div class="mark">
-<img alt="Jose and Paula Villalpando, founders of Waymark Inc." height="1800" loading="lazy" src="/assets/waymark-founders.jpg" width="1200"/>
+<div class="portrait reveal">
+<div class="clip"><img alt="Jose and Paula Villalpando, founders of Waymark Inc." class="ph" height="1800" loading="lazy" src="/assets/waymark-founders.jpg" width="1200"/></div>
+<div aria-hidden="true" class="seal">
+<svg viewbox="0 0 140 140"><circle cx="70" cy="70" fill="#F7F4EE" r="69" stroke="#C8A45D" stroke-width=".8"></circle><g class="spin"><path d="M18 70a52 52 0 1 1 104 0a52 52 0 1 1-104 0" fill="none" id="sealPath"></path><text fill="#102A43" font-family="Urbanist,sans-serif" font-size="9.5" font-weight="600" letter-spacing="2"><textpath data-i18n="seal-ring" href="#sealPath" textlength="320">MARCANDO EL CAMINO DE REGRESO • WAYMARK INC. • </textpath></text></g></svg>
+<img alt="" height="46" loading="lazy" src="/assets/waymark-symbol.svg" width="34"/>
 </div>
-<div class="seal"><span data-i18n="about-seal">Est.<br/>Marcando el<br/>camino de regreso</span></div>
 </div>
-<div class="about-body reveal">
-<span class="eyebrow" data-i18n="about-eyebrow">¿Qué es un waymark?</span>
-<h2 data-i18n="about-h2">Una señal firme que dice: el camino sigue aquí.</h2>
-<p data-i18n="about-p1">Un waymark es una señal colocada a lo largo de un sendero —una piedra, un poste, una marca pintada— dejada por quienes caminaron antes para que nadie que los siga pierda el rumbo. Cuando el camino se cubre de maleza y baja la niebla, un waymark le recuerda al viajero cansado que no está perdido. Solo está entre una señal y la siguiente.</p>
+<div class="about-body">
+<span class="eyebrow reveal" data-i18n="about-eyebrow">¿Qué es un waymark?</span>
+<h2 class="reveal" data-i18n="about-h2">Una señal firme que dice: el camino sigue aquí.</h2>
+<p class="reveal" data-i18n="about-p1">Un waymark es una señal colocada a lo largo de un sendero —una piedra, un poste, una marca pintada— dejada por quienes caminaron antes para que nadie que los siga pierda el rumbo. Cuando el camino se cubre de maleza y baja la niebla, un waymark le recuerda al viajero cansado que no está perdido. Solo está entre una señal y la siguiente.</p>
 <p class="pullout" data-i18n="about-pullout">Eso es lo que hacemos. Marcamos el camino de regreso: a tu matrimonio, a tu familia, a tu fe, a ti mismo.</p>
-<p data-i18n="about-f1">Sabemos lo que es perder el rumbo, y sabemos lo que es encontrar el camino de regreso. Dios restauró nuestro propio matrimonio, y esa historia es la razón por la que hacemos lo que hacemos hoy.</p>
-<p data-i18n="about-f2">Waymark es el nuevo capítulo de Relationship Resources, un ministerio con más de cinco décadas de historia. Es un honor continuar el legado y la metodología del <a href="/es/dr-jim-talley/"><strong>Dr. Jim Talley</strong></a>, caminando junto a matrimonios y familias a través del coaching, talleres, conferencias y publicaciones, en español y en inglés.</p>
-<p data-i18n="about-f3">Creemos con todo el corazón que siempre hay esperanza para un matrimonio. Por muy largo que parezca el camino, el regreso es posible.</p>
-<p data-i18n="about-f4">Llevamos 15 años casados, somos padres de seis hijos y abuelos, y Oklahoma es nuestro hogar. Nuestra pasión es caminar a tu lado mientras marcamos el camino de regreso.</p>
-<div class="sign">
+<p class="reveal" data-i18n="about-f1">Sabemos lo que es perder el rumbo, y sabemos lo que es encontrar el camino de regreso. Dios restauró nuestro propio matrimonio, y esa historia es la razón por la que hacemos lo que hacemos hoy.</p>
+<p class="reveal" data-i18n="about-f2">Waymark es el nuevo capítulo de Relationship Resources, un ministerio con más de cinco décadas de historia. Es un honor continuar el legado y la metodología del <a href="/es/dr-jim-talley/"><strong>Dr. Jim Talley</strong></a>, caminando junto a matrimonios y familias a través del coaching, talleres, conferencias y publicaciones, en español y en inglés.</p>
+<p class="reveal" data-i18n="about-f3">Creemos con todo el corazón que siempre hay esperanza para un matrimonio. Por muy largo que parezca el camino, el regreso es posible.</p>
+<p class="reveal" data-i18n="about-f4">Llevamos 15 años casados, somos padres de seis hijos y abuelos, y Oklahoma es nuestro hogar. Nuestra pasión es caminar a tu lado mientras marcamos el camino de regreso.</p>
+<div class="sign reveal">
 <div class="nm" data-i18n="about-nm">Jose y Paula Villalpando</div>
 <div class="rl" data-i18n="about-rl">Fundadores</div>
 </div>
 </div>
 </div>
 </section>
+<div aria-hidden="true" class="marq"><div class="marq-in" id="marq"><span class="f">Marking the way back</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span>Marcando el camino de regreso</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span class="f">Marking the way back</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span>Marcando el camino de regreso</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span class="f">Marking the way back</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span>Marcando el camino de regreso</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span class="f">Marking the way back</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/><span>Marcando el camino de regreso</span><img alt="" height="80" loading="lazy" src="/assets/waymark-symbol.svg" width="60"/></div></div>
 <!-- ================= SERVICES ================= -->
-<section class="block services" id="services">
+<section class="dark services" id="services">
+<svg aria-hidden="true" class="contours" data-seed="3" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 1000"></svg>
 <div class="wrap">
-<div class="sec-head center reveal">
-<span class="eyebrow center" data-i18n="svc-eyebrow">Acompañamiento personalizado</span>
-<h2 data-i18n="svc-h2">Coaching y dirección espiritual</h2>
-<p data-i18n="svc-sub">Para cuando prefieres caminar acompañado en lugar de caminar solo. Confidencial, compasivo y respaldado por décadas de experiencia.</p>
-<p class="svc-note" data-i18n="svc-note">Somos coaches, no consejeros licenciados ni terapeutas. No hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es atención con licencia, te lo diremos con claridad y te ayudaremos a encontrarla.</p>
+<div class="svc-head">
+<div>
+<span class="eyebrow reveal" data-i18n="svc-eyebrow">Acompañamiento personalizado</span>
+<h2 class="reveal" data-i18n="svc-h2">Coaching y dirección espiritual</h2>
+<p class="sub reveal" data-i18n="svc-sub">Para cuando prefieres caminar acompañado en lugar de caminar solo. Confidencial, compasivo y respaldado por décadas de experiencia.</p>
 </div>
-<div class="svc-grid">
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
-<h3 data-i18n="svc1-h">Coaching para parejas</h3>
-<p data-i18n="svc1-p">Sesiones estructuradas para parejas en crisis, que reconstruyen tras una traición o que simplemente desean acercarse más. Te encontramos donde estás.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"></path><path d="M9 12l2 2 4-4"></path></svg></div>
-<h3 data-i18n="svc2-h">Restauración matrimonial</h3>
-<p data-i18n="svc2-p">Un camino intensivo y guiado para matrimonios al borde de la ruptura: pasos comprobados que llevan a las parejas de la separación de regreso a un pacto duradero.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 0 0-7-7z"></path><path d="M9 21h6M10 18v3M14 18v3"></path></svg></div>
-<h3 data-i18n="svc3-h">Dirección espiritual</h3>
-<p data-i18n="svc3-p">Acompañamiento centrado en la fe para las preguntas más profundas: propósito, perdón, identidad y el regreso a la paz.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"></path></svg></div>
-<h3 data-i18n="svc4-h">Coaching para ministros y líderes</h3>
-<p data-i18n="svc4-p">Apoyo para pastores, ministros y líderes que se entregan por los demás: cuida tu propio matrimonio, tu familia y tu llamado mientras sirves.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
-<h3 data-i18n="svc5-h">Consultas telefónicas</h3>
-<p data-i18n="svc5-p">Conversaciones directas y privadas cuando necesitas un consejo sabio con prontitud. Llama al <strong>(405) 822-8300</strong> para comenzar.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6M22 11h-6"></path></svg></div>
-<h3 data-i18n="svc6-h">Orientación prematrimonial</h3>
-<p data-i18n="svc6-p">Comienza en el orden correcto. Una preparación que ayuda a las parejas a construir intimidad sobre un cimiento lo suficientemente firme para toda la vida.</p>
-</a>
-<a class="svc reveal" href="https://waymarkcoach.com/book/?clcm_lang=es">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M3 18h18"></path><path d="M12 3v3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1"></path><path d="M6.5 18a5.5 5.5 0 0 1 11 0"></path></svg></div>
-<h3 data-i18n="svc7-h">Reconstrucción tras el divorcio</h3>
-<p data-i18n="svc7-p">Para la temporada después de que un matrimonio termina: darle sentido a la pérdida, recuperar el equilibrio y seguir adelante sin llevar las mismas heridas a lo que viene.</p>
-</a>
+<p class="note reveal" data-i18n="svc-note">Somos coaches, no consejeros licenciados ni terapeutas. No hacemos diagnósticos y no tratamos condiciones de salud mental. Si lo que necesitas es atención con licencia, te lo diremos con claridad y te ayudaremos a encontrarla.</p>
+</div>
+<div class="rows">
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">01</span><h3 data-i18n="svc1-h">Coaching para parejas</h3><p data-i18n="svc1-p">Sesiones estructuradas para parejas en crisis, que reconstruyen tras una traición o que simplemente desean acercarse más. Te encontramos donde estás.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">02</span><h3 data-i18n="svc2-h">Restauración matrimonial</h3><p data-i18n="svc2-p">Un camino intensivo y guiado para matrimonios al borde de la ruptura: pasos comprobados que llevan a las parejas de la separación de regreso a un pacto duradero.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">03</span><h3 data-i18n="svc3-h">Dirección espiritual</h3><p data-i18n="svc3-p">Acompañamiento centrado en la fe para las preguntas más profundas: propósito, perdón, identidad y el regreso a la paz.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">04</span><h3 data-i18n="svc4-h">Coaching para ministros y líderes</h3><p data-i18n="svc4-p">Apoyo para pastores, ministros y líderes que se entregan por los demás: cuida tu propio matrimonio, tu familia y tu llamado mientras sirves.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">05</span><h3 data-i18n="svc5-h">Consultas telefónicas</h3><p data-i18n="svc5-p">Conversaciones directas y privadas cuando necesitas un consejo sabio con prontitud. Llama al <strong>(405) 822-8300</strong> para comenzar.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">06</span><h3 data-i18n="svc6-h">Orientación prematrimonial</h3><p data-i18n="svc6-p">Comienza en el orden correcto. Una preparación que ayuda a las parejas a construir intimidad sobre un cimiento lo suficientemente firme para toda la vida.</p><span aria-hidden="true" class="go">→</span></a>
+<a class="row reveal" href="https://waymarkcoach.com/book/?clcm_lang=es"><span class="n">07</span><h3 data-i18n="svc7-h">Reconstrucción tras el divorcio</h3><p data-i18n="svc7-p">Para la temporada después de que un matrimonio termina: darle sentido a la pérdida, recuperar el equilibrio y seguir adelante sin llevar las mismas heridas a lo que viene.</p><span aria-hidden="true" class="go">→</span></a>
 </div>
 </div>
 </section>
 <!-- ================= APPROACH ================= -->
-<section class="block approach">
-<div class="wrap">
-<div class="sec-head center reveal">
-<span class="eyebrow center" data-i18n="appr-eyebrow">Cómo funciona</span>
+<section class="walk" id="walk">
+<div class="walk-pin"><div class="wrap">
+<span class="eyebrow" data-i18n="appr-eyebrow">Cómo funciona</span>
 <h2 data-i18n="appr-h2">Tres pasos, una dirección honesta</h2>
-</div>
-<div class="steps">
-<div aria-hidden="true" class="joiner"></div>
-<div class="step reveal">
-<div class="circle"><span class="n">I</span></div>
-<h3 data-i18n="step1-h">Encuentra tu base</h3>
-<p data-i18n="step1-p">Comienza con una conversación. Escuchamos, evaluamos dónde estás y definimos el siguiente paso honesto, sin presión y sin juicios.</p>
-</div>
-<div class="step reveal">
-<div class="circle"><span class="n">II</span></div>
-<h3 data-i18n="step2-h">Recorre el camino</h3>
-<p data-i18n="step2-p">A través del coaching personalizado, sigues un marco claro y comprobado —una señal a la vez— con acompañamiento siempre que lo necesites.</p>
-</div>
-<div class="step reveal">
-<div class="circle"><span class="n">III</span></div>
-<h3 data-i18n="step3-h">Llega restaurado</h3>
-<p data-i18n="step3-p">Confianza reconstruida, límites más sanos y una relación firme para perdurar. Y las herramientas para ayudar a marcar el camino a alguien más.</p>
+<div class="walk-grid">
+<div class="route">
+<svg aria-hidden="true" preserveaspectratio="none" viewbox="0 0 900 70"><path class="g" d="M6 40 C 150 5, 250 68, 440 36 S 760 8, 894 34"></path><path class="l" d="M6 40 C 150 5, 250 68, 440 36 S 760 8, 894 34" id="routeL"></path></svg>
+<div class="stops">
+<div class="stop"><span class="num">i.</span><h3 data-i18n="step1-h">Encuentra tu base</h3><p data-i18n="step1-p">Comienza con una conversación. Escuchamos, evaluamos dónde estás y definimos el siguiente paso honesto, sin presión y sin juicios.</p></div>
+<div class="stop"><span class="num">ii.</span><h3 data-i18n="step2-h">Recorre el camino</h3><p data-i18n="step2-p">A través del coaching personalizado, sigues un marco claro y comprobado —una señal a la vez— con acompañamiento siempre que lo necesites.</p></div>
+<div class="stop"><span class="num">iii.</span><h3 data-i18n="step3-h">Llega restaurado</h3><p data-i18n="step3-p">Confianza reconstruida, límites más sanos y una relación firme para perdurar. Y las herramientas para ayudar a marcar el camino a alguien más.</p></div>
 </div>
 </div>
+<div class="cairn-col">
+<div aria-hidden="true" class="cairn" id="cairn"><div class="cairn-ph"><i></i></div></div>
+<div class="cairn-cap" data-i18n="cairn-cap">Una piedra a la vez</div>
 </div>
+</div>
+</div></div>
 </section>
 <!-- ================= TRAINING ================= -->
-<section class="block services" id="training">
+<section class="dark training" id="training">
+<svg aria-hidden="true" class="contours" data-seed="6" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 1000"></svg>
 <div class="wrap">
-<div class="sec-head center reveal">
-<span class="eyebrow center" data-i18n="train-eyebrow">Para coaches y líderes</span>
-<h2 data-i18n="train-h2">Formación y certificación</h2>
-<p data-i18n="train-sub">Equípate para acompañar a otros de regreso a la plenitud: el método Talley, estructurado para pastores, coaches y líderes que desean generar un impacto duradero.</p>
+<div class="svc-head">
+<div>
+<span class="eyebrow reveal" data-i18n="train-eyebrow">Para coaches y líderes</span>
+<h2 class="reveal" data-i18n="train-h2">Formación y certificación</h2>
 </div>
-<div class="svc-grid">
-<div class="svc reveal">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="8" r="5"></circle><path d="M8.2 12.5 7 21l5-2.6L17 21l-1.2-8.5"></path></svg></div>
-<h3 data-i18n="train1-h">Plan de estudios certificado</h3>
-<p data-i18n="train1-p">Un marco estructurado y comprobado que puedes llevar a tu propio ministerio o práctica, y enseñar con confianza.</p>
+<p class="sub reveal" data-i18n="train-sub">Equípate para acompañar a otros de regreso a la plenitud: el método Talley, estructurado para pastores, coaches y líderes que desean generar un impacto duradero.</p>
 </div>
-<div class="svc reveal">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"></path></svg></div>
-<h3 data-i18n="train2-h">Grupos con mentoría</h3>
-<p data-i18n="train2-p">Aprende junto a otros líderes, con la guía directa de coaches experimentados que han recorrido este camino.</p>
+<div class="cols3">
+<div class="col reveal"><span class="n">i.</span><h3 data-i18n="train1-h">Plan de estudios certificado</h3><p data-i18n="train1-p">Un marco estructurado y comprobado que puedes llevar a tu propio ministerio o práctica, y enseñar con confianza.</p></div>
+<div class="col reveal"><span class="n">ii.</span><h3 data-i18n="train2-h">Grupos con mentoría</h3><p data-i18n="train2-p">Aprende junto a otros líderes, con la guía directa de coaches experimentados que han recorrido este camino.</p></div>
+<div class="col reveal"><span class="n">iii.</span><h3 data-i18n="train3-h">Herramientas reales</h3><p data-i18n="train3-p">Recursos prácticos para las conversaciones más difíciles que las parejas a tu cuidado traerán a ti.</p></div>
 </div>
-<div class="svc reveal">
-<div class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4l-5.6 5.6a2.1 2.1 0 0 0 3 3l5.6-5.6a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6z"></path></svg></div>
-<h3 data-i18n="train3-h">Herramientas reales</h3>
-<p data-i18n="train3-p">Recursos prácticos para las conversaciones más difíciles que las parejas a tu cuidado traerán a ti.</p>
-</div>
-</div>
-<div style="text-align:center; margin-top: 44px;">
+<div class="cta-row reveal">
 <a class="btn btn-gold" data-i18n="train-cta" href="#contact">Solicita la formación <span class="arrow">→</span></a>
 </div>
 </div>
 </section>
 <!-- ================= BOOKS ================= -->
-<section class="block books" id="books">
+<section class="books" id="books">
+<div class="wrap books-head">
+<div>
+<span class="eyebrow reveal" data-i18n="books-eyebrow">De la biblioteca</span>
+<h2 class="reveal" data-i18n="books-h2">Libros y recursos</h2>
+</div>
+<div>
+<p class="reveal" data-i18n="books-sub">Los escritos que han guiado a las parejas durante una generación, ahora parte de la colección Waymark.</p>
+<span class="hint" data-i18n="shelf-hint">Arrastra o desliza el estante →</span>
+</div>
+</div>
+<div class="shelfwrap"><div class="shelf">
+<a class="bk" href="https://www.amazon.com/dp/B0FYVDS2BS?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Too Close, Too Soon</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Too Close, Too Soon book cover" height="500" loading="lazy" src="/assets/covers/B0FYVDS2BS.jpg" width="324"/></span></span></span><span class="shadow"></span><span class="t">Too Close, Too Soon</span><span class="s" data-i18n="book1-bs">En la Era Digital</span></a>
+<a class="bk" href="https://www.amazon.com/dp/0785296875?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Reconcilable Differences</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Reconcilable Differences book cover" height="500" loading="lazy" src="/assets/covers/0785296875.jpg" width="318"/></span></span></span><span class="shadow"></span><span class="t">Reconcilable Differences</span><span class="s" data-i18n="book2-bs">Reconstruyendo la confianza rota</span></a>
+<a class="bk" href="https://www.amazon.com/dp/1979543100?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Fight or Flight</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Fight or Flight book cover" height="500" loading="lazy" src="/assets/covers/1979543100.jpg" width="386"/></span></span></span><span class="shadow"></span><span class="t">Fight or Flight</span><span class="s" data-i18n="book3-bs">Enfrentando el conflicto con valor</span></a>
+<a class="bk" href="https://www.amazon.com/dp/1724597833?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Diferencias Reconciliables</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Diferencias Reconciliables book cover" height="500" loading="lazy" src="/assets/covers/1724597833.jpg" width="324"/></span></span></span><span class="shadow"></span><span class="t">Diferencias Reconciliables</span><span class="s" data-i18n="book4-bs">Diferencias reconciliables, en español</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B0FYVK2CMJ?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Too Close, Too Soon</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Too Close, Too Soon Digital Age Workbook cover" height="500" loading="lazy" src="/assets/covers/B0FYVK2CMJ.jpg" width="387"/></span></span></span><span class="shadow"></span><span class="t">Too Close, Too Soon</span><span class="s" data-i18n="book5-bs">Cuaderno de la Era Digital</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B096LYNVSH?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Reconciliation Instruction</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Reconciliation Instruction Workbook cover" height="500" loading="lazy" src="/assets/covers/B096LYNVSH.jpg" width="386"/></span></span></span><span class="shadow"></span><span class="t">Reconciliation Instruction</span><span class="s" data-i18n="book6-bs">Cuaderno de estudio</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B08HSC4N9F?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Instrucción de Reconciliación</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Instrucción de Reconciliación book cover" height="500" loading="lazy" src="/assets/covers/B08HSC4N9F.jpg" width="386"/></span></span></span><span class="shadow"></span><span class="t">Instrucción de Reconciliación</span><span class="s" data-i18n="book7-bs">Reconciliation Instruction, en español</span></a>
+</div><div class="plank"></div></div>
 <div class="wrap">
-<div class="sec-head center reveal">
-<span class="eyebrow center" data-i18n="books-eyebrow">De la biblioteca</span>
-<h2 data-i18n="books-h2">Libros y recursos</h2>
-<p data-i18n="books-sub">Los escritos que han guiado a las parejas durante una generación, ahora parte de la colección Waymark.</p>
-</div>
-<div class="book-grid">
-<a class="book reveal" href="https://www.amazon.com/dp/B0FYVDS2BS?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Too Close, Too Soon book cover" loading="lazy" src="/assets/covers/B0FYVDS2BS.jpg"/></div>
-<div class="label"><div class="bn">Too Close, Too Soon</div><div class="bs" data-i18n="book1-bs">En la Era Digital</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/0785296875?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Reconcilable Differences book cover" loading="lazy" src="/assets/covers/0785296875.jpg"/></div>
-<div class="label"><div class="bn">Reconcilable Differences</div><div class="bs" data-i18n="book2-bs">Reconstruyendo la confianza rota</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/1979543100?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Fight or Flight book cover" loading="lazy" src="/assets/covers/1979543100.jpg"/></div>
-<div class="label"><div class="bn">Fight or Flight</div><div class="bs" data-i18n="book3-bs">Enfrentando el conflicto con valor</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/1724597833?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Diferencias Reconciliables book cover" loading="lazy" src="/assets/covers/1724597833.jpg"/></div>
-<div class="label"><div class="bn">Diferencias Reconciliables</div><div class="bs" data-i18n="book4-bs">Diferencias reconciliables, en español</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/B0FYVK2CMJ?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Too Close, Too Soon Digital Age Workbook cover" loading="lazy" src="/assets/covers/B0FYVK2CMJ.jpg"/></div>
-<div class="label"><div class="bn">Too Close, Too Soon</div><div class="bs" data-i18n="book5-bs">Cuaderno de la Era Digital</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/B096LYNVSH?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Reconciliation Instruction Workbook cover" loading="lazy" src="/assets/covers/B096LYNVSH.jpg"/></div>
-<div class="label"><div class="bn">Reconciliation Instruction</div><div class="bs" data-i18n="book6-bs">Cuaderno de estudio</div></div>
-</a>
-<a class="book reveal" href="https://www.amazon.com/dp/B08HSC4N9F?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Instrucción de Reconciliación book cover" loading="lazy" src="/assets/covers/B08HSC4N9F.jpg"/></div>
-<div class="label"><div class="bn">Instrucción de Reconciliación</div><div class="bs" data-i18n="book7-bs">Reconciliation Instruction, en español</div></div>
-</a>
-</div>
-<div class="rec-reading reveal">
-<div class="rec-head">
-<span class="eyebrow center" data-i18n="selah-eyebrow">Recién publicado</span>
+<div class="shelf-block">
+<div class="rec-head reveal">
+<span class="eyebrow" data-i18n="selah-eyebrow">Recién publicado</span>
 <h3 data-i18n="selah-h">SELAH</h3>
 <p data-i18n="selah-sub">Diez capítulos de restauración para pastores, líderes de iglesia y quienes caminan a su lado. Escrito por José y Paula Villalpando, en inglés y español, cada uno con su cuaderno del participante.</p>
 </div>
-<div class="book-grid">
-<a class="book" href="https://www.amazon.com/dp/B0HKTVSWW6?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="SELAH: The Shepherd's Rest book cover" loading="lazy" src="/assets/covers/B0HKTVSWW6.jpg"/></div>
-<div class="label"><div class="bn">SELAH</div><div class="bs" data-i18n="selah1-bs">El descanso del pastor, en inglés</div></div>
-</a>
-<a class="book" href="https://www.amazon.com/dp/B0HKTH6QCH?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="SELAH: El Descanso del Pastor book cover" loading="lazy" src="/assets/covers/B0HKTH6QCH.jpg"/></div>
-<div class="label"><div class="bn">SELAH</div><div class="bs" data-i18n="selah2-bs">El Descanso del Pastor</div></div>
-</a>
-<a class="book" href="https://www.amazon.com/dp/B0HLK5J54R?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="SELAH: Participant Workbook cover" loading="lazy" src="/assets/covers/B0HLK5J54R.jpg"/></div>
-<div class="label"><div class="bn">SELAH</div><div class="bs" data-i18n="selah3-bs">Cuaderno del participante, en inglés</div></div>
-</a>
-<a class="book" href="https://www.amazon.com/dp/B0HLKKC1XD?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="SELAH: Cuaderno del Participante cover" loading="lazy" src="/assets/covers/B0HLKKC1XD.jpg"/></div>
-<div class="label"><div class="bn">SELAH</div><div class="bs" data-i18n="selah4-bs">Cuaderno del Participante</div></div>
-</a>
+<div class="shelfwrap"><div class="shelf">
+<a class="bk" href="https://www.amazon.com/dp/B0HKTVSWW6?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>SELAH</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="SELAH: The Shepherd's Rest book cover" height="500" loading="lazy" src="/assets/covers/B0HKTVSWW6.jpg" width="334"/></span></span></span><span class="shadow"></span><span class="t">SELAH</span><span class="s" data-i18n="selah1-bs">El descanso del pastor, en inglés</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B0HKTH6QCH?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>SELAH</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="SELAH: El Descanso del Pastor book cover" height="500" loading="lazy" src="/assets/covers/B0HKTH6QCH.jpg" width="334"/></span></span></span><span class="shadow"></span><span class="t">SELAH</span><span class="s" data-i18n="selah2-bs">El Descanso del Pastor</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B0HLK5J54R?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>SELAH</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="SELAH: Participant Workbook cover" height="500" loading="lazy" src="/assets/covers/B0HLK5J54R.jpg" width="387"/></span></span></span><span class="shadow"></span><span class="t">SELAH</span><span class="s" data-i18n="selah3-bs">Cuaderno del participante, en inglés</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B0HLKKC1XD?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>SELAH</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="SELAH: Cuaderno del Participante cover" height="500" loading="lazy" src="/assets/covers/B0HLKKC1XD.jpg" width="387"/></span></span></span><span class="shadow"></span><span class="t">SELAH</span><span class="s" data-i18n="selah4-bs">Cuaderno del Participante</span></a>
+</div><div class="plank"></div></div>
 </div>
-</div>
-<div class="rec-reading reveal">
-<div class="rec-head">
-<span class="eyebrow center" data-i18n="rec-eyebrow">También vale la pena leer</span>
+<div class="shelf-block">
+<div class="rec-head reveal">
+<span class="eyebrow" data-i18n="rec-eyebrow">También vale la pena leer</span>
 <h3 data-i18n="rec-h">Lecturas recomendadas</h3>
 <p data-i18n="rec-sub">Libros, más allá de los nuestros, que recomendamos para el camino.</p>
 </div>
-<div class="book-grid">
-<a class="book" href="https://www.amazon.com/dp/B006X50SLM?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="The Search for Significance book cover" loading="lazy" src="/assets/covers/B006X50SLM.jpg"/></div>
-<div class="label"><div class="bn">The Search for Significance</div><div class="bs" data-i18n="rec1-bs">Descubre tu valor a través de los ojos de Dios</div></div>
-</a>
-<a class="book" href="https://www.amazon.com/dp/1517755417?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="La Búsqueda de Significado book cover" loading="lazy" src="/assets/covers/1517755417.jpg"/></div>
-<div class="label"><div class="bn">La Búsqueda de Significado</div><div class="bs" data-i18n="rec2-bs">Edición en español</div></div>
-</a>
-<a class="book" href="https://www.amazon.com/dp/B0CKPR5S2M?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank">
-<div class="cover"><img alt="Comunicación Familiar book cover" loading="lazy" src="/assets/covers/B0CKPR5S2M.jpg"/></div>
-<div class="label"><div class="bn">Comunicación Familiar</div><div class="bs" data-i18n="rec3-bs">Habilidades para una comunicación familiar sana</div></div>
-</a>
-</div>
+<div class="shelfwrap"><div class="shelf">
+<a class="bk" href="https://www.amazon.com/dp/B006X50SLM?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>The Search for Significance</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="The Search for Significance book cover" height="500" loading="lazy" src="/assets/covers/B006X50SLM.jpg" width="333"/></span></span></span><span class="shadow"></span><span class="t">The Search for Significance</span><span class="s" data-i18n="rec1-bs">Descubre tu valor a través de los ojos de Dios</span></a>
+<a class="bk" href="https://www.amazon.com/dp/1517755417?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>La Búsqueda de Significado</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="La Búsqueda de Significado book cover" height="500" loading="lazy" src="/assets/covers/1517755417.jpg" width="386"/></span></span></span><span class="shadow"></span><span class="t">La Búsqueda de Significado</span><span class="s" data-i18n="rec2-bs">Edición en español</span></a>
+<a class="bk" href="https://www.amazon.com/dp/B0CKPR5S2M?tag=onamzdrtalley-20" rel="noopener noreferrer" target="_blank"><span class="p3"><span class="b3"><span class="back"></span><span class="spine"><span>Comunicación Familiar</span></span><span class="pages"></span><span class="top"></span><span class="front"><img alt="Comunicación Familiar book cover" height="500" loading="lazy" src="/assets/covers/B0CKPR5S2M.jpg" width="334"/></span></span></span><span class="shadow"></span><span class="t">Comunicación Familiar</span><span class="s" data-i18n="rec3-bs">Habilidades para una comunicación familiar sana</span></a>
+</div><div class="plank"></div></div>
 </div>
 </div>
 </section>
@@ -1077,31 +1090,24 @@
 </div>
 </div>
 </section>
-<!-- ================= TESTIMONIAL ================= -->
-<section class="block testi">
+<!-- ================= STORIES ================= -->
+<section class="block voices" id="stories">
 <div class="wrap">
-<div class="sec-head center reveal">
-<span class="eyebrow center" data-i18n="testi-eyebrow">Historias de restauración</span>
-<h2 data-i18n="testi-h2">De quienes encontraron el camino de regreso</h2>
-</div>
-<div class="testi-grid">
-<div class="testi-card feature reveal">
-<div aria-label="Five stars" class="stars">★★★★★</div>
-<blockquote data-i18n="testi2-quote"><p>«Pasar por un divorcio es una de las cosas más difíciles que una persona puede experimentar. Me encontré completamente perdido, sin saber ya quién era ni qué dirección se suponía que debía tomar mi vida. Waymark llegó justo en el momento preciso.</p><p>Este programa no solo me dio herramientas, me dio un camino cuando no podía ver ninguno. Me ayudó a darle sentido al dolor, la confusión y la incertidumbre que vienen con reconstruir tu vida después de que todo se derrumba.</p><p>José fue una parte significativa de mi experiencia. Su acompañamiento fue genuino y su apoyo, constante. Me ayudó a volver a funcionar en un momento en que solo pasar el día ya se sentía como un logro. Me encontró donde estaba y me ayudó a recuperar el equilibrio sin juzgarme.</p><p>Hoy estoy en un lugar mejor, y este programa fue parte de ese camino. Si estás pasando por un divorcio y sientes que te estás ahogando, recomendaría Waymark sin dudarlo. No tienes que resolverlo solo.»</p></blockquote>
-<div class="who">Gabriel<span class="role" data-i18n="testi2-role">Reconstruyendo tras el divorcio</span></div>
-</div>
-<div class="testi-col">
-<div class="testi-card reveal">
-<div aria-label="Five stars" class="stars">★★★★★</div>
+<span class="eyebrow reveal" data-i18n="testi-eyebrow">Historias de restauración</span>
+<h2 class="reveal" data-i18n="testi-h2">De quienes encontraron el camino de regreso</h2>
+<figure class="lead-q reveal">
 <blockquote data-i18n="testi-quote">«Llegamos convencidos de que todo había terminado. Waymark marcó el camino de regreso el uno al otro cuando no podíamos ver ni un paso adelante. Hoy estamos casados, caminando con Dios y sirviéndole juntos.»</blockquote>
-<div class="who">Daniel &amp; Silvia<span class="role" data-i18n="testi1-role">Restaurados y casados de nuevo</span></div>
-</div>
-<div class="testi-card reveal">
-<div aria-label="Five stars" class="stars">★★★★★</div>
+<figcaption class="who">Daniel &amp; Silvia<span class="role" data-i18n="testi1-role">Restaurados y casados de nuevo</span></figcaption>
+</figure>
+<div class="voices-2">
+<figure class="reveal">
+<blockquote data-i18n="testi2-quote"><p>«Pasar por un divorcio es una de las cosas más difíciles que una persona puede experimentar. Me encontré completamente perdido, sin saber ya quién era ni qué dirección se suponía que debía tomar mi vida. Waymark llegó justo en el momento preciso.</p><p>Este programa no solo me dio herramientas, me dio un camino cuando no podía ver ninguno. Me ayudó a darle sentido al dolor, la confusión y la incertidumbre que vienen con reconstruir tu vida después de que todo se derrumba.</p><p>José fue una parte significativa de mi experiencia. Su acompañamiento fue genuino y su apoyo, constante. Me ayudó a volver a funcionar en un momento en que solo pasar el día ya se sentía como un logro. Me encontró donde estaba y me ayudó a recuperar el equilibrio sin juzgarme.</p><p>Hoy estoy en un lugar mejor, y este programa fue parte de ese camino. Si estás pasando por un divorcio y sientes que te estás ahogando, recomendaría Waymark sin dudarlo. No tienes que resolverlo solo.»</p></blockquote>
+<figcaption class="who">Gabriel<span class="role" data-i18n="testi2-role">Reconstruyendo tras el divorcio</span></figcaption>
+</figure>
+<figure class="reveal">
 <blockquote data-i18n="testi3-quote">«Cuando llegué a Waymark, me sentía rota en un millón de pedazos. Mi esposo y yo nos habíamos herido durante años, y yo estaba agotada emocional y espiritualmente; otras consejerías y un sinfín de videos solo me dejaban más sin esperanza. Aquí por fin comencé a sanar. He aprendido la verdad sobre quién soy y mi verdadero valor: que soy plenamente amada, completamente perdonada y agradable a Dios. Si sientes ese mismo dolor o esa desesperanza, emprende este camino; no tienes que quedarte rota.»</blockquote>
-<div class="who">Ruth<span class="role" data-i18n="testi3-role">En su proceso de sanación</span></div>
-</div>
-</div>
+<figcaption class="who">Ruth<span class="role" data-i18n="testi3-role">En su proceso de sanación</span></figcaption>
+</figure>
 </div>
 </div>
 </section>
@@ -1194,6 +1200,7 @@
 </div>
 </div>
 </section>
+</main>
 <!-- ================= FOOTER ================= -->
 <footer>
 <div class="wrap">

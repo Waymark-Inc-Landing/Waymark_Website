@@ -138,6 +138,16 @@
     .field-row { grid-template-columns: 1fr; }
     .btn { width: 100%; justify-content: center; }
   }
+
+  /* ---- Shared look with the redesigned homepage ---- */
+  h1, h2, h3 { font-weight: 500; letter-spacing: -0.015em; }
+  .btn { border-radius: 3px; }
+  .card { border-radius: 4px; }
+  footer { background: #0B1E32; }
+  .btn-gold { color: #0B1E32; }
+  .btn-gold:hover { background: #E3CB95; }
+  @keyframes wmRise { from { opacity: 0; transform: translateY(14px); } }
+  @media (prefers-reduced-motion: no-preference) { h1 { animation: wmRise .9s cubic-bezier(.2,.7,.2,1) both; } }
 </style>
 </head>
 <body>
