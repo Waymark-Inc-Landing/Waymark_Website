@@ -449,7 +449,7 @@ SERVICES = [
             'desc': 'Christian marriage coaching by phone or video, anywhere in the United States, in English and Spanish. Fifty years of work with couples behind every conversation. First 15-minute call free.',
             'eyebrow': 'Online Christian marriage coaching',
             'h1': 'Help for your marriage, wherever you live.',
-            'lead': '<strong>Christian marriage coaching by phone or video</strong>, anywhere in the United States. The same people, the same process, and the same care as in our office. Fifty years of work with couples stand behind every conversation.',
+            'lead': '<strong>Christian marriage coaching by phone or video</strong>, anywhere in the United States. The same people, the same process, and the same care as in person. Fifty years of work with couples stand behind every conversation.',
             'for': [
                 ('Couples with no one nearby', 'There is no faith-based help for marriages where you live, or none you would trust with this.'),
                 ('Couples who need privacy', 'In a small town or a close church, everyone knows everyone. A phone call from home stays at home.'),
@@ -472,7 +472,7 @@ SERVICES = [
             'desc': 'Coaching matrimonial cristiano en español, por teléfono o video, en cualquier parte de Estados Unidos. Cincuenta años de trabajo con parejas detrás de cada conversación. Primera llamada gratis.',
             'eyebrow': 'Coaching matrimonial cristiano en español',
             'h1': 'Ayuda para su matrimonio, vivan donde vivan.',
-            'lead': '<strong>Coaching matrimonial cristiano en español</strong>, por teléfono o video, en cualquier parte de Estados Unidos. Las mismas personas, el mismo proceso y el mismo cuidado que en nuestra oficina. Cincuenta años de trabajo con parejas respaldan cada conversación.',
+            'lead': '<strong>Coaching matrimonial cristiano en español</strong>, por teléfono o video, en cualquier parte de Estados Unidos. Las mismas personas, el mismo proceso y el mismo cuidado que en persona. Cincuenta años de trabajo con parejas respaldan cada conversación.',
             'for': [
                 ('Parejas sin ayuda cerca', 'Donde viven no hay ayuda para matrimonios basada en la fe y en español, o ninguna a la que le confiarían esto.'),
                 ('Parejas que necesitan privacidad', 'En un pueblo pequeño o una iglesia cercana todos se conocen. Una llamada desde casa se queda en casa.'),

@@ -163,7 +163,7 @@ CITIES = [
     _city('tulsa', 'marriage-coaching-tulsa-ok', 'coaching-matrimonial-tulsa-ok', 'Tulsa', {
         'desc': 'Faith-based marriage coaching for couples in Tulsa, Oklahoma, by phone or video, in English and Spanish. Built on 50+ years of work with couples. First 15-minute call free.',
         'h1': 'Christian marriage coaching for couples in Tulsa.',
-        'lead': 'Tulsa is <strong>about an hour and a half from our office in Shawnee</strong>, so couples from Tulsa, Broken Arrow, Owasso, Jenks and Bixby can meet with us by phone or video, with the same people and the same process as in person.',
+        'lead': 'Tulsa is <strong>about an hour and a half from Shawnee, where we are based</strong>, so couples from Tulsa, Broken Arrow, Owasso, Jenks and Bixby can meet with us by phone or video, with the same people and the same process as in person.',
         'for': [
             ('Couples across the Tulsa area', 'From Broken Arrow, Owasso, Jenks, Bixby or midtown, a session starts wherever the two of you are.'),
             ('Couples who live apart right now', 'If you are separated, each of you can join the same call from a different place.'),
@@ -171,13 +171,13 @@ CITIES = [
         ],
         'step2': ('THEN', 'Sessions by phone or video', 'One hour at a time, from home in Tulsa. If you ever want to meet face to face, in-person sessions are in Shawnee.'),
         'faq': [
-            ('Do you have an office in Tulsa?', 'No. Our office is in Shawnee, about an hour and a half away, so Tulsa couples can meet with us by phone or video.'),
+            ('Do you have an office in Tulsa?', 'No. We are based in Shawnee, about an hour and a half away, so Tulsa couples can meet with us by phone or video.'),
             ('Does marriage coaching by video really work?', 'Yes. Most of our sessions happen this way. What matters is the structure and the work the two of you do between sessions.'),
         ],
     }, {
         'desc': 'Coaching matrimonial basado en la fe para parejas de Tulsa, Oklahoma, en español, por teléfono o video. Más de 50 años de trabajo con parejas. Primera llamada de 15 minutos gratis.',
         'h1': 'Coaching matrimonial cristiano para parejas de Tulsa.',
-        'lead': 'Tulsa queda <strong>a una hora y media de nuestra oficina en Shawnee</strong>, así que las parejas de Tulsa, Broken Arrow, Owasso, Jenks y Bixby pueden reunirse con nosotros por teléfono o video, con las mismas personas y el mismo proceso que en persona.',
+        'lead': 'Tulsa queda <strong>a una hora y media de Shawnee, donde tenemos nuestra sede</strong>, así que las parejas de Tulsa, Broken Arrow, Owasso, Jenks y Bixby pueden reunirse con nosotros por teléfono o video, con las mismas personas y el mismo proceso que en persona.',
         'for': [
             ('Parejas de toda el área de Tulsa', 'Desde Broken Arrow, Owasso, Jenks, Bixby o el centro, una sesión empieza donde estén los dos.'),
             ('Parejas que hoy viven separadas', 'Si están separados, cada uno puede unirse a la misma llamada desde un lugar distinto.'),
@@ -185,7 +185,7 @@ CITIES = [
         ],
         'step2': ('DESPUÉS', 'Sesiones por teléfono o video', 'Una hora a la vez, desde casa en Tulsa. Si alguna vez quieren reunirse cara a cara, las sesiones en persona son en Shawnee.'),
         'faq': [
-            ('¿Tienen oficina en Tulsa?', 'No. Nuestra oficina está en Shawnee, a una hora y media, así que las parejas de Tulsa pueden reunirse con nosotros por teléfono o video.'),
+            ('¿Tienen oficina en Tulsa?', 'No. Nuestra sede está en Shawnee, a una hora y media, así que las parejas de Tulsa pueden reunirse con nosotros por teléfono o video.'),
             ('¿De verdad funciona el coaching matrimonial por video?', 'Sí. La mayoría de nuestras sesiones son así. Lo que importa es la estructura y el trabajo que los dos hacen entre sesiones.'),
         ],
     }),
