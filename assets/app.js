@@ -531,8 +531,36 @@
       status.textContent = '';
       var payload = {};
       new FormData(form).forEach(function (v, k) { payload[k] = v; });
-      // Also create a Lead in the Waymark platform (fire-and-forget; form-urlencoded
-      // avoids a CORS preflight, and we don't block the visitor on the response).
+      // The inquiry goes two ways at once: to the Waymark platform, which records the
+      // lead and emails us, and to the mail service. Either one arriving is a success,
+      // so the visitor is not left waiting on whichever is slow or down.
+      var settled = false, pending = 2, timer = null;
+      function finish(ok) {
+        if (settled) return;
+        if (ok) {
+          status.className = 'form-status ok';
+          status.textContent = es
+            ? '¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto muy pronto.'
+            : 'Thank you — we’ve received your message and will be in touch very soon.';
+          form.reset();
+          if (window.wmTrack) { window.wmTrack('lead'); }
+        } else if (--pending > 0) {
+          return;
+        } else {
+          status.className = 'form-status err';
+          status.innerHTML = es
+            ? 'Algo salió mal. Llámanos al (405) 822-8300 o escríbenos a <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.'
+            : 'Something went wrong. Please call (405) 822-8300 or email <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.';
+        }
+        settled = true;
+        if (timer) clearTimeout(timer);
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+      // Both get 15 seconds, then the visitor sees the phone number and email address.
+      var ctl = window.AbortController ? new AbortController() : null;
+      timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
+      var signal = ctl ? ctl.signal : undefined;
       try {
         var lead = new URLSearchParams();
         lead.append('name', payload.name || '');
@@ -541,40 +569,23 @@
         lead.append('service', payload.service || '');
         lead.append('message', payload.message || '');
         lead.append('_honey', payload._honey || '');
+        // form-urlencoded, so there is no CORS preflight to wait on.
         fetch('https://waymarkcoach.com/wp-json/lms/v1/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: lead.toString()
-        }).catch(function () {});
-      } catch (e) {}
-      // Give the mail service 15 seconds; past that the visitor gets the phone number
-      // and email address instead of a button that says Sending for a minute.
-      var ctl = window.AbortController ? new AbortController() : null;
-      var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
+          body: lead.toString(),
+          signal: signal
+        }).then(function (r) { finish(r.ok); }).catch(function () { finish(false); });
+      } catch (e) { finish(false); }
       fetch('https://formsubmit.co/ajax/coaching@waymarkinc.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload),
-        signal: ctl ? ctl.signal : undefined
+        signal: signal
       })
       .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (j.success === true || j.success === 'true') {
-          status.className = 'form-status ok';
-          status.textContent = es
-            ? '¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto muy pronto.'
-            : 'Thank you — we’ve received your message and will be in touch very soon.';
-          form.reset();
-          if (window.wmTrack) { window.wmTrack('lead'); }
-        } else { throw new Error('submit failed'); }
-      })
-      .catch(function () {
-        status.className = 'form-status err';
-        status.innerHTML = es
-          ? 'Algo salió mal. Llámanos al (405) 822-8300 o escríbenos a <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.'
-          : 'Something went wrong. Please call (405) 822-8300 or email <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.';
-      })
-      .finally(function () { if (timer) clearTimeout(timer); btn.disabled = false; btn.innerHTML = orig; });
+      .then(function (j) { finish(j.success === true || j.success === 'true'); })
+      .catch(function () { finish(false); });
     });
   }
 

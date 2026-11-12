@@ -35,52 +35,59 @@
     var payload = {};
     new FormData(form).forEach(function (v, k) { payload[k] = v; });
 
-    // Create the Lead in the Waymark platform too. Fire-and-forget, and
-    // form-urlencoded so there is no CORS preflight to wait on.
+    // The inquiry goes two ways at once: to the Waymark platform, which records the
+    // lead and emails us, and to the mail service. Either one arriving is a success,
+    // so the visitor is not left waiting on whichever is slow or down.
+    var settled = false, pending = 2, timer = null;
+    function finish(ok) {
+      if (settled) { return; }
+      if (ok) {
+        status.className = 'form-status ok';
+        status.textContent = '¡Gracias! Recibimos tu mensaje y te responderemos muy pronto.';
+        form.reset();
+        window.wmTrack('lead');
+      } else if (--pending > 0) {
+        return;
+      } else {
+        status.className = 'form-status err';
+        status.innerHTML = 'No pudimos enviar el mensaje. Escríbenos a '
+          + '<a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a> '
+          + 'o llámanos al <a href="tel:14058228300">(405) 822-8300</a>.';
+      }
+      settled = true;
+      status.style.display = 'block';
+      if (timer) { clearTimeout(timer); }
+      btn.disabled = false;
+      btn.innerHTML = orig;
+    }
+
+    // Both get 15 seconds, then the visitor sees the email address and phone number.
+    var ctl = window.AbortController ? new AbortController() : null;
+    timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
+    var signal = ctl ? ctl.signal : undefined;
+
     try {
       var lead = new URLSearchParams();
       ['name', 'email', 'phone', 'service', 'message', '_honey'].forEach(function (k) {
         lead.append(k, payload[k] || '');
       });
+      // form-urlencoded, so there is no CORS preflight to wait on.
       fetch('https://waymarkcoach.com/wp-json/lms/v1/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: lead.toString()
-      }).catch(function () {});
-    } catch (err) {}
+        body: lead.toString(),
+        signal: signal
+      }).then(function (r) { finish(r.ok); }).catch(function () { finish(false); });
+    } catch (err) { finish(false); }
 
-    // Give the mail service 15 seconds, then show the email address and phone number.
-    var ctl = window.AbortController ? new AbortController() : null;
-    var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
     fetch('https://formsubmit.co/ajax/coaching@waymarkinc.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload),
-      signal: ctl ? ctl.signal : undefined
+      signal: signal
     })
       .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (j.success === true || j.success === 'true') {
-          status.className = 'form-status ok';
-          status.textContent = '¡Gracias! Recibimos tu mensaje y te responderemos muy pronto.';
-          status.style.display = 'block';
-          form.reset();
-          window.wmTrack('lead');
-        } else {
-          throw new Error('rejected');
-        }
-      })
-      .catch(function () {
-        status.className = 'form-status err';
-        status.innerHTML = 'No pudimos enviar el mensaje. Escríbenos a '
-          + '<a href="mailto:coaching@waymarkinc.com">coaching@waymarkinc.com</a> '
-          + 'o llámanos al <a href="tel:14058228300">(405) 822-8300</a>.';
-        status.style.display = 'block';
-      })
-      .then(function () {
-        if (timer) clearTimeout(timer);
-        btn.disabled = false;
-        btn.innerHTML = orig;
-      });
+      .then(function (j) { finish(j.success === true || j.success === 'true'); })
+      .catch(function () { finish(false); });
   });
 })();
