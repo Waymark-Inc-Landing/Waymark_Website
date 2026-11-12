@@ -49,10 +49,14 @@
       }).catch(function () {});
     } catch (err) {}
 
+    // Give the mail service 15 seconds, then show the email address and phone number.
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
     fetch('https://formsubmit.co/ajax/coaching@waymarkinc.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: ctl ? ctl.signal : undefined
     })
       .then(function (r) { return r.json(); })
       .then(function (j) {
@@ -74,6 +78,7 @@
         status.style.display = 'block';
       })
       .then(function () {
+        if (timer) clearTimeout(timer);
         btn.disabled = false;
         btn.innerHTML = orig;
       });

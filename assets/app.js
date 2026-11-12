@@ -527,7 +527,8 @@
       var orig = btn.innerHTML;
       btn.disabled = true;
       btn.textContent = es ? 'Enviando…' : 'Sending…';
-      status.style.display = 'none';
+      status.className = 'form-status';
+      status.textContent = '';
       var payload = {};
       new FormData(form).forEach(function (v, k) { payload[k] = v; });
       // Also create a Lead in the Waymark platform (fire-and-forget; form-urlencoded
@@ -546,10 +547,15 @@
           body: lead.toString()
         }).catch(function () {});
       } catch (e) {}
+      // Give the mail service 15 seconds; past that the visitor gets the phone number
+      // and email address instead of a button that says Sending for a minute.
+      var ctl = window.AbortController ? new AbortController() : null;
+      var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
       fetch('https://formsubmit.co/ajax/coaching@waymarkinc.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: ctl ? ctl.signal : undefined
       })
       .then(function (r) { return r.json(); })
       .then(function (j) {
@@ -568,7 +574,7 @@
           ? 'Algo salió mal. Llámanos al (405) 822-8300 o escríbenos a <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.'
           : 'Something went wrong. Please call (405) 822-8300 or email <a href="mailto:coaching@waymarkinc.com" style="color:inherit;">coaching@waymarkinc.com</a>.';
       })
-      .finally(function () { btn.disabled = false; btn.innerHTML = orig; });
+      .finally(function () { if (timer) clearTimeout(timer); btn.disabled = false; btn.innerHTML = orig; });
     });
   }
 
