@@ -284,13 +284,21 @@
   var header = document.getElementById('header');
   var heroEl = document.getElementById('hero');
   var mobileMenu = document.getElementById('mobileMenu');
-  var lastY = 0;
+  // Hide/show changes only on a clear move (STEP px) in one direction; small steps keep the current
+  // state, so slow or momentum scrolling on a phone no longer flips it every frame. y is clamped so
+  // the iOS rubber-band at the top or bottom does not read as scrolling up.
+  var lastY = 0, STEP = 8;
   var onScroll = function () {
-    var y = window.scrollY || 0, vh = window.innerHeight;
+    var vh = window.innerHeight;
+    var max = Math.max(0, document.documentElement.scrollHeight - vh);
+    var y = Math.min(Math.max(window.scrollY || 0, 0), max);
     header.classList.toggle('scrolled', y > (heroEl ? vh * 0.7 : 24));
     if (motion) {
-      header.classList.toggle('hide', y > vh && y > lastY + 2 && !mobileMenu.classList.contains('open'));
-      if (Math.abs(y - lastY) > 2) lastY = y;
+      var dy = y - lastY;
+      if (y <= vh || mobileMenu.classList.contains('open')) header.classList.remove('hide');
+      else if (dy > STEP) header.classList.add('hide');
+      else if (dy < -STEP) header.classList.remove('hide');
+      if (Math.abs(dy) > STEP) lastY = y;
     }
     // The hero film sits behind the rest of the page; no reason to keep decoding it there.
     if (heroVideo) {

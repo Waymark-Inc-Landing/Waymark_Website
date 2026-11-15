@@ -10,15 +10,20 @@
   var btn = document.getElementById('wmMenuBtn');
   if (!header) { return; }
 
-  var lastY = 0;
+  // Same rule as assets/app.js: change state only on a clear move, clamp the iOS rubber-band.
+  var lastY = 0, STEP = 8;
   var onScroll = function () {
-    var y = window.scrollY || 0;
+    var max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    var y = Math.min(Math.max(window.scrollY || 0, 0), max);
     var edge = hero ? Math.max(24, hero.offsetHeight - 120) : 24;
     header.classList.toggle('scrolled', y > edge);
     if (motion) {
       var open = menu && menu.classList.contains('open');
-      header.classList.toggle('hide', y > edge + 200 && y > lastY + 2 && !open);
-      if (Math.abs(y - lastY) > 2) { lastY = y; }
+      var dy = y - lastY;
+      if (y <= edge + 200 || open) { header.classList.remove('hide'); }
+      else if (dy > STEP) { header.classList.add('hide'); }
+      else if (dy < -STEP) { header.classList.remove('hide'); }
+      if (Math.abs(dy) > STEP) { lastY = y; }
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
