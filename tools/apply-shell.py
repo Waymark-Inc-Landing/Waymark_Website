@@ -23,6 +23,14 @@ PAGES = [
     ('blog/your-worth-does-not-depend-on-your-performance.html', 'en', '/blog/tu-valor-no-depende-de-tu-rendimiento.html'),
     ('blog/tu-valor-no-depende-de-tu-rendimiento.html', 'es', '/blog/your-worth-does-not-depend-on-your-performance.html'),
     ('es/coaching-matrimonial/index.html', 'es', '/'),
+    ('blog/christian-marriage-coaching-vs-counseling.html', 'en', '/blog/coaching-matrimonial-cristiano-o-consejeria.html'),
+    ('blog/coaching-matrimonial-cristiano-o-consejeria.html', 'es', '/blog/christian-marriage-coaching-vs-counseling.html'),
+    ('blog/how-to-rebuild-trust-in-a-marriage.html', 'en', '/blog/como-reconstruir-la-confianza-en-el-matrimonio.html'),
+    ('blog/como-reconstruir-la-confianza-en-el-matrimonio.html', 'es', '/blog/how-to-rebuild-trust-in-a-marriage.html'),
+    ('blog/questions-to-ask-before-getting-engaged.html', 'en', '/blog/preguntas-antes-de-comprometerse.html'),
+    ('blog/preguntas-antes-de-comprometerse.html', 'es', '/blog/questions-to-ask-before-getting-engaged.html'),
+    ('blog/when-only-one-spouse-wants-to-save-the-marriage.html', 'en', '/blog/como-restaurar-mi-matrimonio-cuando-solo-yo-quiero.html'),
+    ('blog/como-restaurar-mi-matrimonio-cuando-solo-yo-quiero.html', 'es', '/blog/when-only-one-spouse-wants-to-save-the-marriage.html'),
 ]
 
 

@@ -547,6 +547,11 @@
   .blog-soon h3 a { background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 1px no-repeat; transition: background-size .6s var(--ease); }
   .blog-soon h3 a:hover { background-size: 100% 1px; }
   .blog-soon p { color: var(--muted); max-width: 52ch; margin-bottom: 28px; font-size: 18px; font-weight: 300; }
+  .blog-more { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 28px; }
+  .blog-more ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 44px; }
+  .blog-more a { font-family: var(--serif); font-size: 19px; line-height: 1.4; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); }
+  .blog-more a:hover { color: var(--gold-deep); }
+  @media (max-width: 720px) { .blog-more ul { grid-template-columns: 1fr; } }
 
   /* ---------- Stories ---------- */
   .voices { background: var(--cream-deep); }
@@ -1065,6 +1070,7 @@
         <p>A reflection on Ephesians 1 &mdash; who you are, why you are here, and the approval trap that never satisfies. Con versi&oacute;n en espa&ntilde;ol.</p>
         <a href="blog/your-worth-does-not-depend-on-your-performance.html" class="btn btn-outline">Read the devotional <span class="arrow">&rarr;</span></a>
       </div>
+      <div class="blog-more" data-i18n="blog-more"><span class="post-kicker">More from the journal</span><ul><li><a href="/blog/christian-marriage-coaching-vs-counseling.html">Christian marriage coaching vs. counseling: what is the difference?</a></li><li><a href="/blog/how-to-rebuild-trust-in-a-marriage.html">How to rebuild trust in a marriage</a></li><li><a href="/blog/questions-to-ask-before-getting-engaged.html">12 questions to ask before you get engaged</a></li><li><a href="/blog/when-only-one-spouse-wants-to-save-the-marriage.html">When only one of you wants to save the marriage</a></li></ul></div>
     </div>
   </div>
 </section>

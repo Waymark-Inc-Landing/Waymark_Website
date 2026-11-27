@@ -544,6 +544,11 @@
   .blog-soon h3 a { background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 1px no-repeat; transition: background-size .6s var(--ease); }
   .blog-soon h3 a:hover { background-size: 100% 1px; }
   .blog-soon p { color: var(--muted); max-width: 52ch; margin-bottom: 28px; font-size: 18px; font-weight: 300; }
+  .blog-more { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 28px; }
+  .blog-more ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 44px; }
+  .blog-more a { font-family: var(--serif); font-size: 19px; line-height: 1.4; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); }
+  .blog-more a:hover { color: var(--gold-deep); }
+  @media (max-width: 720px) { .blog-more ul { grid-template-columns: 1fr; } }
 
   /* ---------- Stories ---------- */
   .voices { background: var(--cream-deep); }
@@ -1101,6 +1106,7 @@
 </div>
 <div class="blog-soon reveal">
 <div data-i18n="blog-feat"><span class="post-kicker">Devocional · por Paula Villalpando</span><h3><a href="/blog/tu-valor-no-depende-de-tu-rendimiento.html">Tu valor no depende de tu rendimiento</a></h3><p>Una reflexión sobre Efesios 1 — quién eres, para qué estás aquí, y la trampa de la aprobación que nunca satisface.</p><a class="btn btn-outline" href="/blog/tu-valor-no-depende-de-tu-rendimiento.html">Leer el devocional <span class="arrow">→</span></a></div>
+<div class="blog-more" data-i18n="blog-more"><span class="post-kicker">Más del diario</span><ul><li><a href="/blog/coaching-matrimonial-cristiano-o-consejeria.html">Coaching matrimonial cristiano o consejería: ¿cuál es la diferencia?</a></li><li><a href="/blog/como-reconstruir-la-confianza-en-el-matrimonio.html">Cómo reconstruir la confianza en el matrimonio</a></li><li><a href="/blog/preguntas-antes-de-comprometerse.html">12 preguntas antes de comprometerse</a></li><li><a href="/blog/como-restaurar-mi-matrimonio-cuando-solo-yo-quiero.html">Cómo restaurar mi matrimonio cuando solo yo quiero intentarlo</a></li></ul></div>
 </div>
 </div>
 </section>
